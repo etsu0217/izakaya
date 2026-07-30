@@ -1,0 +1,411 @@
+@charset "utf-8";
+
+/* =========================================================
+   西成居酒屋Ｒ  style.css
+   （※現状はヘッダー＋ヒーロー部分のみ）
+   ========================================================= */
+
+:root {
+    --brown:   #4a3526;
+    --gold:    #b8894b;
+    --cream:   #f7f2e8;
+    --ink:     #2a211a;
+    --dark:    #241a13;   /* FVの地色 */
+    --font: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "MS PMincho", serif;
+    --font-en: "Georgia", "Times New Roman", serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; transition: opacity .25s, background .25s, color .25s; }
+a:hover { opacity: .8; }
+
+/* =========================================================
+   First View  ヘッダー＋ヒーロー
+   ========================================================= */
+.fv {
+    position: relative;
+    height: 100vh;
+    min-height: 780px;
+    background: var(--dark) url("../image/bg.jpg") center/cover no-repeat;
+    overflow: hidden;
+}
+
+/* --- 背景ヒーロー画像（上部バーの下・左右100pxずつ空ける） --- */
+.fv-img {
+    position: absolute;
+    top: 148px;
+    left: 100px; right: 100px; bottom: 0;
+    z-index: 0;
+}
+.fv-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+}
+.fv-img img.is-active { opacity: 1; }
+.fv-img::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(20,13,8,.25), rgba(20,13,8,.05) 40%);
+}
+
+/* --- 上部バー --- */
+.fv-header {
+    position: relative;
+    z-index: 5;
+    height: 148px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 0 44px;
+}
+/* --- 左上ブランド（キャッチ＋ロゴ） --- */
+.fv-brand { display: flex; flex-direction: column; gap: 8px; }
+.fv-catch {
+    font-family: "Yuji Syuku", serif;   /* 筆文字風 */
+    color: #f0e6d2;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: .14em;
+    text-shadow: 0 1px 6px rgba(0,0,0,.55);
+}
+.fv-catch span {
+    display: block;
+    font-size: 14px;
+    letter-spacing: .22em;
+    color: var(--gold);
+    margin-bottom: 3px;
+}
+.fv-logo a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo-text {
+    font-family: "Yuji Mai", serif;   /* 毛筆手書き風 */
+    color: #f3ead6;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: .08em;
+    text-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+.logo-r {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-size: 64px;
+    letter-spacing: 0;
+    padding-bottom: 2px;
+    position: relative;
+    top: 10px;
+}
+.logo-fish {
+    height: 56px;
+    width: auto;
+    filter: brightness(0) invert(1);   /* 魚も白抜きに */
+}
+
+.fv-contact { color: #fff; }
+.fv-contact__label {
+    font-size: 12px;
+    letter-spacing: .12em;
+    color: #e7d9c2;
+    margin-bottom: 2px;
+}
+.fv-contact__tel a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Amiri", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: .04em;
+}
+.fv-contact__tel a::before {
+    content: "\260E";           /* ☎ */
+    font-size: 20px;
+    color: #e7d9c2;
+}
+
+.fv-reserve a {
+    display: inline-block;
+    background: #a88228;
+    color: #fff;
+    padding: 13px 28px;
+    font-size: 14px;
+    letter-spacing: .1em;
+    border-radius: 2px;
+}
+.fv-reserve a:hover { opacity: 1; background: #8f6d1e; }
+
+.fv-subnav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.fv-subnav li { padding: 0 20px; line-height: 1; }
+.fv-subnav li + li { border-left: 1px solid rgba(255,255,255,.4); }
+.fv-subnav a { color: #fff; font-size: 14px; letter-spacing: .04em; }
+
+/* --- 縦書きメインナビ（右から80pxの位置） --- */
+.fv-nav {
+    position: absolute;
+    top: 118px;
+    right: 50px;
+    z-index: 6;
+}
+.fv-nav ul { display: flex; }
+.fv-nav a {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    height: 258px;
+    padding: 20px 12px;
+    background: rgba(24,16,10,.72);
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: .14em;
+    border-left: 1px solid rgba(255,255,255,.08);
+}
+.fv-nav a:hover { opacity: 1; background: rgba(24,16,10,.9); }
+.fv-nav a.is-active { background: #a88228; }
+.fv-nav a.is-active:hover { background: #a88228; }
+
+/* --- 縦書きキャッチ（左端） --- */
+.fv-side {
+    position: absolute;
+    left: 40px;
+    top: 200px;
+    z-index: 5;
+    writing-mode: vertical-rl;
+    white-space: nowrap;          /* 縦一行（折り返さない） */
+    color: #d3c1a4;
+    font-size: 13px;
+    letter-spacing: .2em;
+    line-height: 1;
+    text-shadow: 0 1px 6px rgba(0,0,0,.5);
+}
+
+/* --- 左下 お知らせ --- */
+.fv-news {
+    position: absolute;
+    left: 100px;
+    bottom: 40px;
+    z-index: 6;
+    max-width: 600px;
+    width: 46%;
+}
+.fv-news__card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--cream);
+    padding: 20px 28px 20px 20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+.fv-news__card:hover { opacity: 1; }
+.fv-news__thumb {
+    flex: 0 0 auto;
+    width: 84px;
+    height: 84px;
+    overflow: hidden;
+}
+.fv-news__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.fv-news__body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.fv-news__date {
+    font-family: var(--font-en);
+    font-size: 15px;
+    letter-spacing: .06em;
+    color: var(--gold);
+}
+.fv-news__title {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.fv-news__more {
+    flex: 0 0 auto;
+    align-self: center;
+    font-family: var(--font-en);
+    font-size: 15px;
+    letter-spacing: .06em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+}
+.fv-news__more span { margin-left: 4px; }
+
+/* --- ハンバーガー（スマホ用・初期は非表示） --- */
+.fv-toggle {
+    display: none;
+    width: 34px; height: 26px;
+    position: relative;
+    background: none; border: none; cursor: pointer;
+}
+.fv-toggle span {
+    position: absolute; left: 0;
+    width: 100%; height: 2px;
+    background: #fff;
+    transition: .3s;
+}
+.fv-toggle span:nth-child(1) { top: 2px; }
+.fv-toggle span:nth-child(2) { top: 12px; }
+.fv-toggle span:nth-child(3) { top: 22px; }
+.fv-toggle.is-open span:nth-child(1) { top: 12px; transform: rotate(45deg); }
+.fv-toggle.is-open span:nth-child(2) { opacity: 0; }
+.fv-toggle.is-open span:nth-child(3) { top: 12px; transform: rotate(-45deg); }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 1080px) {
+    .fv-header { gap: 24px; padding: 0 24px; }
+    .fv-contact__tel a { font-size: 24px; }
+    .fv-reserve a { padding: 13px 22px; font-size: 14px; }
+    .fv-subnav li { padding: 0 12px; }
+    .fv-nav a { height: 220px; font-size: 15px; padding: 16px 10px; }
+}
+
+@media (max-width: 767px) {
+    .fv { height: auto; min-height: 0; }
+
+    .fv-header {
+        height: 64px;
+        gap: 0;
+        padding: 0 16px;
+        background: var(--dark);
+        justify-content: space-between;
+    }
+    .logo-text { font-size: 30px; }
+    .logo-r { font-size: 40px; }
+    .fv-logo img.logo-fish { height: 36px; }
+    .fv-brand { gap: 4px; }
+    .fv-catch { font-size: 15px; }
+    .fv-catch span { font-size: 12px; }
+    .fv-contact,
+    .fv-reserve,
+    .fv-subnav,
+    .fv-side { display: none; }
+
+    .fv-toggle { display: block; }
+
+    /* 縦書きナビ → スマホでは横書きのドロップダウン */
+    .fv-nav {
+        position: absolute;
+        top: 64px;
+        left: 0; right: 0;
+        z-index: 20;
+        transform: translateY(-120%);
+        transition: transform .35s ease;
+    }
+    .fv-nav.is-open { transform: translateY(0); }
+    .fv-nav ul { flex-direction: column; }
+    .fv-nav a {
+        writing-mode: horizontal-tb;
+        height: auto;
+        width: 100%;
+        justify-content: center;
+        padding: 15px;
+        background: rgba(24,16,10,.96);
+        border-left: 0;
+        border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    /* 画像はヘッダー直下にフルで（左右の余白は解除） */
+    .fv-img {
+        position: relative;
+        top: 0;
+        left: 0; right: 0; bottom: auto;
+        height: 58vh;
+        min-height: 340px;
+    }
+    /* お知らせは画像の下に通常表示で */
+    .fv-news {
+        position: static;
+        width: 100%;
+        max-width: none;
+        padding: 12px;
+    }
+    .fv-news__card {
+        gap: 14px;
+        padding: 14px;
+        box-shadow: 0 3px 12px rgba(0,0,0,.2);
+    }
+    .fv-news__thumb { width: 64px; height: 64px; }
+    .fv-news__more { display: none; }
+    /* SNSバーは右下に横並びで小さく */
+    .side-sns {
+        top: auto;
+        bottom: 16px;
+        right: 12px;
+        transform: none;
+        flex-direction: row;
+        gap: 8px;
+    }
+    .side-sns a { width: 40px; height: 40px; }
+}
+
+/* =========================================================
+   右端 縦並びSNS
+   ========================================================= */
+.side-sns {
+    position: absolute;
+    top: 80%;
+    right: 35px;
+    transform: translateY(-50%);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.side-sns li { list-style: none; }
+.side-sns a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(74,53,38,.5);
+    color: var(--cream);
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    transition: background .25s, color .25s, transform .25s, opacity .25s;
+}
+.side-sns a:hover {
+    background: var(--gold);
+    color: #fff;
+    transform: translateY(-2px);
+    opacity: 1;
+}
