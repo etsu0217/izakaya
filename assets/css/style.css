@@ -89,15 +89,22 @@ a:hover { opacity: .8; }
     color: var(--gold);
     margin-bottom: 3px;
 }
-.fv-logo a {
+/* ---------------------------------------------------------
+   テキストロゴ（ヘッダー／ドロワー／フッター 共通）
+   --logo-size だけを各所で変えれば、字間・魚の大きさ・
+   R の食い込み具合まで同じ比率で拡大縮小される
+   --------------------------------------------------------- */
+.fv-logo a,
+.drawer__logo a,
+.footer-logo a {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: calc(var(--logo-size) * .25);
 }
 .logo-text {
     font-family: "Yuji Mai", serif;   /* 毛筆手書き風 */
     color: #f3ead6;
-    font-size: 48px;
+    font-size: var(--logo-size);
     line-height: 1;
     letter-spacing: .08em;
     text-shadow: 0 2px 8px rgba(0,0,0,.5);
@@ -105,17 +112,19 @@ a:hover { opacity: .8; }
 .logo-r {
     font-family: "Great Vibes", cursive;
     font-weight: 400;
-    font-size: 64px;
+    font-size: calc(var(--logo-size) * 1.33);
     letter-spacing: 0;
     padding-bottom: 2px;
     position: relative;
-    top: 10px;
+    top: calc(var(--logo-size) * .21);
 }
 .logo-fish {
-    height: 56px;
+    height: calc(var(--logo-size) * 1.17);
     width: auto;
     filter: brightness(0) invert(1);   /* 魚も白抜きに */
 }
+/* ヘッダー（一番上）のサイズ */
+.fv-logo { --logo-size: 48px; }
 
 .fv-contact { color: #fff; }
 .fv-contact__label {
@@ -189,7 +198,7 @@ a:hover { opacity: .8; }
 .fv-side {
     position: absolute;
     left: 40px;
-    top: 250px;
+    top: 215px;
     z-index: 5;
     writing-mode: vertical-rl;
     white-space: nowrap;          /* 縦一行（折り返さない） */
@@ -298,7 +307,13 @@ a:hover { opacity: .8; }
 }
 
 @media (max-width: 900px) {
-    .fv { height: auto; min-height: 0; }
+    /* 縦積みにして、写真の下にお知らせカードを置けるようにする */
+    .fv {
+        height: auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
 
     .fv-header {
         position: relative;
@@ -311,10 +326,8 @@ a:hover { opacity: .8; }
     }
     /* ロゴだけを縦中央にすっきり配置（キャッチは省略） */
     .fv-brand { flex-direction: row; align-items: center; gap: 0; }
-    .fv-logo { display: flex; align-items: center; }
-    .logo-text { font-size: 26px; text-shadow: none; }
-    .logo-r { font-size: 34px; top: 6px; }
-    .fv-logo img.logo-fish { height: 28px; }
+    .fv-logo { display: flex; align-items: center; --logo-size: 26px; }
+    .logo-text { text-shadow: none; }
     .fv-catch,
     .fv-contact,
     .fv-reserve,
@@ -352,19 +365,29 @@ a:hover { opacity: .8; }
         left: 0; right: 0; bottom: auto;
         height: 58vh;
         min-height: 340px;
+        order: 1;              /* ヘッダーの次 */
+        flex: 0 0 auto;
     }
-    /* スマホではヒーローの白いお知らせカードは非表示 */
-    .fv-news { display: none; }
-    /* SNSバーは右下に横並びで小さく */
-    .side-sns {
-        top: auto;
-        bottom: 16px;
-        right: 12px;
-        transform: none;
-        flex-direction: row;
-        gap: 8px;
+    /* お知らせカードは、写真の下の茶色い余白に流し込む */
+    .fv-news {
+        position: static;
+        order: 2;              /* 写真の次 */
+        width: auto;
+        max-width: none;
+        margin: 0;
+        padding: 18px 16px 22px;
     }
-    .side-sns a { width: 40px; height: 40px; }
+    .fv-news__card {
+        gap: 14px;
+        padding: 14px 16px;
+    }
+    .fv-news__thumb { width: 64px; height: 64px; }
+    .fv-news__date { font-size: 13px; }
+    .fv-news__title { font-size: 14px; }
+    /* 「more >」は横幅が足りないので省略 */
+    .fv-news__more { display: none; }
+    /* カードのすぐ下から次のセクションへ。茶色の帯は挟まない */
+    .hero-gap { display: none; }
 }
 
 /* =========================================================
@@ -373,7 +396,8 @@ a:hover { opacity: .8; }
 .side-sns {
     position: absolute;
     top: 80%;
-    right: 35px;
+    /* 写真は左右100pxずつ空けてあるので、その内側（+20px）に重ねる */
+    right: 120px;
     transform: translateY(-50%);
     z-index: 30;
     display: flex;
@@ -401,6 +425,21 @@ a:hover { opacity: .8; }
     color: #fff;
     transform: translateY(-2px);
     opacity: 1;
+}
+/* スマホ：写真の上・右端に横並びで小さく
+   （この上書きは必ず .side-sns の基本指定より後に置くこと） */
+@media (max-width: 900px) {
+    .side-sns {
+        top: 74px;
+        bottom: auto;
+        right: 12px;
+        transform: none;
+        flex-direction: row;
+        gap: 8px;
+        /* 開いたナビ（z-index:20）より下に潜らせる */
+        z-index: 8;
+    }
+    .side-sns a { width: 40px; height: 40px; }
 }
 
 /* ヒーローと画像バンドの間の余白（濃い地色） */
@@ -453,6 +492,8 @@ a:hover { opacity: .8; }
 }
 .parallax--01 { background-image: url("../image/S__2793487.jpg"); }
 .parallax--02 { background-image: url("../image/S__2793482.jpg"); }
+/* 2行目「心ゆくまで。」だけ少し右へずらして、字面に流れを出す */
+.parallax--02 .lead:nth-of-type(3) { padding-left: 1.2em; }
 
 /* --- スクロールで出現するアニメーション --- */
 .reveal-line {
@@ -505,6 +546,11 @@ a:hover { opacity: .8; }
     .parallax {
         height: 380px;
         background-attachment: scroll;
+    }
+    /* キャッチコピーは折り返さず一行に。画面幅に合わせて文字を縮める */
+    .parallax__inner p.lead {
+        white-space: nowrap;
+        font-size: min(5.8vw, 34px);
     }
 }
 
@@ -589,6 +635,7 @@ a:hover { opacity: .8; }
 
 @media (max-width: 900px) {
     .intro { padding: 70px 20px 80px; }
+    .intro-txt { font-size: 14px; }
     .intro-txt br { display: none; }   /* スマホは自然改行に */
     .intro-btn a {
         min-width: 0;
@@ -670,17 +717,9 @@ a:hover { opacity: .8; }
     color: #fff;
 }
 
-/* スマホ：上下2分割に切り替え（左＝上段・下から / 右＝下段・上から のまま） */
+/* スマホ：鍋・魚のビジュアルは非表示（縦に長くなりすぎるため） */
 @media (max-width: 900px) {
-    .split-hero {
-        flex-direction: column;
-        padding: 40px 16px;
-        gap: 16px;
-    }
-    .split-hero__half { height: 42vh; min-height: 240px; }
-    .split-hero__half--left  { margin-top: 0; }   /* 縦積みではずらしを解除 */
-    .split-hero__half--right { margin-top: 0; }
-    .split-hero__text { font-size: clamp(2.4rem, 14vw, 4rem); }
+    .split-hero { display: none; }
 }
 
 /* アニメーションを控える設定では即表示 */
@@ -822,8 +861,22 @@ a:hover { opacity: .8; }
     }
     /* 炭火は全幅の淡い背景に */
     .concept::after { width: 100%; opacity: .35; }
+    /* スマホは左寄せをやめて中央配置に */
+    .concept { align-items: center; }
     .concept .section-head,
-    .concept .concept-body { max-width: 100%; }
+    .concept .concept-body {
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    /* 本文だけは行頭を揃えて読みやすく（見出し・リード文は中央のまま） */
+    .concept .concept-txt p { text-align: left; }
+    .concept .concept-txt .lead {
+        text-align: center;
+        /* 折り返さず一行に。画面幅に合わせて文字を縮める */
+        white-space: nowrap;
+        font-size: min(4.8vw, 22px);
+    }
     .concept-btn a { min-width: 0; width: 100%; gap: 20px; padding: 18px 24px; font-size: 15px; }
 }
 
@@ -1095,24 +1148,14 @@ a:hover { opacity: .8; }
     padding-top: 28px;
     border-top: 1px solid rgba(42,33,26,.18);
 }
-/* ドロワーのロゴ＝ヘッダーと同じテキストロゴ（R の字体を統一） */
-.drawer__logo a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
+/* ドロワー（ハンバーガーメニュー）のロゴ＝ヘッダーと同じテキストロゴ。
+   サイズは --logo-size、色だけクリーム背景用に濃色へ差し替える */
+.drawer__logo { --logo-size: clamp(32px, 3.2vw, 42px); }
 .drawer__logo .logo-text {
-    color: var(--ink);            /* クリーム背景に合わせて濃色 */
-    font-size: clamp(34px, 3.4vw, 46px);
-    letter-spacing: .02em;        /* 文字間を詰めて横幅を狭める */
+    color: var(--ink);
     text-shadow: none;
 }
-.drawer__logo .logo-r {
-    color: var(--ink);
-    font-size: clamp(46px, 4.6vw, 62px);
-}
 .drawer__logo .logo-fish {
-    height: clamp(38px, 3.6vw, 52px);
     filter: none;                 /* 白抜き解除（濃色ロゴに合わせる） */
 }
 .drawer__label { font-size: 13px; letter-spacing: .08em; color: var(--ink); }
@@ -1196,18 +1239,19 @@ a:hover { opacity: .8; }
     display: inline-block;
     padding-bottom: 20px;
 }
+/* 下線は見出しの文字幅ぴったりに（h2 は inline-block なので幅＝文字幅）。
+   letter-spacing ぶん末尾に余白が出るので、その .08em を差し引く */
 .section-head h2::after {
     content: "";
     position: absolute;
-    left: 50%;
+    left: 0;
     bottom: 0;
-    width: 46px;
+    width: calc(100% - .08em);
     height: 2px;
     background: var(--gold);
-    transform: translateX(-50%);
+    transform: none;
 }
 .section-head.left { text-align: left; margin-left: 0; }
-.section-head.left h2::after { left: 0; transform: none; }
 .section-note {
     margin-top: 18px;
     font-size: 13px;
@@ -1241,27 +1285,71 @@ a:hover { opacity: .8; }
 }
 .menu-card {
     margin: 0;
-    background: #fff;
-    box-shadow: 0 8px 26px rgba(74, 53, 38, .12);
+    position: relative;
+    background: #fffdf8;
+    border: 1px solid rgba(184, 137, 75, .28);
+    box-shadow: 0 10px 30px rgba(74, 53, 38, .10);
     overflow: hidden;
-    transition: transform .35s ease, box-shadow .35s ease;
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
     /* 出現アニメ */
     opacity: 0;
     transform: translateY(34px);
 }
+/* 右下に金の角飾り（和のあしらい） */
+.menu-card::after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 16px;
+    height: 16px;
+    border-right: 1px solid rgba(184, 137, 75, .55);
+    border-bottom: 1px solid rgba(184, 137, 75, .55);
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+}
+.menu-card:hover::after { opacity: 1; }
 .section.reveal.is-inview .menu-card { opacity: 1; transform: none; }
 .section.reveal.is-inview .menu-card:nth-child(1) { transition: opacity .8s ease .05s, transform .8s ease .05s; }
 .section.reveal.is-inview .menu-card:nth-child(2) { transition: opacity .8s ease .12s, transform .8s ease .12s; }
 .section.reveal.is-inview .menu-card:nth-child(n+3) { transition: opacity .8s ease .18s, transform .8s ease .18s; }
 .menu-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 38px rgba(74, 53, 38, .22);
+    box-shadow: 0 18px 40px rgba(74, 53, 38, .20);
+    border-color: rgba(184, 137, 75, .6);
 }
 /* 名物2品は横2枠ぶち抜きで大きく */
 .menu-card.feature { grid-column: span 2; }
 .menu-thumb {
+    position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
+}
+/* 写真の足元をほんのり暗くして、題名との境目を締める */
+.menu-thumb::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 42%;
+    background: linear-gradient(to top, rgba(36, 26, 19, .28), rgba(36, 26, 19, 0));
+    z-index: 1;
+    pointer-events: none;
+}
+/* 名物カードだけ「名物」ラベル */
+.menu-card.feature .menu-thumb::after {
+    content: "名物";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding: 7px 18px;
+    background: var(--gold);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: .28em;
+    text-indent: .28em;
+    line-height: 1;
 }
 .menu-card.feature .menu-thumb { aspect-ratio: 16 / 9; }
 .menu-thumb img {
@@ -1272,31 +1360,36 @@ a:hover { opacity: .8; }
 }
 .menu-card:hover .menu-thumb img { transform: scale(1.06); }
 .menu-card figcaption {
-    padding: 18px 20px 22px;
+    padding: 20px 22px 24px;
 }
 .menu-card figcaption h3 {
+    /* 文字の幅ぶんだけの箱にして、下線を文字幅に揃える */
+    display: table;
+    position: relative;
+    max-width: 100%;
     font-size: clamp(16px, 1.7vw, 19px);
     font-weight: 700;
     letter-spacing: .04em;
     color: var(--brown);
-    margin-bottom: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
 }
 .menu-card.feature figcaption h3 { font-size: clamp(19px, 2vw, 24px); }
-.menu-card figcaption h3::before {
+/* 題名の下線：文字幅いっぱい＋右へ向かって溶ける金の罫 */
+.menu-card figcaption h3::after {
     content: "";
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin-right: 9px;
-    background: var(--gold);
-    transform: rotate(45deg);
-    vertical-align: middle;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, rgba(184, 137, 75, .15) 100%);
 }
 .menu-card figcaption p {
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.9;
     color: #6a5c4c;
-    letter-spacing: .02em;
+    letter-spacing: .03em;
 }
 
 /* =========================================================
@@ -1495,7 +1588,7 @@ a:hover { opacity: .8; }
     align-items: flex-start;
 }
 .info-table {
-    flex: 1 1 58%;
+    flex: 1 1 50%;
 }
 .info-table dl {
     display: flex;
@@ -1532,33 +1625,65 @@ a:hover { opacity: .8; }
 }
 .info-table dd a { color: var(--gold); font-weight: 700; }
 
+/* 右カラム：白ボックスは使わず、地図を大きく見せる */
 .info-side {
-    flex: 0 0 34%;
-    max-width: 340px;
+    flex: 1 1 50%;
+    min-width: 0;
     text-align: center;
-    background: #fff;
-    padding: 34px 28px 38px;
-    box-shadow: 0 10px 30px rgba(74, 53, 38, .14);
+    /* 中の電話番号を、このカラムの幅を基準に縮めるため */
+    container-type: inline-size;
 }
-.info-logo { margin-bottom: 22px; overflow: hidden; }
-.info-logo img { width: 100%; }
+/* Google マップ埋め込み */
+.info-map {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(231, 217, 194, .28);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .3);
+    background: #2f2419;   /* 読み込み中の下地 */
+}
+.info-map iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+.info-map-link {
+    margin-bottom: 20px;
+    font-size: 13px;
+    letter-spacing: .04em;
+    text-align: right;
+}
+.info-map-link a { color: var(--gold); }
+.info-map-link a span {
+    font-family: var(--font-en);
+    margin-left: 6px;
+}
+.info-map-link a:hover { opacity: 1; text-decoration: underline; }
 .info-cta {
     font-size: 14px;
     letter-spacing: .06em;
-    color: var(--brown);
+    color: #d8ccb8;
     margin-bottom: 6px;
 }
+.info-tel { white-space: nowrap; }   /* 電話番号は必ず一列（折り返さない） */
 .info-tel a {
     font-family: "Amiri", var(--font-en);
-    font-size: clamp(28px, 3.2vw, 36px);
     font-weight: 700;
-    letter-spacing: .04em;
-    color: var(--brown);
+    letter-spacing: .03em;
+    color: #fff;
+    /* 旧ブラウザ用のフォールバック */
+    font-size: clamp(24px, 2.8vw, 32px);
+    /* カラム幅に対する割合。狭くなれば文字も縮むので必ず一行に収まる */
+    font-size: clamp(24px, 8cqw, 34px);
 }
 .info-tel a::before {
     content: "\260E";
     font-size: .6em;
-    margin-right: 8px;
+    margin-right: 6px;
     color: var(--gold);
 }
 .info-btn { margin-top: 18px; }
@@ -1576,20 +1701,20 @@ a:hover { opacity: .8; }
    Footer
    ========================================================= */
 .footer {
-    background: var(--dark) url("../image/haikei_dark.jpg") center / cover no-repeat;
+    /* 背景画像の右端にある白い縦線を画面外へ逃がす（拡大＋左寄せ）。
+       高さ 100% 指定で、フッターが縦に伸びても地色が出ないようにする */
+    background: var(--dark) url("../image/haikei_dark.jpg") left center / 132% 100% no-repeat;
     color: #e7d9c2;
     text-align: center;
     padding: clamp(56px, 7vw, 84px) 24px clamp(28px, 4vw, 40px);
     border-top: 1px solid rgba(231, 217, 194, .12);
 }
-.footer-logo img {
-    height: clamp(72px, 9vw, 104px);
-    width: auto;
-    margin: 0 auto 26px;
-    opacity: .95;
-    /* 濃茶ロゴを暗背景で見えるよう白抜きに */
-    filter: brightness(0) invert(1);
+/* フッターのロゴ＝ヘッダーと同じテキストロゴ（毛筆＋筆記体の R） */
+.footer-logo {
+    --logo-size: clamp(32px, 3.2vw, 42px);
+    margin: 0 0 26px;
 }
+.footer-logo .logo-text { text-shadow: none; }
 .footer-nav {
     list-style: none;
     padding: 0;
@@ -1651,10 +1776,26 @@ a:hover { opacity: .8; }
     .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .menu-card.feature { grid-column: span 2; }
     .menu-card.feature .menu-thumb { aspect-ratio: 16 / 10; }
-    .menu-card figcaption { padding: 12px 14px 16px; }
-    .menu-card figcaption p { font-size: 13px; }
+    .menu-card figcaption { padding: 14px 13px 18px; }
+    /* 2列で幅が狭いぶん、字間を詰めて折り返しを減らす */
+    .menu-card figcaption h3 {
+        font-size: 14px;
+        line-height: 1.5;
+        letter-spacing: .01em;
+        padding-bottom: 7px;
+        margin-bottom: 8px;
+    }
+    .menu-card.feature figcaption h3 { font-size: 16px; }
+    .menu-card figcaption p {
+        font-size: 12px;
+        line-height: 1.7;
+        letter-spacing: .01em;
+    }
+    .menu-card.feature .menu-thumb::after { padding: 6px 13px; font-size: 11px; letter-spacing: .2em; text-indent: .2em; }
+    .menu-card::after { display: none; }
 
-    /* Drink：縦積み */
+    /* Drink：縦積み。写真が先頭に来るので上の余白を詰める */
+    .drink { padding-top: 24px; }
     .drink-inner { flex-direction: column; gap: 26px; }
     .drink-img img { min-height: 220px; }
     .drink-list li { flex-direction: column; gap: 4px; }
@@ -1678,15 +1819,102 @@ a:hover { opacity: .8; }
     .news-title { grid-area: title; white-space: normal; }
     .news-more a { width: 100%; justify-content: center; }
 
-    /* Info：縦積み */
-    .info-body { flex-direction: column; gap: 32px; }
-    .info-side { flex: 1 1 auto; max-width: none; width: 100%; }
-    .info-table dl { flex-direction: column; gap: 4px; padding: 14px 4px; }
-    .info-table dt { width: auto; }
+    /* Info：縦積み。全体を一回り小さく、幅も絞って中央に */
+    .info-body {
+        flex-direction: column;
+        gap: 26px;
+        align-items: center;
+    }
+    .info-table,
+    .info-side {
+        flex: 0 1 auto;
+        width: 100%;
+        max-width: 420px;
+    }
+    /* 項目名と内容は横並びのまま、幅を詰めて小さく */
+    .info-table dl { gap: 12px; padding: 12px 2px; }
+    .info-table dt {
+        width: 84px;
+        font-size: 13px;
+        letter-spacing: .04em;
+        padding-left: 13px;
+    }
+    .info-table dt::before { width: 5px; height: 5px; }
+    .info-table dd { font-size: 13px; line-height: 1.75; }
+    .info-cta { font-size: 13px; }
+    .info-tel a { font-size: min(7.5cqw, 28px); }
+    .info-map-link { font-size: 12px; margin-bottom: 16px; }
+    .info-btn { margin-top: 14px; }
+    .info-btn a { padding: 13px; font-size: 14px; }
 
     /* Footer */
     .footer-nav li { padding: 0 14px; }
     .footer-nav a { font-size: 13px; }
 
     .pagetop { right: 14px; bottom: 14px; width: 44px; height: 44px; }
+}
+
+/* =========================================================
+   Language switch  言語切替（日本語がベース、英語版は index-en.html）
+   ========================================================= */
+.lang-switch a {
+    letter-spacing: .12em;
+}
+.fv-subnav .lang-switch a,
+.drawer__sub .lang-switch a,
+.footer-nav .lang-switch a {
+    color: var(--gold);
+}
+.fv-subnav .lang-switch a:hover,
+.drawer__sub .lang-switch a:hover,
+.footer-nav .lang-switch a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* =========================================================
+   English page  英語版だけの上書き（<body class="lang-en">）
+   ========================================================= */
+.lang-en {
+    /* 本文だけ欧文セリフ体に。ロゴの毛筆・筆記体はそのまま */
+    --font: "Amiri", Georgia, "Times New Roman", serif;
+}
+/* お品書きの「名物」ラベルを英語に */
+.lang-en .menu-card.feature .menu-thumb::after {
+    content: "SIGNATURE";
+    letter-spacing: .18em;
+    text-indent: .18em;
+}
+
+@media (min-width: 901px) {
+    /* 縦書きだと英語は読めないので、メインナビは横組みの縦積みタブに */
+    .lang-en .fv-nav ul {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .lang-en .fv-nav a {
+        writing-mode: horizontal-tb;
+        height: auto;
+        min-width: 200px;
+        padding: 13px 20px;
+        font-size: 14px;
+        letter-spacing: .1em;
+        justify-content: flex-start;
+        border-left: 0;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    /* 左端のキャッチは縦組みのまま、英字を横倒しにして読めるように */
+    .lang-en .fv-side {
+        text-orientation: sideways;
+        letter-spacing: .1em;
+    }
+}
+
+/* =========================================================
+   改行コントロール（スマホだけ改行したい箇所に <br class="br-sp">）
+   ※ この2つは必ずこの順で。逆にすると効かない
+   ========================================================= */
+.br-sp { display: none; }
+@media (max-width: 900px) {
+    .br-sp { display: inline; }
 }

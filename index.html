@@ -10,6 +10,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
+    <!-- 英語版との相互リンク（検索エンジンに言語違いの同一ページだと伝える） -->
+    <link rel="alternate" hreflang="ja" href="index.html">
+    <link rel="alternate" hreflang="en" href="index-en.html">
+
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ja_JP">
@@ -57,12 +61,15 @@
                 <p class="fv-contact__tel"><a href="tel:09019593572">090-1959-3572</a></p>
             </div>
 
-            <p class="fv-reserve"><a href="tel:09019593572">ご予約はこちら</a></p>
+            <p class="fv-reserve">
+                <a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">ご予約はこちら</a>
+            </p>
 
             <ul class="fv-subnav">
                 <li><a href="#gallery">店内のご案内</a></li>
                 <li><a href="#info">店舗情報</a></li>
                 <li><a href="#info">アクセス</a></li>
+                <li class="lang-switch"><a href="index-en.html" hreflang="en" lang="en">English</a></li>
             </ul>
 
             <button class="fv-toggle" id="navToggle" aria-label="メニュー" aria-expanded="false">
@@ -182,7 +189,7 @@
                 <div class="concept-txt">
                     <p class="lead">"旨い魚"と"良い酒"に、まっすぐ。</p>
                     <p>
-                        西成の路地にのれんを掲げる「居酒屋Ｒ」<br>
+                        西成の路地にのれんを掲げる<br class="br-sp">「居酒屋Ｒ」<br>
                         毎朝仕入れる鮮魚を、刺身に、揚げ物に、鍋に
                         素材の持ち味をいちばん活かせるかたちでお出しします。
                     </p>
@@ -327,14 +334,14 @@
                 <h2>店内・お料理ギャラリー</h2>
             </div>
             <div class="gallery-grid">
-                <div class="g-item"><img src="assets/image/S__2793489.jpg" alt="刺身の定食"></div>
+                <div class="g-item"><img src="assets/image/12B42235-FE5C-4FDA-B285-809FDA777590.jpg" alt="黒板メニューの並ぶカウンター"></div>
                 <div class="g-item"><img src="assets/image/S__2793479.jpg" alt="舟盛り"></div>
                 <div class="g-item"><img src="assets/image/S__2793483.jpg" alt="伊勢海老グラタン"></div>
-                <div class="g-item"><img src="assets/image/S__2793487.jpg" alt="お造り"></div>
-                <div class="g-item"><img src="assets/image/S__2793480.jpg" alt="小鍋膳"></div>
+                <div class="g-item"><img src="assets/image/150x150_square_149215378.jpg" alt="店内のカウンター席"></div>
+                <div class="g-item"><img src="assets/image/150x150_square_149215514.jpg" alt="店内のテーブル席"></div>
                 <div class="g-item"><img src="assets/image/S__2793484.jpg" alt="刺身盛り合わせ"></div>
                 <div class="g-item"><img src="assets/image/S__2793485.jpg" alt="海老フライ"></div>
-                <div class="g-item"><img src="assets/image/S__2793482.jpg" alt="タルタル"></div>
+                <div class="g-item"><img src="assets/image/150x150_square_149215510.jpg" alt="店内のテーブル席"></div>
             </div>
         </section>
 
@@ -397,7 +404,7 @@
                     </dl>
                     <dl>
                         <dt>住所</dt>
-                        <dd>〒000-0000<br>大阪府大阪市西成区○○○ 0-0-0</dd>
+                        <dd>〒557-0004<br>大阪府大阪市西成区萩之茶屋1-7-12</dd>
                     </dl>
                     <dl>
                         <dt>電話</dt>
@@ -413,7 +420,7 @@
                     </dl>
                     <dl>
                         <dt>席数</dt>
-                        <dd>○○席（カウンター・テーブル）</dd>
+                        <dd>11席（カウンター5席、テーブル2席（4名、2名））</dd>
                     </dl>
                     <dl>
                         <dt>ご予約</dt>
@@ -421,10 +428,19 @@
                     </dl>
                 </div>
                 <div class="info-side">
-                    <p class="info-logo"><img src="assets/image/S__4227076.jpg" alt="西成居酒屋Ｒ"></p>
-                    <p class="info-cta">ご予約・お問い合わせはお電話で</p>
+                    <div class="info-map">
+                        <iframe
+                            src="https://www.google.com/maps?q=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E8%A5%BF%E6%88%90%E5%8C%BA%E8%90%A9%E4%B9%8B%E8%8C%B6%E5%B1%8B1-7-12&amp;z=17&amp;output=embed"
+                            title="西成居酒屋Ｒ 地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen></iframe>
+                    </div>
+                    <p class="info-map-link">
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E8%A5%BF%E6%88%90%E5%8C%BA%E8%90%A9%E4%B9%8B%E8%8C%B6%E5%B1%8B1-7-12"
+                           target="_blank" rel="noopener noreferrer">大きな地図で見る<span>&rarr;</span></a>
+                    </p>
+                    <p class="info-cta">ご予約・お問い合わせ</p>
                     <p class="info-tel"><a href="tel:09019593572">090-1959-3572</a></p>
-                    <p class="info-btn"><a href="tel:09019593572">電話をかける</a></p>
+                    <p class="info-btn"><a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">ご予約はこちら</a></p>
                 </div>
             </div>
         </section>
@@ -458,7 +474,13 @@
 
     <!-- ===== Footer ===== -->
     <footer class="footer">
-        <p class="footer-logo"><img src="assets/image/izakaya-r-logo-transparent.png" alt="西成居酒屋Ｒ"></p>
+        <p class="footer-logo">
+            <a href="#top" aria-label="西成居酒屋Ｒ">
+                <span class="logo-text">居酒屋</span>
+                <img src="assets/image/logo-fish.png" alt="" class="logo-fish">
+                <span class="logo-text logo-r">R</span>
+            </a>
+        </p>
         <ul class="footer-nav">
             <li><a href="#concept">こだわり</a></li>
             <li><a href="#menu">お品書き</a></li>
@@ -466,6 +488,7 @@
             <li><a href="#gallery">ギャラリー</a></li>
             <li><a href="#news">お知らせ</a></li>
             <li><a href="#info">店舗情報</a></li>
+            <li><a href="index-en.html" hreflang="en" lang="en">English</a></li>
         </ul>
         <p class="copyright">&copy; 西成居酒屋Ｒ All Rights Reserved.</p>
     </footer>
@@ -491,6 +514,7 @@
                 <li><a href="#gallery">店内のご案内</a></li>
                 <li><a href="#info">店舗情報</a></li>
                 <li><a href="#info">アクセス</a></li>
+                <li class="lang-switch"><a href="index-en.html" hreflang="en" lang="en">English</a></li>
             </ul>
 
             <nav class="drawer__nav" aria-label="メインメニュー">
@@ -516,7 +540,7 @@
                 <div class="drawer__contact">
                     <p class="drawer__label">ご予約・お問い合わせ</p>
                     <p class="drawer__tel"><a href="tel:09019593572">090-1959-3572</a></p>
-                    <p class="drawer__btn"><a href="tel:09019593572">お電話でご予約</a></p>
+                    <p class="drawer__btn"><a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">ご予約はこちら</a></p>
                 </div>
             </div>
         </div>

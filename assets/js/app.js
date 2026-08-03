@@ -50,7 +50,14 @@
                             obs.unobserve(entry.target);   // 一度だけ再生
                         }
                     });
-                }, { threshold: 0.35 });
+                }, {
+                    // threshold は「要素の何割が見えたら」の判定。
+                    // お品書きのように画面より背の高いセクションは
+                    // 何割も同時に見えないため、割合ではなく
+                    // 「要素の上端が画面下から15%入ったら」で判定する。
+                    threshold: 0,
+                    rootMargin: '0px 0px -15% 0px'
+                });
                 reveals.forEach(function (el) { io.observe(el); });
             } else {
                 // 非対応ブラウザは即表示
