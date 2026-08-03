@@ -1174,12 +1174,65 @@ a:hover { opacity: .8; }
     .menu-fab__lines span:nth-child(3) { top: 12px; }
 
     .drawer { flex-direction: column; overflow-y: auto; }
-    .drawer__media { flex: 0 0 34vh; }
-    .drawer__panel { flex: 1 1 auto; padding: 44px 22px; }
-    .drawer__sub { justify-content: flex-start; padding-right: 54px; }
-    .drawer__nav { justify-content: flex-start; margin: 28px 0; }
-    .drawer__nav ul { gap: 22px; }
-    .drawer__foot { justify-content: flex-start; }
+    /* 写真は控えめに。メニュー本体を画面内に収める */
+    .drawer__media { flex: 0 0 20vh; }
+    .drawer__panel { flex: 1 1 auto; padding: 26px 20px 34px; }
+
+    /* CLOSEボタンは右上の角へ */
+    .drawer__close { top: 18px; right: 18px; gap: 4px; }
+    .drawer__close-x { width: 24px; height: 24px; }
+    .drawer__close em { font-size: 10px; }
+
+    /* サブリンクは左寄せ・折り返し可。CLOSEとの重なりを避ける */
+    .drawer__sub {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        padding-right: 64px;
+        margin-bottom: 0;
+        font-size: 12px;
+    }
+    .drawer__sub li + li { padding-left: 14px; }
+
+    /* メインナビ：縦書きをやめて、押しやすい横書きの一覧に */
+    .drawer__nav { margin: 22px 0 0; }
+    .drawer__nav ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        border-top: 1px solid rgba(42,33,26,.14);
+    }
+    .drawer__nav li { border-bottom: 1px solid rgba(42,33,26,.14); }
+    .drawer__nav a {
+        writing-mode: horizontal-tb;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 2px;
+        font-size: 16px;
+        letter-spacing: .1em;
+    }
+    /* 各項目の右端に小さな矢印 */
+    .drawer__nav a::after {
+        content: "\203A";
+        font-family: var(--font-en);
+        font-size: 18px;
+        color: var(--gold);
+    }
+
+    /* 連絡先：縦積みで中央に */
+    .drawer__foot {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: 26px;
+        padding-top: 22px;
+    }
+    .drawer__logo { --logo-size: 30px; }
+    .drawer__contact { width: 100%; text-align: center; }
+    .drawer__label { font-size: 12px; }
+    .drawer__tel a { font-size: 28px; }
+    .drawer__btn a { display: block; margin-top: 12px; padding: 14px; font-size: 14px; }
 }
 
 /* アニメーションを控える設定では即表示 */
