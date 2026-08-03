@@ -334,29 +334,10 @@ a:hover { opacity: .8; }
     .fv-subnav,
     .fv-side { display: none; }
 
-    .fv-toggle { display: block; flex: 0 0 auto; }
-
-    /* 縦書きナビ → スマホでは横書きのドロップダウン */
-    .fv-nav {
-        position: absolute;
-        top: 62px;
-        left: 0; right: 0;
-        z-index: 20;
-        transform: translateY(-120%);
-        transition: transform .35s ease;
-    }
-    .fv-nav.is-open { transform: translateY(0); }
-    .fv-nav ul { flex-direction: column; }
-    .fv-nav a {
-        writing-mode: horizontal-tb;
-        height: auto;
-        width: 100%;
-        justify-content: center;
-        padding: 15px;
-        background: rgba(24,16,10,.96);
-        border-left: 0;
-        border-bottom: 1px solid rgba(255,255,255,.1);
-    }
+    /* スマホのメニューは右上の固定ハンバーガー（.menu-fab →ドロワー）に一本化。
+       ヘッダー内のハンバーガーとドロップダウンnavは、同じ位置に二重に出るため使わない */
+    .fv-toggle { display: none; }
+    .fv-nav { display: none; }
 
     /* 画像はヘッダー直下にフルで（左右の余白は解除） */
     .fv-img {
@@ -1179,7 +1160,15 @@ a:hover { opacity: .8; }
 
 /* スマホ：画像を上に、パネルを下に（縦積み） */
 @media (max-width: 900px) {
-    .menu-fab { width: 68px; height: 68px; gap: 7px; }
+    /* スマホでは唯一のメニューなので、スクロール位置に関係なく常に表示 */
+    .menu-fab {
+        width: 68px;
+        height: 68px;
+        gap: 7px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
     .menu-fab__lines { width: 26px; height: 13px; }
     .menu-fab__lines span:nth-child(2) { top: 6px; }
     .menu-fab__lines span:nth-child(3) { top: 12px; }
