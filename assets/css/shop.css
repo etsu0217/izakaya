@@ -97,26 +97,47 @@
     color: #8a7550;
     white-space: nowrap;
 }
-/* 落款印（朱色の角印） */
+/* 赤ちょうちん（軒先に下がっている見立て） */
 .shop-logo__seal {
     position: absolute;
-    top: 12px;
+    top: 13px;
     right: 12px;
     z-index: 2;
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #b3272d;
     color: #fff;
     font-family: "Yuji Syuku", var(--font);
-    font-size: 21px;
+    font-size: 17px;
     line-height: 1;
-    border-radius: 2px;
-    transform: rotate(-5deg);
-    box-shadow: 0 1px 3px rgba(0,0,0,.22);
+    /* 骨の横筋＋提灯のふくらみを感じる陰影 */
+    background:
+        repeating-linear-gradient(to bottom,
+            rgba(0,0,0,.16) 0 1px,
+            transparent 1px 6px),
+        radial-gradient(120% 100% at 32% 28%, #dc4045 0%, #bd2b31 52%, #8e1a20 100%);
+    /* 上下がすぼまった提灯の輪郭 */
+    border-radius: 46% / 34%;
+    transform: rotate(-4deg);
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    text-shadow: 0 1px 2px rgba(0,0,0,.45);
 }
+/* 上下の黒い口輪 */
+.shop-logo__seal::before,
+.shop-logo__seal::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 5px;
+    background: #241a12;
+    border-radius: 2px;
+}
+.shop-logo__seal::before { top: -3px; }
+.shop-logo__seal::after  { bottom: -3px; }
 
 /* --- 中央：アイコン付きナビ --- */
 .shop-nav { display: flex; }
@@ -266,6 +287,16 @@
     height: 100%;
     object-fit: cover;
 }
+/* 写真の右側を暗く落として、白い文字を読みやすくする */
+.hero-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(to left, rgba(18,12,6,.62) 0%, rgba(18,12,6,.34) 34%, rgba(18,12,6,0) 62%),
+        linear-gradient(to top, rgba(18,12,6,.3) 0%, rgba(18,12,6,0) 30%);
+}
 /* 縦書きのキャッチコピー（写真の右側）
    縦書きの中では「列を横に並べる」＝flex-direction: column。
    row にすると3つが同じ列に積まれてしまうので注意 */
@@ -280,8 +311,13 @@
     gap: clamp(10px, 1.4vw, 22px);
     writing-mode: vertical-rl;
     text-orientation: mixed;     /* 日本語は標準の向き、英数字だけ横倒し */
+    z-index: 1;                  /* 暗く落とした層より前に出す */
     color: #fff;
-    text-shadow: 0 2px 14px rgba(0,0,0,.55);
+    /* 近い影で輪郭を締め、遠い影で写真から浮かせる */
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.85),
+        0 2px 10px rgba(0,0,0,.7),
+        0 6px 26px rgba(0,0,0,.5);
 }
 /* 高さが足りないと縦書きは勝手に次の列へ折り返すので、
    1行＝1列で固定して2列に割れないようにする */
@@ -291,7 +327,8 @@
 }
 /* 3列は右から順に、開始位置を少しずつ下げて段違いに置く */
 .hero-slide__small {
-    font-size: clamp(13px, 1.3vw, 20px);
+    font-size: clamp(14px, 1.45vw, 22px);
+    font-weight: 500;
     letter-spacing: .3em;
     margin-top: 0;
 }
@@ -303,7 +340,8 @@
     margin-top: .55em;
 }
 .hero-slide__lead {
-    font-size: clamp(12px, 1.1vw, 17px);
+    font-size: clamp(13px, 1.25vw, 19px);
+    font-weight: 500;
     letter-spacing: .24em;
     margin-top: 3.4em;
 }
@@ -800,10 +838,12 @@
     .shop-logo::after { display: none; }
     .shop-logo__sub { display: none; }
     .shop-logo__seal {
-        top: 6px; right: 6px;
-        width: 24px; height: 24px;
-        font-size: 15px;
+        top: 7px; right: 7px;
+        width: 21px; height: 28px;
+        font-size: 12px;
     }
+    .shop-logo__seal::before,
+    .shop-logo__seal::after { width: 11px; height: 4px; }
     .shop-util {
         margin-left: auto;
         padding: 8px 12px;
