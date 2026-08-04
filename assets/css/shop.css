@@ -143,14 +143,14 @@
 /* 御神輿（提灯の対角＝左下に置く） */
 .shop-logo__mikoshi {
     position: absolute;
-    /* 札の左端にぴったり寄せる（右側はロゴ文字と重なってよい） */
-    left: 6px;
+    /* 右側は罫線・ロゴ文字と重ねる */
+    left: 20px;
     bottom: 12px;
     z-index: 2;
     line-height: 0;
 }
 .shop-logo__mikoshi img {
-    width: 76px;
+    width: 80px;
     height: auto;
     filter: drop-shadow(0 1px 3px rgba(0,0,0,.25));
 }
