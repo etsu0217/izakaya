@@ -103,15 +103,15 @@
     top: 12px;
     right: 12px;
     z-index: 2;
-    width: 24px;
-    height: 24px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #b3272d;
     color: #fff;
     font-family: "Yuji Syuku", var(--font);
-    font-size: 14px;
+    font-size: 21px;
     line-height: 1;
     border-radius: 2px;
     transform: rotate(-5deg);
@@ -280,11 +280,15 @@
     gap: clamp(10px, 1.4vw, 22px);
     writing-mode: vertical-rl;
     text-orientation: mixed;     /* 日本語は標準の向き、英数字だけ横倒し */
-    max-height: 78%;
     color: #fff;
     text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
-.hero-slide__copy > * { writing-mode: vertical-rl; }
+/* 高さが足りないと縦書きは勝手に次の列へ折り返すので、
+   1行＝1列で固定して2列に割れないようにする */
+.hero-slide__copy > * {
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+}
 /* 3列は右から順に、開始位置を少しずつ下げて段違いに置く */
 .hero-slide__small {
     font-size: clamp(13px, 1.3vw, 20px);
@@ -796,9 +800,9 @@
     .shop-logo::after { display: none; }
     .shop-logo__sub { display: none; }
     .shop-logo__seal {
-        top: 7px; right: 7px;
-        width: 17px; height: 17px;
-        font-size: 10px;
+        top: 6px; right: 6px;
+        width: 24px; height: 24px;
+        font-size: 15px;
     }
     .shop-util {
         margin-left: auto;
@@ -827,7 +831,10 @@
     .shop-nav__label { font-size: 13px; }
 
     /* ヒーロー：縦書きのままだと文字が大きすぎるので少し詰める */
-    .hero-slide__copy { right: 18px; }
+    .hero-slide__copy { right: 18px; gap: 8px; }
+    /* 画面が低いぶん、段違いの下げ幅も控えめに */
+    .hero-slide__big { margin-top: .4em; }
+    .hero-slide__lead { margin-top: 2em; }
     .hero-slider__dots { bottom: 12px; }
 
     .shop-points ul { grid-template-columns: 1fr; gap: 26px; }
