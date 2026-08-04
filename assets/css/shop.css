@@ -47,15 +47,8 @@
     /* 左下に御神輿を置くぶん、左側を広めにとる */
     padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
-    /* 和紙の風合い：斜めの薄い織り目＋かなり薄い茶の地色 */
-    background:
-        repeating-linear-gradient(45deg,
-            rgba(140,110,70,.03) 0 2px,
-            transparent 2px 5px),
-        repeating-linear-gradient(-45deg,
-            rgba(140,110,70,.025) 0 2px,
-            transparent 2px 6px),
-        radial-gradient(120% 120% at 30% 0%, #f9f4ec 0%, #f4ece0 58%, #efe5d6 100%);
+    /* 枠の中だけでなく、パネル全面をかなり薄い茶のベタ塗りに */
+    background-color: #f2e8da;
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
