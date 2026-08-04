@@ -183,10 +183,13 @@ a:hover { opacity: .8; }
    --------------------------------------------------------- */
 .fv-logo a,
 .drawer__logo a,
-.footer-logo a {
+.footer-logo a,
+.shop-logo a,
+.shop-footer__logo a {
     display: inline-flex;
     align-items: center;
     gap: calc(var(--logo-size) * .25);
+    white-space: nowrap;   /* 「居酒屋」と「R」が折り返さないように */
 }
 .logo-text {
     font-family: "Yuji Mai", serif;   /* 毛筆手書き風 */
