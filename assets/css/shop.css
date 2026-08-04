@@ -47,8 +47,8 @@
     /* 左下に御神輿を置くぶん、左側を広めにとる */
     padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
-    /* 枠の中だけでなく、パネル全面をかなり薄い茶のベタ塗りに */
-    background-color: #f2e8da;
+    /* パネル全面をかなり薄い茶のベタ塗りに（赤味を抑えた黄寄りの茶） */
+    background-color: #f2ecdf;
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
@@ -81,7 +81,6 @@
         0 1px 0 rgba(255,255,255,.9),
         0 0 1px rgba(29,20,9,.55);
 }
-.shop-logo .logo-r { color: #7d1f16; }   /* R だけ差し色の赤茶に */
 .shop-logo .logo-fish {
     filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
 }
