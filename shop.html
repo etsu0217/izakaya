@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>オンラインショップ｜西成居酒屋Ｒ</title>
+
+    <meta name="description" content="西成の居酒屋Ｒのお取り寄せ。名物のおでん、牛すじどて煮、味付けホルモン、ホタルイカ、もつ鍋セットを冷凍・冷蔵でお届けします。">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- OGP -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:title" content="オンラインショップ｜西成居酒屋Ｒ">
+    <meta property="og:site_name" content="西成居酒屋Ｒ">
+    <meta property="og:description" content="居酒屋Ｒの味をご自宅で。名物のおでん・どて煮・ホルモン・もつ鍋セットをお届けします。">
+    <meta property="og:image" content="assets/image/shop/set-takunomi.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/image/izakaya-r-logo-transparent.png">
+    <link rel="apple-touch-icon" href="assets/image/izakaya-r-logo-transparent.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Great+Vibes&family=Noto+Serif+JP:wght@400;500;700&family=Yuji+Mai&family=Yuji+Syuku&display=swap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/shop.css">
+
+    <!-- Scripts -->
+    <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/shop.js" defer></script>
+</head>
+
+<body id="shop">
+
+    <!-- ===== ヘッダー ===== -->
+    <header class="shop-header">
+        <p class="shop-logo">
+            <a href="index.html" aria-label="西成居酒屋Ｒ">
+                <span class="logo-text">居酒屋</span>
+                <img src="assets/image/logo-fish.png" alt="" class="logo-fish">
+                <span class="logo-text logo-r">R</span>
+            </a>
+        </p>
+
+        <nav class="shop-nav" aria-label="ショップメニュー">
+            <ul>
+                <li><a href="index.html">お店のサイト</a></li>
+                <li><a href="#items">商品一覧</a></li>
+                <li><a href="#guide">ご利用ガイド</a></li>
+                <li><a href="#faq">よくある質問</a></li>
+            </ul>
+        </nav>
+
+        <p class="shop-tel">
+            <span>お電話でのご注文</span>
+            <a href="tel:09019593572">090-1959-3572</a>
+        </p>
+    </header>
+
+    <!-- ===== ヒーロー ===== -->
+    <section class="shop-hero">
+        <div class="shop-hero__img">
+            <img src="assets/image/shop/set-takunomi.jpg" alt="居酒屋Ｒの料理が並んだ食卓">
+        </div>
+        <div class="shop-hero__body">
+            <p class="shop-hero__en">ONLINE SHOP</p>
+            <h1 class="shop-hero__title">西成の味を、<br>ご自宅の食卓へ。</h1>
+            <p class="shop-hero__lead">
+                お店で出しているおでん、どて煮、ホルモン、もつ鍋を、<br class="pc-br">
+                そのままの味付けで真空パックにしてお届けします。<br class="pc-br">
+                温めるだけで、今夜はおうちが居酒屋Ｒに。
+            </p>
+            <p class="shop-hero__btn"><a href="#items">商品を見る<span>&rarr;</span></a></p>
+        </div>
+    </section>
+
+    <!-- ===== 3つの約束 ===== -->
+    <section class="shop-points">
+        <ul>
+            <li>
+                <p class="shop-points__en">FROZEN</p>
+                <p class="shop-points__title">お店の味を急速冷凍</p>
+                <p class="shop-points__txt">仕込んだその日に冷凍。温めるだけで店の一皿になります。</p>
+            </li>
+            <li>
+                <p class="shop-points__en">SHIPPING</p>
+                <p class="shop-points__title">1万円以上で送料無料</p>
+                <p class="shop-points__txt">クール便でお届け。ご注文から3営業日以内に発送します。</p>
+            </li>
+            <li>
+                <p class="shop-points__en">GIFT</p>
+                <p class="shop-points__title">贈り物にも</p>
+                <p class="shop-points__txt">のし・ギフト包装を承ります。ご注文時にお申し付けください。</p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ===== 商品一覧 ===== -->
+    <section id="items" class="shop-items">
+        <div class="shop-head">
+            <p class="en">ITEMS</p>
+            <h2>お取り寄せ商品</h2>
+            <p class="shop-head__note">価格はすべて税込・送料別です。</p>
+        </div>
+
+        <!-- 商品カードは assets/js/shop.js の PRODUCTS から生成します -->
+        <div class="item-grid" id="itemGrid"></div>
+
+        <p class="shop-items__note">
+            ※ 表示価格・内容量は変更になる場合があります。アレルギーや原材料についてはお気軽にお問い合わせください。
+        </p>
+    </section>
+
+    <!-- ===== ご利用ガイド ===== -->
+    <section id="guide" class="shop-guide">
+        <div class="shop-head">
+            <p class="en">GUIDE</p>
+            <h2>ご利用ガイド</h2>
+        </div>
+        <div class="guide-grid">
+            <div class="guide-box">
+                <h3>お支払い方法</h3>
+                <p>クレジットカード（VISA / Mastercard / JCB / AMEX）、Apple Pay、Google Pay がご利用いただけます。決済はStripe社の安全な決済画面で行われ、当店がカード情報を保持することはありません。</p>
+            </div>
+            <div class="guide-box">
+                <h3>送料について</h3>
+                <p>クール便（冷凍）でお届けします。送料は全国一律1,200円、商品合計10,000円以上で無料です。北海道・沖縄・離島は追加送料をいただく場合があります。</p>
+            </div>
+            <div class="guide-box">
+                <h3>お届けまで</h3>
+                <p>ご注文確認後、3営業日以内に発送します。日時指定をご希望の場合は、ご注文後にお電話またはメールにてご連絡ください。</p>
+            </div>
+            <div class="guide-box">
+                <h3>返品・交換</h3>
+                <p>食品のため、お客様都合による返品・交換はお受けできません。破損・傷みなど商品に不備があった場合は、到着後3日以内にご連絡ください。良品と交換いたします。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== よくある質問 ===== -->
+    <section id="faq" class="shop-faq">
+        <div class="shop-head">
+            <p class="en">FAQ</p>
+            <h2>よくある質問</h2>
+        </div>
+        <dl class="faq-list">
+            <div class="faq-item">
+                <dt>賞味期限はどのくらいですか？</dt>
+                <dd>冷凍状態で製造日から30日間です。解凍後はその日のうちにお召し上がりください。</dd>
+            </div>
+            <div class="faq-item">
+                <dt>温め方を教えてください。</dt>
+                <dd>袋のまま熱湯で7〜10分湯せんしてください。おでん・もつ鍋は鍋に移して温めていただくと、より店の味に近づきます。</dd>
+            </div>
+            <div class="faq-item">
+                <dt>複数の商品をまとめて注文できますか？</dt>
+                <dd>はい。商品ごとにご購入手続きいただくか、お電話（090-1959-3572）でまとめてご注文いただけます。まとめてのご注文は送料をおまとめします。</dd>
+            </div>
+            <div class="faq-item">
+                <dt>お店で受け取ることはできますか？</dt>
+                <dd>可能です。ご注文時に「店頭受取希望」とお伝えいただければ、送料無料でご用意します。</dd>
+            </div>
+        </dl>
+    </section>
+
+    <!-- ===== フッター ===== -->
+    <footer class="shop-footer">
+        <p class="shop-footer__logo">
+            <a href="index.html" aria-label="西成居酒屋Ｒ">
+                <span class="logo-text">居酒屋</span>
+                <img src="assets/image/logo-fish.png" alt="" class="logo-fish">
+                <span class="logo-text logo-r">R</span>
+            </a>
+        </p>
+        <ul class="shop-footer__nav">
+            <li><a href="index.html">お店のサイト</a></li>
+            <li><a href="#items">商品一覧</a></li>
+            <li><a href="#guide">ご利用ガイド</a></li>
+            <li><a href="tokushoho.html">特定商取引法に基づく表記</a></li>
+            <li><a href="privacy.html">プライバシーポリシー</a></li>
+        </ul>
+        <p class="copyright">&copy; 西成居酒屋Ｒ All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
