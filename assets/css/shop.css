@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     /* 左下に御神輿を置くぶん、左側を広めにとる */
-    padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(78px, 7.5vw, 98px);
+    padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(50px, 4.8vw, 62px);
     border-right: 1px solid var(--shop-line);
     /* 和紙の風合い：斜めの薄い織り目＋かなり薄い茶の地色 */
     background:
@@ -143,8 +143,8 @@
 /* 御神輿（提灯の対角＝左下に置く） */
 .shop-logo__mikoshi {
     position: absolute;
-    /* 罫線と重なる位置まで右へ寄せる（ロゴ文字と多少重なってよい） */
-    left: clamp(52px, 5vw, 70px);
+    /* 札の左端にぴったり寄せる（右側はロゴ文字と重なってよい） */
+    left: 6px;
     bottom: 12px;
     z-index: 2;
     line-height: 0;
@@ -847,7 +847,7 @@
     }
     .shop-logo {
         --logo-size: 26px;
-        padding: 10px 16px 9px 48px;
+        padding: 10px 16px 9px 38px;
         border-right: 0;
     }
     .shop-logo::before { inset: 4px; }
@@ -860,7 +860,7 @@
     }
     .shop-logo__seal::before,
     .shop-logo__seal::after { width: 12px; height: 4px; }
-    .shop-logo__mikoshi { left: 26px; bottom: 8px; }
+    .shop-logo__mikoshi { left: 4px; bottom: 8px; }
     .shop-logo__mikoshi img { width: 46px; }
     .shop-util {
         margin-left: auto;
