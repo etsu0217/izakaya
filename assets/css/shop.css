@@ -38,30 +38,84 @@
     z-index: 30;
 }
 
-/* --- 左：枠で囲ったロゴ --- */
+/* --- 左：和紙の札に見立てたロゴ --- */
 .shop-logo {
     --logo-size: 34px;
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 14px clamp(16px, 2vw, 30px);
-    background: var(--shop-frame);
+    padding: 16px clamp(20px, 2.4vw, 36px) 14px;
     border-right: 1px solid var(--shop-line);
-    box-shadow: inset 0 0 0 1px rgba(190,175,140,.55);
+    /* 和紙の風合い：斜めの薄い織り目＋にじんだ地色 */
+    background:
+        repeating-linear-gradient(45deg,
+            rgba(160,140,100,.05) 0 2px,
+            transparent 2px 5px),
+        repeating-linear-gradient(-45deg,
+            rgba(160,140,100,.045) 0 2px,
+            transparent 2px 6px),
+        radial-gradient(120% 120% at 30% 0%, #fdf8ec 0%, #f4ebd6 60%, #ecdfc2 100%);
 }
-.shop-logo a { flex-wrap: wrap; justify-content: center; }
+/* 内側の細い罫（二重枠にして木札らしく） */
+.shop-logo::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(150,125,80,.42);
+    pointer-events: none;
+}
+/* 四隅の留め（角に短い線を重ねる） */
+.shop-logo::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(150,125,80,.16);
+    pointer-events: none;
+}
+.shop-logo a {
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 10px;
+}
 .shop-logo .logo-text {
-    color: var(--shop-navy);
-    text-shadow: none;
+    color: #2b2016;
+    text-shadow: 0 1px 0 rgba(255,255,255,.6);
 }
 .shop-logo .logo-fish { filter: none; }
+/* 添え字：上に細い罫を引いて落ち着かせる */
 .shop-logo__sub {
     width: 100%;
+    margin-top: 7px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(150,125,80,.35);
     text-align: center;
-    margin-top: 4px;
     font-size: 10px;
-    letter-spacing: .22em;
-    color: var(--shop-sub);
+    letter-spacing: .3em;
+    text-indent: .3em;   /* 字間ぶんの右寄りを打ち消して中央に */
+    color: #8a7550;
     white-space: nowrap;
+}
+/* 落款印（朱色の角印） */
+.shop-logo__seal {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #b3272d;
+    color: #fff;
+    font-family: "Yuji Syuku", var(--font);
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 2px;
+    transform: rotate(-5deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,.22);
 }
 
 /* --- 中央：アイコン付きナビ --- */
@@ -212,34 +266,42 @@
     height: 100%;
     object-fit: cover;
 }
-/* 縦書きのキャッチコピー（写真の右側） */
+/* 縦書きのキャッチコピー（写真の右側）
+   縦書きの中では「列を横に並べる」＝flex-direction: column。
+   row にすると3つが同じ列に積まれてしまうので注意 */
 .hero-slide__copy {
     position: absolute;
     top: 50%;
     right: clamp(24px, 7vw, 130px);
     transform: translateY(-50%);
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: clamp(8px, 1.2vw, 18px);
+    gap: clamp(10px, 1.4vw, 22px);
     writing-mode: vertical-rl;
+    text-orientation: mixed;     /* 日本語は標準の向き、英数字だけ横倒し */
+    max-height: 78%;
     color: #fff;
     text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
+.hero-slide__copy > * { writing-mode: vertical-rl; }
+/* 3列は右から順に、開始位置を少しずつ下げて段違いに置く */
 .hero-slide__small {
     font-size: clamp(13px, 1.3vw, 20px);
     letter-spacing: .3em;
-    margin-top: 4px;
+    margin-top: 0;
 }
 .hero-slide__big {
     font-family: "Yuji Syuku", var(--font);
-    font-size: clamp(34px, 5vw, 76px);
-    letter-spacing: .12em;
+    font-size: clamp(38px, 5.4vw, 82px);
+    letter-spacing: .14em;
     line-height: 1.1;
+    margin-top: .55em;
 }
 .hero-slide__lead {
     font-size: clamp(12px, 1.1vw, 17px);
-    letter-spacing: .22em;
-    margin-top: 8px;
+    letter-spacing: .24em;
+    margin-top: 3.4em;
 }
 
 /* 左右の矢印 */
@@ -727,10 +789,17 @@
     }
     .shop-logo {
         --logo-size: 26px;
-        padding: 10px 14px;
+        padding: 10px 16px 9px;
         border-right: 0;
     }
+    .shop-logo::before { inset: 4px; }
+    .shop-logo::after { display: none; }
     .shop-logo__sub { display: none; }
+    .shop-logo__seal {
+        top: 7px; right: 7px;
+        width: 17px; height: 17px;
+        font-size: 10px;
+    }
     .shop-util {
         margin-left: auto;
         padding: 8px 12px;
