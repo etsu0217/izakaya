@@ -55,7 +55,7 @@
         repeating-linear-gradient(-45deg,
             rgba(140,110,70,.025) 0 2px,
             transparent 2px 6px),
-        radial-gradient(120% 120% at 30% 0%, #fcf9f5 0%, #f7f2ea 58%, #f2ebe1 100%);
+        radial-gradient(120% 120% at 30% 0%, #f9f4ec 0%, #f4ece0 58%, #efe5d6 100%);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
@@ -80,11 +80,18 @@
     justify-content: center;
     padding: 0 10px;
 }
+/* 薄い地色に負けないよう、文字は濃い墨色＋白のふちで浮かせる */
 .shop-logo .logo-text {
-    color: #2b2016;
-    text-shadow: 0 1px 0 rgba(255,255,255,.6);
+    color: #1d1409;
+    letter-spacing: .1em;
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.9),
+        0 0 1px rgba(29,20,9,.55);
 }
-.shop-logo .logo-fish { filter: none; }
+.shop-logo .logo-r { color: #7d1f16; }   /* R だけ差し色の赤茶に */
+.shop-logo .logo-fish {
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
+}
 /* 添え字：上に細い罫を引いて落ち着かせる */
 .shop-logo__sub {
     width: 100%;
@@ -95,7 +102,7 @@
     font-size: 10px;
     letter-spacing: .3em;
     text-indent: .3em;   /* 字間ぶんの右寄りを打ち消して中央に */
-    color: #8a7550;
+    color: #6f5a33;
     white-space: nowrap;
 }
 /* 赤ちょうちん（軒先に下がっている見立て） */
