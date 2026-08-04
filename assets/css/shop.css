@@ -48,7 +48,7 @@
     padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
     /* パネル全面をかなり薄い茶のベタ塗りに（赤味を抑えた黄寄りの茶） */
-    background-color: #f2ecdf;
+    background-color: #f1ecdd;
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
