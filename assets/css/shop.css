@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     /* 左下に御神輿を置くぶん、左側を広めにとる */
-    padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(50px, 4.8vw, 62px);
+    padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
     /* 和紙の風合い：斜めの薄い織り目＋かなり薄い茶の地色 */
     background:
@@ -144,7 +144,7 @@
 .shop-logo__mikoshi {
     position: absolute;
     /* 右側は罫線・ロゴ文字と重ねる */
-    left: 20px;
+    left: 4px;
     bottom: 12px;
     z-index: 2;
     line-height: 0;
@@ -847,7 +847,7 @@
     }
     .shop-logo {
         --logo-size: 26px;
-        padding: 10px 16px 9px 38px;
+        padding: 10px 16px 9px 30px;
         border-right: 0;
     }
     .shop-logo::before { inset: 4px; }
