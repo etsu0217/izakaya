@@ -89,6 +89,9 @@
 .shop-logo__sub {
     width: 100%;
     margin-top: 7px;
+    /* 罫線だけを左へ伸ばし、御神輿と重ねる（文字の位置は変えない） */
+    margin-left: -52px;
+    padding-left: 52px;
     padding-top: 6px;
     border-top: 1px solid rgba(150,125,80,.35);
     text-align: center;
@@ -143,9 +146,9 @@
 /* 御神輿（提灯の対角＝左下に置く） */
 .shop-logo__mikoshi {
     position: absolute;
-    /* 「西成・萩之茶屋」の上の罫線に少し重なるよう、右寄りに置く */
-    left: 26px;
-    bottom: 14px;
+    /* 罫線がちょうど御神輿の下部を横切る位置に置く */
+    left: 22px;
+    bottom: 12px;
     z-index: 2;
     line-height: 0;
 }
@@ -860,7 +863,7 @@
     }
     .shop-logo__seal::before,
     .shop-logo__seal::after { width: 12px; height: 4px; }
-    .shop-logo__mikoshi { left: 12px; bottom: 8px; }
+    .shop-logo__mikoshi { left: 8px; bottom: 8px; }
     .shop-logo__mikoshi img { width: 46px; }
     .shop-util {
         margin-left: auto;
