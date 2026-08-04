@@ -44,17 +44,18 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 16px clamp(20px, 2.4vw, 36px) 14px;
+    /* 左下に御神輿を置くぶん、左側を広めにとる */
+    padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(78px, 7.5vw, 98px);
     border-right: 1px solid var(--shop-line);
-    /* 和紙の風合い：斜めの薄い織り目＋にじんだ地色 */
+    /* 和紙の風合い：斜めの薄い織り目＋かなり薄い茶の地色 */
     background:
         repeating-linear-gradient(45deg,
-            rgba(160,140,100,.05) 0 2px,
+            rgba(140,110,70,.05) 0 2px,
             transparent 2px 5px),
         repeating-linear-gradient(-45deg,
-            rgba(160,140,100,.045) 0 2px,
+            rgba(140,110,70,.045) 0 2px,
             transparent 2px 6px),
-        radial-gradient(120% 120% at 30% 0%, #fdf8ec 0%, #f4ebd6 60%, #ecdfc2 100%);
+        radial-gradient(120% 120% at 30% 0%, #efe6db 0%, #e9ded0 58%, #e2d4c2 100%);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
@@ -103,14 +104,14 @@
     top: 13px;
     right: 12px;
     z-index: 2;
-    width: 30px;
-    height: 40px;
+    width: 42px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     font-family: "Yuji Syuku", var(--font);
-    font-size: 17px;
+    font-size: 26px;
     line-height: 1;
     /* 骨の横筋＋提灯のふくらみを感じる陰影 */
     background:
@@ -138,6 +139,21 @@
 }
 .shop-logo__seal::before { top: -3px; }
 .shop-logo__seal::after  { bottom: -3px; }
+
+/* 御神輿（提灯の対角＝左下に置く） */
+.shop-logo__mikoshi {
+    position: absolute;
+    /* 「西成・萩之茶屋」の上の罫線に少し重なるよう、右寄りに置く */
+    left: 26px;
+    bottom: 14px;
+    z-index: 2;
+    line-height: 0;
+}
+.shop-logo__mikoshi img {
+    width: 76px;
+    height: auto;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.25));
+}
 
 /* --- 中央：アイコン付きナビ --- */
 .shop-nav { display: flex; }
@@ -831,7 +847,7 @@
     }
     .shop-logo {
         --logo-size: 26px;
-        padding: 10px 16px 9px;
+        padding: 10px 16px 9px 48px;
         border-right: 0;
     }
     .shop-logo::before { inset: 4px; }
@@ -839,11 +855,13 @@
     .shop-logo__sub { display: none; }
     .shop-logo__seal {
         top: 7px; right: 7px;
-        width: 21px; height: 28px;
-        font-size: 12px;
+        width: 27px; height: 36px;
+        font-size: 16px;
     }
     .shop-logo__seal::before,
-    .shop-logo__seal::after { width: 11px; height: 4px; }
+    .shop-logo__seal::after { width: 12px; height: 4px; }
+    .shop-logo__mikoshi { left: 12px; bottom: 8px; }
+    .shop-logo__mikoshi img { width: 46px; }
     .shop-util {
         margin-left: auto;
         padding: 8px 12px;
