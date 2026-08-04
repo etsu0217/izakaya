@@ -26,51 +26,95 @@
         }
 
         // カスタムカーソル（点＝実位置／リング＝少し遅れて追従）
-        // マウス操作の端末だけで動かす（スマホ・タブレットは標準のまま）
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        // マウス操作のときだけ表示し、タッチ操作に切り替わったら自動で標準に戻す
+        (function () {
             const ring = document.createElement('div');
             const dot  = document.createElement('div');
             ring.className = 'cursor-ring';
             dot.className  = 'cursor-dot';
             document.body.appendChild(ring);
             document.body.appendChild(dot);
-            document.documentElement.classList.add('has-cursor');
 
             // 遅れの強さ（1 に近いほど機敏。0.18 くらいがちょうどよい）
-            const ease = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 0.18;
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let ease = reduce.matches ? 1 : 0.18;
             let mouseX = window.innerWidth / 2,  mouseY = window.innerHeight / 2;
             let ringX  = mouseX,                 ringY  = mouseY;
+            let raf = null;
+            let enabled = false;
+
+            // マウスが使える環境かどうか。ウィンドウ幅ではなく入力方法で判定するので、
+            // ブラウザを細くしただけのレスポンシブ確認では消えない
+            const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+            function show() {
+                dot.classList.add('is-visible');
+                ring.classList.add('is-visible');
+            }
+            function hide() {
+                dot.classList.remove('is-visible');
+                ring.classList.remove('is-visible');
+                ring.classList.remove('is-hover', 'is-down');
+            }
+            function loop() {
+                ringX += (mouseX - ringX) * ease;
+                ringY += (mouseY - ringY) * ease;
+                ring.style.transform = 'translate(' + ringX + 'px,' + ringY + 'px)';
+                raf = requestAnimationFrame(loop);
+            }
+            function enable() {
+                if (enabled) return;
+                enabled = true;
+                document.documentElement.classList.add('has-cursor');
+                if (raf === null) loop();
+            }
+            function disable() {
+                if (!enabled) return;
+                enabled = false;
+                document.documentElement.classList.remove('has-cursor');
+                hide();
+                if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+            }
 
             document.addEventListener('mousemove', function (e) {
+                // タッチ由来の擬似 mousemove は無視する
+                if (!fine.matches) return;
+                enable();
                 mouseX = e.clientX;
                 mouseY = e.clientY;
                 dot.style.transform = 'translate(' + mouseX + 'px,' + mouseY + 'px)';
-                if (!dot.classList.contains('is-visible')) {
-                    dot.classList.add('is-visible');
-                    ring.classList.add('is-visible');
-                }
+                if (!dot.classList.contains('is-visible')) show();
+
                 // リンク・ボタンの上ではリングを広げる
                 const el = (e.target instanceof Element) ? e.target : null;
                 const target = el && el.closest('a, button, [role="button"], label, summary');
                 ring.classList.toggle('is-hover', !!target);
-            });
+            }, { passive: true });
 
             // ウィンドウ外へ出たら消す
-            document.addEventListener('mouseleave', function () {
-                dot.classList.remove('is-visible');
-                ring.classList.remove('is-visible');
+            document.addEventListener('mouseleave', hide);
+
+            document.addEventListener('mousedown', function () {
+                if (enabled) ring.classList.add('is-down');
             });
+            document.addEventListener('mouseup', function () { ring.classList.remove('is-down'); });
 
-            document.addEventListener('mousedown', function () { ring.classList.add('is-down'); });
-            document.addEventListener('mouseup',   function () { ring.classList.remove('is-down'); });
+            // 指で触られたら即座に標準カーソルへ戻す（タッチ対応ノートPC・開発者ツールのデバイス表示）
+            document.addEventListener('pointerdown', function (e) {
+                if (e.pointerType === 'touch' || e.pointerType === 'pen') disable();
+            }, { passive: true });
 
-            (function loop() {
-                ringX += (mouseX - ringX) * ease;
-                ringY += (mouseY - ringY) * ease;
-                ring.style.transform = 'translate(' + ringX + 'px,' + ringY + 'px)';
-                requestAnimationFrame(loop);
-            })();
-        }
+            // 入力方法や設定が途中で変わった場合にも追従する
+            function watch(mql, fn) {
+                if (mql.addEventListener) mql.addEventListener('change', fn);
+                else if (mql.addListener) mql.addListener(fn);   // 旧Safari向け
+            }
+            watch(fine, function () { if (!fine.matches) disable(); });
+            watch(reduce, function () { ease = reduce.matches ? 1 : 0.18; });
+
+            // マウスがある環境なら最初から有効化しておく
+            if (fine.matches) enable();
+        })();
 
         // ヒーロー画像スライドショー（フェード切替）
         const slider = document.getElementById('fvSlider');

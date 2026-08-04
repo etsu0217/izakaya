@@ -28,6 +28,12 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; transition: opacity .25s, background .25s, color .25s; }
 a:hover { opacity: .8; }
 
+/* スマホでだけ効かせる改行（PCでは1行のまま） */
+.sp-br { display: none; }
+@media (max-width: 767px) {
+    .sp-br { display: inline; }
+}
+
 /* =========================================================
    カスタムカーソル（追従リング＋点）
    ・JSが html.has-cursor を付けたときだけ有効
@@ -87,6 +93,22 @@ a:hover { opacity: .8; }
 .has-cursor input,
 .has-cursor textarea,
 .has-cursor select { cursor: auto; }
+
+/* 画面が狭いときはリングを小さめにして、要素を覆い隠さないようにする */
+@media (max-width: 767px) {
+    .cursor-ring {
+        width: 28px; height: 28px;
+        margin: -14px 0 0 -14px;
+    }
+    .cursor-ring.is-hover {
+        width: 48px; height: 48px;
+        margin: -24px 0 0 -24px;
+    }
+    .cursor-ring.is-down {
+        width: 20px; height: 20px;
+        margin: -10px 0 0 -10px;
+    }
+}
 
 /* 動きを抑える設定では追従の遅れをなくす */
 @media (prefers-reduced-motion: reduce) {
@@ -1239,6 +1261,44 @@ a:hover { opacity: .8; }
 }
 .drawer__nav a:hover { color: var(--gold); opacity: 1; }
 
+/* 言語切り替え（日本語 / English） */
+.drawer__lang {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+}
+.drawer__lang-label {
+    font-family: var(--font-en);
+    font-size: 11px;
+    letter-spacing: .18em;
+    color: rgba(42,33,26,.55);
+}
+.drawer__lang-btns {
+    display: flex;
+    border: 1px solid rgba(42,33,26,.25);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.drawer__lang-btns > * {
+    padding: 7px 18px;
+    font-size: 13px;
+    letter-spacing: .06em;
+    line-height: 1;
+    white-space: nowrap;
+}
+.drawer__lang-btns > * + * { border-left: 1px solid rgba(42,33,26,.25); }
+.drawer__lang-btns a:hover {
+    background: rgba(184,137,75,.15);
+    color: var(--ink);
+    opacity: 1;
+}
+/* いま表示している言語 */
+.drawer__lang-btns .is-current {
+    background: var(--gold);
+    color: #fff;
+}
+
 /* フッター：ロゴ＋連絡先 */
 .drawer__foot {
     display: flex;
@@ -1339,6 +1399,21 @@ a:hover { opacity: .8; }
         font-family: var(--font-en);
         font-size: 18px;
         color: var(--gold);
+    }
+
+    /* 言語切り替え：ナビの下で全幅に広げ、指で押しやすいサイズに */
+    .drawer__lang {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        margin-top: 18px;
+    }
+    .drawer__lang-label { text-align: center; }
+    .drawer__lang-btns > * {
+        flex: 1;
+        padding: 12px 10px;
+        text-align: center;
+        font-size: 14px;
     }
 
     /* 連絡先：縦積みで中央に */
