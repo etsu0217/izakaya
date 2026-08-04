@@ -50,12 +50,12 @@
     /* 和紙の風合い：斜めの薄い織り目＋かなり薄い茶の地色 */
     background:
         repeating-linear-gradient(45deg,
-            rgba(140,110,70,.05) 0 2px,
+            rgba(140,110,70,.03) 0 2px,
             transparent 2px 5px),
         repeating-linear-gradient(-45deg,
-            rgba(140,110,70,.045) 0 2px,
+            rgba(140,110,70,.025) 0 2px,
             transparent 2px 6px),
-        radial-gradient(120% 120% at 30% 0%, #efe6db 0%, #e9ded0 58%, #e2d4c2 100%);
+        radial-gradient(120% 120% at 30% 0%, #fcf9f5 0%, #f7f2ea 58%, #f2ebe1 100%);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
