@@ -47,8 +47,8 @@
     /* 左下に御神輿を置くぶん、左側を広めにとる */
     padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
-    /* パネル全面をかなり薄い茶のベタ塗りに（赤味を抑えた黄寄りの茶） */
-    background-color: #f1ecdd;
+    /* パネル全面に #843b17 をかなり薄く透過させて敷く（ベタ塗りにしない） */
+    background-color: rgba(132, 59, 23, .12);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
