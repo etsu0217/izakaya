@@ -29,6 +29,71 @@ a { color: inherit; text-decoration: none; transition: opacity .25s, background 
 a:hover { opacity: .8; }
 
 /* =========================================================
+   カスタムカーソル（追従リング＋点）
+   ・JSが html.has-cursor を付けたときだけ有効
+   ・マウスを持つ端末のみ／JS無効時は標準の矢印のまま
+   ========================================================= */
+.cursor-ring,
+.cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .3s;
+    will-change: transform;
+}
+/* 遅れて追従する細いリング */
+.cursor-ring {
+    width: 36px; height: 36px;
+    margin: -18px 0 0 -18px;
+    border: 1px solid rgba(184,137,75,.9);
+    background: rgba(184,137,75,0);
+    transition: opacity .3s, width .3s, height .3s, margin .3s,
+                background .3s, border-color .3s;
+}
+/* マウス位置にぴったり付く小さな点 */
+.cursor-dot {
+    width: 6px; height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--gold);
+}
+/* マウスが画面内に入ったら表示 */
+.has-cursor .cursor-ring.is-visible,
+.has-cursor .cursor-dot.is-visible { opacity: 1; }
+
+/* リンク・ボタンの上ではリングが広がって光る */
+.cursor-ring.is-hover {
+    width: 64px; height: 64px;
+    margin: -32px 0 0 -32px;
+    border-color: rgba(212,175,105,1);
+    background: rgba(184,137,75,.18);
+}
+/* クリック中は少し縮む */
+.cursor-ring.is-down {
+    width: 26px; height: 26px;
+    margin: -13px 0 0 -13px;
+}
+
+/* 標準の矢印を隠す（カスタムカーソルが動いているときのみ） */
+.has-cursor,
+.has-cursor a,
+.has-cursor button,
+.has-cursor [role="button"],
+.has-cursor label,
+.has-cursor summary { cursor: none; }
+/* 入力欄だけはキャレットが必要なので標準に戻す */
+.has-cursor input,
+.has-cursor textarea,
+.has-cursor select { cursor: auto; }
+
+/* 動きを抑える設定では追従の遅れをなくす */
+@media (prefers-reduced-motion: reduce) {
+    .cursor-ring { transition: opacity .3s; }
+}
+
+/* =========================================================
    First View  ヘッダー＋ヒーロー
    ========================================================= */
 .fv {
@@ -428,6 +493,62 @@ a:hover { opacity: .8; }
     height: 90px;
     /* 右端の白い線を画面外にクロップするため拡大＋左寄せ */
     background: var(--dark) url("../image/haikei_dark.jpg") left center / 118% no-repeat;
+}
+
+/* =========================================================
+   ヒーロー画像の上を練り歩く御神輿
+   ========================================================= */
+.mikoshi {
+    position: absolute;
+    /* ヒーロー画像（.fv-img）の下部に重ねる */
+    left: 0; right: 0; bottom: 0;
+    height: 220px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 7;   /* お知らせカード(6)より前を通す。開いたナビ(20)より下 */
+}
+/* 横移動（左→右へ練り歩く） */
+.mikoshi__track {
+    position: absolute;
+    left: 0;
+    bottom: 24px;
+    will-change: transform;
+    animation: mikoshi-walk 22s linear infinite;
+}
+/* 担ぎ手の上下動＋左右の揺れ（わっしょい） */
+.mikoshi__img {
+    display: block;
+    width: auto;
+    height: 150px;
+    transform-origin: 50% 100%;
+    filter: drop-shadow(0 10px 14px rgba(0,0,0,.45));
+    will-change: transform;
+    animation: mikoshi-bounce .7s ease-in-out infinite;
+}
+@keyframes mikoshi-walk {
+    from { transform: translateX(-30vw); }
+    to   { transform: translateX(110vw); }
+}
+@keyframes mikoshi-bounce {
+    0%   { transform: translateY(0)     rotate(-2.5deg); }
+    50%  { transform: translateY(-12px) rotate(2.5deg); }
+    100% { transform: translateY(0)     rotate(-2.5deg); }
+}
+
+@media (max-width: 767px) {
+    .mikoshi { height: 150px; }
+    .mikoshi__img { height: 100px; }
+    .mikoshi__track { bottom: 16px; animation-duration: 16s; }
+}
+
+/* アニメーションを控えたい設定の場合は静止表示 */
+@media (prefers-reduced-motion: reduce) {
+    .mikoshi__track {
+        animation: none;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .mikoshi__img { animation: none; }
 }
 
 /* =========================================================

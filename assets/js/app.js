@@ -25,6 +25,53 @@
             });
         }
 
+        // カスタムカーソル（点＝実位置／リング＝少し遅れて追従）
+        // マウス操作の端末だけで動かす（スマホ・タブレットは標準のまま）
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            const ring = document.createElement('div');
+            const dot  = document.createElement('div');
+            ring.className = 'cursor-ring';
+            dot.className  = 'cursor-dot';
+            document.body.appendChild(ring);
+            document.body.appendChild(dot);
+            document.documentElement.classList.add('has-cursor');
+
+            // 遅れの強さ（1 に近いほど機敏。0.18 くらいがちょうどよい）
+            const ease = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 0.18;
+            let mouseX = window.innerWidth / 2,  mouseY = window.innerHeight / 2;
+            let ringX  = mouseX,                 ringY  = mouseY;
+
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dot.style.transform = 'translate(' + mouseX + 'px,' + mouseY + 'px)';
+                if (!dot.classList.contains('is-visible')) {
+                    dot.classList.add('is-visible');
+                    ring.classList.add('is-visible');
+                }
+                // リンク・ボタンの上ではリングを広げる
+                const el = (e.target instanceof Element) ? e.target : null;
+                const target = el && el.closest('a, button, [role="button"], label, summary');
+                ring.classList.toggle('is-hover', !!target);
+            });
+
+            // ウィンドウ外へ出たら消す
+            document.addEventListener('mouseleave', function () {
+                dot.classList.remove('is-visible');
+                ring.classList.remove('is-visible');
+            });
+
+            document.addEventListener('mousedown', function () { ring.classList.add('is-down'); });
+            document.addEventListener('mouseup',   function () { ring.classList.remove('is-down'); });
+
+            (function loop() {
+                ringX += (mouseX - ringX) * ease;
+                ringY += (mouseY - ringY) * ease;
+                ring.style.transform = 'translate(' + ringX + 'px,' + ringY + 'px)';
+                requestAnimationFrame(loop);
+            })();
+        }
+
         // ヒーロー画像スライドショー（フェード切替）
         const slider = document.getElementById('fvSlider');
         if (slider) {
