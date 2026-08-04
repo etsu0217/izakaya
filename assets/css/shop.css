@@ -7,108 +7,290 @@
 
 #shop {
     background: var(--cream);
+    /* ショップ専用の色（白ヘッダー＋濃紺の文字） */
+    --shop-navy:  #24313f;
+    --shop-line:  #dcd6c8;
+    --shop-frame: #f4eddc;
+    --shop-sub:   #8a8172;
 }
 .pc-br { display: inline; }
 
+/* 読み上げソフト用（画面には出さない） */
+.visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
 /* =========================================================
-   ヘッダー
+   ヘッダー（白地・アイコン付きナビ）
    ========================================================= */
 .shop-header {
     display: flex;
-    align-items: center;
-    gap: 32px;
-    padding: 18px clamp(16px, 4vw, 48px);
-    background: var(--dark);
+    align-items: stretch;
+    background: #fff;
+    border-bottom: 1px solid var(--shop-line);
     position: sticky;
     top: 0;
     z-index: 30;
 }
-.shop-logo { --logo-size: 40px; }
-.shop-logo .logo-text { color: var(--cream); }
 
-.shop-nav { margin-left: auto; }
-.shop-nav ul {
+/* --- 左：枠で囲ったロゴ --- */
+.shop-logo {
+    --logo-size: 34px;
     display: flex;
-    gap: 28px;
+    align-items: center;
+    padding: 14px clamp(16px, 2vw, 30px);
+    background: var(--shop-frame);
+    border-right: 1px solid var(--shop-line);
+    box-shadow: inset 0 0 0 1px rgba(190,175,140,.55);
 }
-.shop-nav a {
-    color: var(--cream);
-    font-size: 14px;
-    letter-spacing: .08em;
+.shop-logo a { flex-wrap: wrap; justify-content: center; }
+.shop-logo .logo-text {
+    color: var(--shop-navy);
+    text-shadow: none;
 }
-.shop-nav a:hover { color: var(--gold); opacity: 1; }
+.shop-logo .logo-fish { filter: none; }
+.shop-logo__sub {
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+    font-size: 10px;
+    letter-spacing: .22em;
+    color: var(--shop-sub);
+    white-space: nowrap;
+}
 
-.shop-tel { text-align: right; line-height: 1.4; }
-.shop-tel span {
-    display: block;
-    color: rgba(247,242,232,.7);
-    font-size: 11px;
-    letter-spacing: .1em;
+/* --- 中央：アイコン付きナビ --- */
+.shop-nav { display: flex; }
+.shop-nav ul { display: flex; }
+.shop-nav li + li { border-left: 1px solid var(--shop-line); }
+.shop-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    height: 100%;
+    padding: 14px clamp(14px, 1.8vw, 28px);
+    color: var(--shop-navy);
 }
-.shop-tel a {
-    color: var(--cream);
-    font-family: var(--font-en);
-    font-size: 20px;
+.shop-nav a:hover { background: #faf7ef; opacity: 1; }
+.shop-nav__icon svg {
+    width: 34px; height: 34px;
+    fill: none;
+    stroke: var(--shop-navy);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.shop-nav__label {
+    font-size: 15px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+}
+.shop-nav__sub {
+    font-size: 10px;
+    letter-spacing: .06em;
+    color: var(--shop-sub);
+    white-space: nowrap;
+}
+
+/* --- 右：検索＋補助リンク --- */
+.shop-util {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    margin-left: auto;
+    padding: 12px clamp(16px, 2.4vw, 34px);
+}
+.shop-util__top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+.shop-search {
+    display: flex;
+    align-items: center;
+    background: #f1f0ec;
+}
+.shop-search input {
+    width: clamp(140px, 16vw, 240px);
+    padding: 9px 14px;
+    border: 0;
+    background: transparent;
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--shop-navy);
+}
+.shop-search input:focus { outline: 2px solid rgba(36,49,63,.35); }
+.shop-search button {
+    padding: 0 12px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    line-height: 0;
+}
+.shop-search svg,
+.shop-util__icon svg {
+    width: 26px; height: 26px;
+    fill: none;
+    stroke: var(--shop-navy);
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.shop-util__icon:hover svg { stroke: var(--gold); }
+
+.shop-util__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    padding-top: 10px;
+    border-top: 1px solid var(--shop-line);
+    font-size: 13px;
+}
+.shop-util__bottom a {
+    color: var(--shop-navy);
     letter-spacing: .04em;
+}
+.shop-util__bottom a:hover { color: var(--gold); opacity: 1; }
+
+/* 文字サイズ切り替え */
+.font-size {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--shop-navy);
+}
+.font-size span { font-size: 12px; }
+.font-size button {
+    padding: 3px 9px;
+    border: 1px solid var(--shop-navy);
+    background: #fff;
+    color: var(--shop-navy);
+    font-family: var(--font);
+    font-size: 12px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+.font-size button.is-active {
+    background: var(--shop-navy);
+    color: #fff;
 }
 
 /* =========================================================
-   ヒーロー
+   ヒーロー（全幅スライドショー）
    ========================================================= */
-.shop-hero {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    align-items: stretch;
-    background: var(--dark);
-}
-.shop-hero__img {
+.hero-slider {
     position: relative;
-    min-height: 460px;
     overflow: hidden;
+    background: #efe7d8;
 }
-.shop-hero__img img {
+.hero-slider__track {
+    position: relative;
+    height: clamp(320px, 42vw, 620px);
+}
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+}
+.hero-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.hero-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.shop-hero__body {
+/* 縦書きのキャッチコピー（写真の右側） */
+.hero-slide__copy {
+    position: absolute;
+    top: 50%;
+    right: clamp(24px, 7vw, 130px);
+    transform: translateY(-50%);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(32px, 5vw, 72px);
-    color: var(--cream);
-}
-.shop-hero__en {
-    font-family: var(--font-en);
-    font-size: 13px;
-    letter-spacing: .3em;
-    color: var(--gold);
-    margin-bottom: 18px;
-}
-.shop-hero__title {
-    font-size: clamp(26px, 3.2vw, 40px);
-    font-weight: 500;
-    line-height: 1.6;
-    letter-spacing: .06em;
-}
-.shop-hero__lead {
-    margin-top: 22px;
-    font-size: 15px;
-    line-height: 2;
-    color: rgba(247,242,232,.85);
-}
-.shop-hero__btn { margin-top: 32px; }
-.shop-hero__btn a {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px 38px;
-    background: var(--gold);
+    align-items: flex-start;
+    gap: clamp(8px, 1.2vw, 18px);
+    writing-mode: vertical-rl;
     color: #fff;
-    font-size: 15px;
-    letter-spacing: .1em;
+    text-shadow: 0 2px 14px rgba(0,0,0,.55);
 }
-.shop-hero__btn a:hover { background: #8f6d1e; opacity: 1; }
+.hero-slide__small {
+    font-size: clamp(13px, 1.3vw, 20px);
+    letter-spacing: .3em;
+    margin-top: 4px;
+}
+.hero-slide__big {
+    font-family: "Yuji Syuku", var(--font);
+    font-size: clamp(34px, 5vw, 76px);
+    letter-spacing: .12em;
+    line-height: 1.1;
+}
+.hero-slide__lead {
+    font-size: clamp(12px, 1.1vw, 17px);
+    letter-spacing: .22em;
+    margin-top: 8px;
+}
+
+/* 左右の矢印 */
+.hero-slider__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(38px, 3.4vw, 54px);
+    height: clamp(60px, 5.6vw, 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.35);
+    border: 0;
+    cursor: pointer;
+    transition: background .25s;
+    z-index: 2;
+}
+.hero-slider__arrow:hover { background: rgba(255,255,255,.7); }
+.hero-slider__arrow--prev { left: 0; }
+.hero-slider__arrow--next { right: 0; }
+.hero-slider__arrow svg {
+    width: 24px; height: 24px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.5));
+}
+.hero-slider__arrow:hover svg { stroke: var(--shop-navy); filter: none; }
+
+/* 下部のドット */
+.hero-slider__dots {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 2;
+}
+.hero-slider__dots button {
+    width: 10px; height: 10px;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+.hero-slider__dots button.is-active { background: #fff; }
 
 /* =========================================================
    3つの約束
@@ -401,6 +583,35 @@
     letter-spacing: .06em;
 }
 
+/* 検索で1件も見つからなかったとき */
+.item-empty {
+    max-width: 1240px;
+    margin: 24px auto 0;
+    padding: 22px;
+    background: #efe7d8;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* =========================================================
+   文字サイズ「大」を選んだときの本文サイズ
+   （読む部分だけを大きくし、レイアウトは崩さない）
+   ========================================================= */
+.txt-lg .item-card__name,
+.txt-lg .guide-box h3,
+.txt-lg .faq-item dt { font-size: 18px; }
+.txt-lg .item-card__sub { font-size: 14px; }
+.txt-lg .item-card__text,
+.txt-lg .guide-box p,
+.txt-lg .faq-item dd,
+.txt-lg .shop-points__txt,
+.txt-lg .legal-table th,
+.txt-lg .legal-table td,
+.txt-lg .legal-body p,
+.txt-lg .legal-body li { font-size: 16px; }
+.txt-lg .shop-items__note,
+.txt-lg .shop-head__note { font-size: 14px; }
+
 /* =========================================================
    特商法・プライバシーポリシー（法定表記ページ）
    ========================================================= */
@@ -490,43 +701,65 @@
 /* =========================================================
    タブレット
    ========================================================= */
+@media (max-width: 1240px) {
+    /* 検索窓とナビが窮屈になるので、補助リンクの列を畳む */
+    .shop-nav__sub { display: none; }
+    .shop-util__bottom { display: none; }
+    .shop-util { justify-content: center; }
+}
 @media (max-width: 1024px) {
     .item-grid { grid-template-columns: repeat(3, 1fr); }
-    .shop-hero { grid-template-columns: 1fr; }
-    .shop-hero__img { min-height: 300px; }
     .pc-br { display: none; }
+    .shop-nav__label { font-size: 13px; }
+    .shop-nav__icon svg { width: 28px; height: 28px; }
+    .shop-search input { width: 130px; }
 }
 
 /* =========================================================
    スマホ
    ========================================================= */
 @media (max-width: 767px) {
+    /* ヘッダー：1段目にロゴと検索、2段目にナビを横スクロールで */
     .shop-header {
         flex-wrap: wrap;
-        gap: 12px 18px;
-        padding: 14px 16px;
+        align-items: center;
+        padding: 0;
     }
-    .shop-logo { --logo-size: 32px; }
+    .shop-logo {
+        --logo-size: 26px;
+        padding: 10px 14px;
+        border-right: 0;
+    }
+    .shop-logo__sub { display: none; }
+    .shop-util {
+        margin-left: auto;
+        padding: 8px 12px;
+        gap: 0;
+    }
+    .shop-util__top { gap: 10px; }
+    .shop-search input { width: 34vw; padding: 8px 10px; font-size: 12px; }
+    .shop-search svg,
+    .shop-util__icon svg { width: 22px; height: 22px; }
+
     .shop-nav {
         order: 3;
         width: 100%;
-        margin-left: 0;
+        border-top: 1px solid var(--shop-line);
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
-    .shop-nav ul {
-        gap: 18px;
-        white-space: nowrap;
-        padding-bottom: 2px;
+    .shop-nav ul { width: max-content; }
+    .shop-nav a {
+        flex-direction: row;
+        gap: 8px;
+        padding: 11px 16px;
     }
-    .shop-nav a { font-size: 13px; }
-    .shop-tel { margin-left: auto; }
-    .shop-tel a { font-size: 17px; }
+    .shop-nav__icon svg { width: 22px; height: 22px; }
+    .shop-nav__label { font-size: 13px; }
 
-    .shop-hero__img { min-height: 220px; }
-    .shop-hero__title { line-height: 1.5; }
-    .shop-hero__lead { font-size: 14px; }
-    .shop-hero__btn a { width: 100%; justify-content: center; }
+    /* ヒーロー：縦書きのままだと文字が大きすぎるので少し詰める */
+    .hero-slide__copy { right: 18px; }
+    .hero-slider__dots { bottom: 12px; }
 
     .shop-points ul { grid-template-columns: 1fr; gap: 26px; }
 

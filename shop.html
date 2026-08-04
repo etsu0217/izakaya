@@ -41,44 +41,123 @@
 
     <!-- ===== ヘッダー ===== -->
     <header class="shop-header">
+        <!-- 左：枠付きロゴ -->
         <p class="shop-logo">
             <a href="index.html" aria-label="西成居酒屋Ｒ">
                 <span class="logo-text">居酒屋</span>
                 <img src="assets/image/logo-fish.png" alt="" class="logo-fish">
                 <span class="logo-text logo-r">R</span>
+                <span class="shop-logo__sub">西成・萩之茶屋</span>
             </a>
         </p>
 
+        <!-- 中央：アイコン付きメインナビ -->
         <nav class="shop-nav" aria-label="ショップメニュー">
             <ul>
-                <li><a href="index.html">お店のサイト</a></li>
-                <li><a href="#items">商品一覧</a></li>
-                <li><a href="#guide">ご利用ガイド</a></li>
-                <li><a href="#faq">よくある質問</a></li>
+                <li>
+                    <a href="#items">
+                        <span class="shop-nav__icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40"><path d="M11 13h18l3 19H8z"/><path d="M15 13v-3a5 5 0 0 1 10 0v3"/></svg>
+                        </span>
+                        <span class="shop-nav__label">商品一覧</span>
+                        <span class="shop-nav__sub">オンラインショップ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html#info">
+                        <span class="shop-nav__icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40"><path d="M8 15h24v17H8z"/><path d="M8 15V9h24v6"/><path d="M14 9v6M20 9v6M26 9v6M15 32V22M25 32V22"/></svg>
+                        </span>
+                        <span class="shop-nav__label">店舗のご案内</span>
+                        <span class="shop-nav__sub">アクセス・営業時間</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html#gallery">
+                        <span class="shop-nav__icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40"><path d="M6 17h22l6 3-6 3H6z"/><path d="M28 17l6-3M28 23l6 3"/></svg>
+                        </span>
+                        <span class="shop-nav__label">お食事処</span>
+                        <span class="shop-nav__sub">店内のご案内</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#guide">
+                        <span class="shop-nav__icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40"><path d="M4 12h20v14H4z"/><path d="M24 17h6l4 5v4h-10z"/><circle cx="12" cy="28" r="3"/><circle cx="28" cy="28" r="3"/></svg>
+                        </span>
+                        <span class="shop-nav__label">お届けについて</span>
+                        <span class="shop-nav__sub">送料・配送のご案内</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 
-        <p class="shop-tel">
-            <span>お電話でのご注文</span>
-            <a href="tel:09019593572">090-1959-3572</a>
-        </p>
+        <!-- 右：検索と補助リンク -->
+        <div class="shop-util">
+            <div class="shop-util__top">
+                <form class="shop-search" id="shopSearch" role="search" onsubmit="return false;">
+                    <label class="visually-hidden" for="shopSearchInput">商品を検索</label>
+                    <input type="search" id="shopSearchInput" placeholder="商品を検索" autocomplete="off">
+                    <button type="submit" aria-label="検索">
+                        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="18" cy="18" r="10"/><path d="M25 25l8 8"/></svg>
+                    </button>
+                </form>
+                <a class="shop-util__icon" href="tel:09019593572" aria-label="電話で注文する">
+                    <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M12 7l5 6-4 4a18 18 0 0 0 10 10l4-4 6 5-4 5c-12 1-23-10-22-22z"/></svg>
+                </a>
+                <a class="shop-util__icon" href="#faq" aria-label="よくある質問">
+                    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M15 16a5 5 0 1 1 6 5v3"/><path d="M20 28.5v.5"/></svg>
+                </a>
+            </div>
+            <div class="shop-util__bottom">
+                <a href="#guide">ご利用案内</a>
+                <a href="tokushoho.html">特定商取引法</a>
+                <div class="font-size" id="fontSize">
+                    <span>文字サイズ</span>
+                    <button type="button" data-size="normal" class="is-active">普通</button>
+                    <button type="button" data-size="large">大</button>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- ===== ヒーロー ===== -->
-    <section class="shop-hero">
-        <div class="shop-hero__img">
-            <img src="assets/image/shop/set-takunomi.jpg" alt="居酒屋Ｒの料理が並んだ食卓">
+    <!-- ===== ヒーロー（スライドショー） ===== -->
+    <section class="hero-slider" id="heroSlider" aria-label="おすすめ商品">
+        <div class="hero-slider__track">
+            <div class="hero-slide is-active">
+                <img src="assets/image/shop/set-takunomi.jpg" alt="居酒屋Ｒの料理が並んだ食卓">
+                <div class="hero-slide__copy">
+                    <p class="hero-slide__small">西成名物</p>
+                    <p class="hero-slide__big">宅呑みセット</p>
+                    <p class="hero-slide__lead">店の味を、そのままご自宅へ</p>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <img src="assets/image/shop/oden.jpg" alt="出汁が染みたおでん">
+                <div class="hero-slide__copy">
+                    <p class="hero-slide__small">継ぎ足しの出汁</p>
+                    <p class="hero-slide__big">名物おでん</p>
+                    <p class="hero-slide__lead">温めるだけで、あの一皿</p>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <img src="assets/image/shop/motsunabe.jpg" alt="国産牛のもつ鍋">
+                <div class="hero-slide__copy">
+                    <p class="hero-slide__small">寒い夜に</p>
+                    <p class="hero-slide__big">もつ鍋セット</p>
+                    <p class="hero-slide__lead">出汁も野菜も入って2人前</p>
+                </div>
+            </div>
         </div>
-        <div class="shop-hero__body">
-            <p class="shop-hero__en">ONLINE SHOP</p>
-            <h1 class="shop-hero__title">西成の味を、<br>ご自宅の食卓へ。</h1>
-            <p class="shop-hero__lead">
-                お店で出しているおでん、どて煮、ホルモン、もつ鍋を、<br class="pc-br">
-                そのままの味付けで真空パックにしてお届けします。<br class="pc-br">
-                温めるだけで、今夜はおうちが居酒屋Ｒに。
-            </p>
-            <p class="shop-hero__btn"><a href="#items">商品を見る<span>&rarr;</span></a></p>
-        </div>
+
+        <button class="hero-slider__arrow hero-slider__arrow--prev" type="button" aria-label="前の写真">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4L7 12l8 8"/></svg>
+        </button>
+        <button class="hero-slider__arrow hero-slider__arrow--next" type="button" aria-label="次の写真">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg>
+        </button>
+        <div class="hero-slider__dots" id="heroDots" role="tablist" aria-label="スライドの切り替え"></div>
     </section>
 
     <!-- ===== 3つの約束 ===== -->

@@ -145,4 +145,129 @@
     }).join('');
 
     grid.innerHTML = html;
+
+    /* =========================================================
+       商品検索（ヘッダーの検索窓で絞り込み）
+       ========================================================= */
+    const searchInput = document.getElementById('shopSearchInput');
+    if (searchInput) {
+        const cards = Array.prototype.slice.call(grid.children);
+
+        // 該当なしのときに出すメッセージ
+        const empty = document.createElement('p');
+        empty.className = 'item-empty';
+        empty.hidden = true;
+        grid.parentNode.insertBefore(empty, grid.nextSibling);
+
+        searchInput.addEventListener('input', function () {
+            const q = searchInput.value.trim().toLowerCase();
+            let hit = 0;
+            cards.forEach(function (card, i) {
+                const p = PRODUCTS[i];
+                const found = !q ||
+                    (p.name + ' ' + p.sub + ' ' + p.text).toLowerCase().indexOf(q) !== -1;
+                card.hidden = !found;
+                if (found) hit++;
+            });
+            empty.hidden = hit > 0;
+            if (!hit) {
+                empty.textContent = '「' + searchInput.value.trim() + '」に一致する商品は見つかりませんでした。';
+            }
+        });
+    }
+})();
+
+/* =========================================================
+   ヒーローのスライドショー
+   ========================================================= */
+(function () {
+    'use strict';
+
+    const slider = document.getElementById('heroSlider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll('.hero-slide');
+    const dotsBox = document.getElementById('heroDots');
+    const prev = slider.querySelector('.hero-slider__arrow--prev');
+    const next = slider.querySelector('.hero-slider__arrow--next');
+    if (slides.length < 2) return;
+
+    let current = 0;
+    let timer = null;
+    const INTERVAL = 6000;
+
+    // 下部のドットを枚数ぶん作る
+    const dots = [];
+    for (let i = 0; i < slides.length; i++) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', (i + 1) + '枚目を表示');
+        b.addEventListener('click', function () { go(i); });
+        dotsBox.appendChild(b);
+        dots.push(b);
+    }
+
+    function go(n) {
+        current = (n + slides.length) % slides.length;
+        slides.forEach(function (s, i) { s.classList.toggle('is-active', i === current); });
+        dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
+        restart();
+    }
+
+    function restart() {
+        clearInterval(timer);
+        timer = setInterval(function () { go(current + 1); }, INTERVAL);
+    }
+
+    prev.addEventListener('click', function () { go(current - 1); });
+    next.addEventListener('click', function () { go(current + 1); });
+
+    // 指でのスワイプにも対応
+    let startX = null;
+    slider.addEventListener('touchstart', function (e) {
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+    slider.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        const diff = e.changedTouches[0].clientX - startX;
+        if (Math.abs(diff) > 50) go(current + (diff < 0 ? 1 : -1));
+        startX = null;
+    });
+
+    // タブを見ていない間は止めて、戻ったら再開する
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) clearInterval(timer);
+        else restart();
+    });
+
+    go(0);
+})();
+
+/* =========================================================
+   文字サイズの切り替え（普通 / 大）
+   ========================================================= */
+(function () {
+    'use strict';
+
+    const box = document.getElementById('fontSize');
+    if (!box) return;
+
+    const buttons = box.querySelectorAll('button');
+
+    function apply(size) {
+        document.documentElement.classList.toggle('txt-lg', size === 'large');
+        buttons.forEach(function (b) {
+            b.classList.toggle('is-active', b.dataset.size === size);
+        });
+        try { localStorage.setItem('izakayaR-fontSize', size); } catch (e) { /* 保存できなくても動く */ }
+    }
+
+    buttons.forEach(function (b) {
+        b.addEventListener('click', function () { apply(b.dataset.size); });
+    });
+
+    // 前回の選択を復元
+    let saved = null;
+    try { saved = localStorage.getItem('izakayaR-fontSize'); } catch (e) { /* 非対応ブラウザ */ }
+    if (saved) apply(saved);
 })();
