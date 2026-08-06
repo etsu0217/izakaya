@@ -10,9 +10,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
+    <!-- このページの正式なURL（別URLで開かれても評価をまとめる） -->
+    <link rel="canonical" href="https://etsu0217.github.io/izakaya/index-en.html">
+
     <!-- 日本語版との相互リンク（検索エンジンに言語違いの同一ページだと伝える） -->
-    <link rel="alternate" hreflang="ja" href="index.html">
-    <link rel="alternate" hreflang="en" href="index-en.html">
+    <link rel="alternate" hreflang="ja" href="https://etsu0217.github.io/izakaya/index.html">
+    <link rel="alternate" hreflang="en" href="https://etsu0217.github.io/izakaya/index-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://etsu0217.github.io/izakaya/index.html">
 
     <!-- OGP -->
     <meta property="og:type" content="website">
@@ -37,9 +41,44 @@
 
     <!-- Scripts -->
     <script src="assets/js/app.js" defer></script>
+
+    <!-- Structured data for search engines (hours, phone, map) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "@id": "https://etsu0217.github.io/izakaya/#restaurant",
+        "name": "Izakaya R",
+        "alternateName": "西成居酒屋Ｒ",
+        "url": "https://etsu0217.github.io/izakaya/index-en.html",
+        "image": "https://etsu0217.github.io/izakaya/assets/image/S__2793479.jpg",
+        "telephone": "+81-90-1959-3572",
+        "servesCuisine": ["Izakaya", "Seafood", "Japanese"],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1-7-12 Haginochaya",
+            "addressLocality": "Nishinari-ku, Osaka",
+            "addressRegion": "Osaka",
+            "postalCode": "557-0004",
+            "addressCountry": "JP"
+        },
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "17:00",
+            "closes": "24:00"
+        }],
+        "acceptsReservations": "https://tabelog.com/osaka/A2701/A270206/27116984/",
+        "hasMenu": "https://etsu0217.github.io/izakaya/index-en.html#menu",
+        "sameAs": ["https://tabelog.com/osaka/A2701/A270206/27116984/"]
+    }
+    </script>
 </head>
 
 <body id="index" class="lang-en">
+
+    <!-- First stop for keyboard users: jump straight to the content -->
+    <a class="skip-link" href="#main">Skip to content</a>
 
     <!-- ===== First View (Header + Hero) ===== -->
     <div class="fv" id="top">
@@ -62,13 +101,14 @@
             </div>
 
             <p class="fv-reserve">
-                <a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">Book a Table</a>
+                <a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">Book a Table<span class="visually-hidden"> (on Tabelog, opens in a new tab)</span></a>
             </p>
 
             <ul class="fv-subnav">
                 <li><a href="#gallery">Our Space</a></li>
                 <li><a href="#info">Restaurant Info</a></li>
                 <li><a href="#info">Access</a></li>
+                <li><a href="shop.html" hreflang="ja">Online Shop<span lang="ja"> (日本語)</span></a></li>
                 <li class="lang-switch"><a href="index.html" hreflang="ja" lang="ja">日本語</a></li>
             </ul>
 
@@ -120,7 +160,7 @@
         </div>
     </div>
 
-    <main>
+    <main id="main">
 
         <!-- ヒーローと画像の間の余白 -->
         <div class="hero-gap" aria-hidden="true"></div>
@@ -446,7 +486,7 @@
                     </p>
                     <p class="info-cta">Reservations &amp; Inquiries</p>
                     <p class="info-tel"><a href="tel:+819019593572">+81 90-1959-3572</a></p>
-                    <p class="info-btn"><a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">Book a Table</a></p>
+                    <p class="info-btn"><a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">Book a Table<span class="visually-hidden"> (on Tabelog, opens in a new tab)</span></a></p>
                 </div>
             </div>
         </section>
@@ -470,7 +510,7 @@
             </a>
         </li>
         <li>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Map and access">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E8%A5%BF%E6%88%90%E5%8C%BA%E8%90%A9%E4%B9%8B%E8%8C%B6%E5%B1%8B1-7-12" target="_blank" rel="noopener noreferrer" aria-label="View on Google Maps (opens in a new tab)">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
                     <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/>
                 </svg>
@@ -494,6 +534,7 @@
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#news">News</a></li>
             <li><a href="#info">Information</a></li>
+            <li><a href="shop.html" hreflang="ja">Online Shop<span lang="ja"> (日本語)</span></a></li>
             <li><a href="index.html" hreflang="ja" lang="ja">日本語</a></li>
         </ul>
         <p class="copyright">&copy; Izakaya R All Rights Reserved.</p>
@@ -520,6 +561,7 @@
                 <li><a href="#gallery">Our Space</a></li>
                 <li><a href="#info">Restaurant Info</a></li>
                 <li><a href="#info">Access</a></li>
+                <li><a href="shop.html" hreflang="ja">Online Shop<span lang="ja"> (日本語)</span></a></li>
                 <li class="lang-switch"><a href="index.html" hreflang="ja" lang="ja">日本語</a></li>
             </ul>
 
@@ -554,7 +596,7 @@
                 <div class="drawer__contact">
                     <p class="drawer__label">Reservations &amp; Inquiries</p>
                     <p class="drawer__tel"><a href="tel:+819019593572">+81 90-1959-3572</a></p>
-                    <p class="drawer__btn"><a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">Book a Table</a></p>
+                    <p class="drawer__btn"><a href="https://tabelog.com/osaka/A2701/A270206/27116984/" target="_blank" rel="noopener noreferrer">Book a Table<span class="visually-hidden"> (on Tabelog, opens in a new tab)</span></a></p>
                 </div>
             </div>
         </div>
