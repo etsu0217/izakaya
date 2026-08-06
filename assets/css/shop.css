@@ -1922,10 +1922,22 @@
     .shop-store__more a { font-size: 11.5px; }
     .shop-store::before { display: none; }
 
-    /* スマホは1列。列ごとに細い罫で区切って続きが分かるように */
-    .guide-grid { grid-template-columns: 1fr; gap: 34px; }
-    .guide-box + .guide-box { padding-top: 34px; border-top: 1px solid rgba(42,33,26,.12); }
-    .guide-box__icon svg { width: 40px; height: 40px; }
+    /* スマホは1列。列ごとに細い罫で区切って続きが分かるように。
+       縦に長くなりすぎないよう、余白と文字を全体に詰める */
+    .shop-guide { padding: 36px 16px 40px; }
+    .shop-guide .shop-head { margin-bottom: 22px; }
+    .guide-grid { grid-template-columns: 1fr; gap: 22px; }
+    .guide-box + .guide-box { padding-top: 22px; border-top: 1px solid rgba(42,33,26,.12); }
+    .guide-box__icon { margin-bottom: 10px; }
+    .guide-box__icon svg { width: 34px; height: 34px; }
+    .guide-box h3 { padding-bottom: 12px; font-size: 15px; letter-spacing: .1em; text-indent: .1em; }
+    .guide-list { margin-top: 16px; }
+    .guide-list dt { font-size: 13px; }
+    .guide-list dt + dd { margin-top: 5px; }
+    .guide-list dd { font-size: 12.5px; line-height: 1.8; }
+    .guide-list dd + dt { margin-top: 15px; }
+    .card-brands { gap: 6px; margin-top: 8px; }
+    .card-brands img { width: 32px; }
 
     .faq-item__q { font-size: 15px; padding: 20px 40px 20px 32px; }
     .faq-item__q::before { left: 4px; top: 18px; font-size: 18px; }
