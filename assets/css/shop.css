@@ -45,9 +45,10 @@
     position: relative;
     display: flex;
     align-items: center;
-    /* 左下に御神輿、右上に提灯を置くぶん、左右を広めにとる
-       （右は提灯の幅42px＋余白ぶんを確保して「Ｒ」と重ねない） */
-    padding: 16px clamp(58px, 5vw, 68px) 14px clamp(36px, 3.6vw, 46px);
+    /* 左下に御神輿を置くぶん、左側を広めにとる。
+       PCは提灯とロゴを近づけたいので右は余白をとらない
+       （狭い画面での重なりは 1024px 以下のメディアクエリで調整） */
+    padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
     /* フッターと同じ濃い茶色（--dark = #241a13）を少しだけ透かす。
        文字まで薄くならないよう opacity ではなく rgba で指定 */
@@ -89,9 +90,9 @@
 /* 添え字：上に細い罫を引いて落ち着かせる */
 .shop-logo__sub {
     width: 100%;
-    margin-top: 7px;
-    padding-top: 6px;
-    border-top: 1px solid rgba(200,170,110,.4);
+    margin-top: 8px;
+    /* ロゴ直下の罫線はなし */
+    border-top: 0;
     text-align: center;
     font-size: 10px;
     letter-spacing: .3em;
