@@ -49,15 +49,15 @@
        （右は提灯の幅42px＋余白ぶんを確保して「Ｒ」と重ねない） */
     padding: 16px clamp(58px, 5vw, 68px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
-    /* パネル全面に #843b17 をかなり薄く透過させて敷く（ベタ塗りにしない） */
-    background-color: rgba(132, 59, 23, .12);
+    /* フッターと同じ濃い茶色（--dark）でベタ塗り */
+    background-color: var(--dark);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
     content: "";
     position: absolute;
     inset: 6px;
-    border: 1px solid rgba(150,125,80,.42);
+    border: 1px solid rgba(200,170,110,.45);
     pointer-events: none;
 }
 /* 四隅の留め（角に短い線を重ねる） */
@@ -65,7 +65,7 @@
     content: "";
     position: absolute;
     inset: 10px;
-    border: 1px solid rgba(150,125,80,.16);
+    border: 1px solid rgba(200,170,110,.18);
     pointer-events: none;
 }
 .shop-logo a {
@@ -75,28 +75,27 @@
     justify-content: center;
     padding: 0 10px;
 }
-/* 薄い地色に負けないよう、文字は濃い墨色＋白のふちで浮かせる */
+/* 濃い地色なので、文字はフッターと同じクリーム色で白抜きに */
 .shop-logo .logo-text {
-    color: #1d1409;
+    color: var(--cream);
     letter-spacing: .1em;
-    text-shadow:
-        0 1px 0 rgba(255,255,255,.9),
-        0 0 1px rgba(29,20,9,.55);
+    text-shadow: 0 1px 3px rgba(0,0,0,.45);
 }
 .shop-logo .logo-fish {
-    filter: drop-shadow(0 1px 0 rgba(255,255,255,.8));
+    /* 魚も白抜き（drop-shadow だけ書くと共通の反転指定が消えるため両方書く） */
+    filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0,0,0,.45));
 }
 /* 添え字：上に細い罫を引いて落ち着かせる */
 .shop-logo__sub {
     width: 100%;
     margin-top: 7px;
     padding-top: 6px;
-    border-top: 1px solid rgba(150,125,80,.35);
+    border-top: 1px solid rgba(200,170,110,.4);
     text-align: center;
     font-size: 10px;
     letter-spacing: .3em;
     text-indent: .3em;   /* 字間ぶんの右寄りを打ち消して中央に */
-    color: #6f5a33;
+    color: rgba(247,242,232,.72);
     white-space: nowrap;
 }
 /* 赤ちょうちん（軒先に下がっている見立て） */
