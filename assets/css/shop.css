@@ -173,28 +173,35 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
+    gap: 7px;
     height: 100%;
     padding: 14px clamp(14px, 1.8vw, 28px);
     color: var(--shop-navy);
+    transition: background .25s ease, color .25s ease;
 }
-.shop-nav a:hover { background: #faf7ef; opacity: 1; }
+.shop-nav a:hover { background: #faf7ef; color: var(--gold); opacity: 1; }
+/* 線は細めにして明朝の文字と釣り合わせる */
 .shop-nav__icon svg {
-    width: 34px; height: 34px;
+    width: 29px; height: 29px;
     fill: none;
-    stroke: var(--shop-navy);
-    stroke-width: 1.6;
+    stroke: currentColor;
+    stroke-width: 1.3;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 .shop-nav__label {
-    font-size: 15px;
-    letter-spacing: .06em;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .1em;
+    text-indent: .1em;    /* 字間ぶんの右寄りを打ち消して中央に */
+    line-height: 1.3;
     white-space: nowrap;
 }
 .shop-nav__sub {
+    margin-top: 3px;
     font-size: 10px;
-    letter-spacing: .06em;
+    letter-spacing: .1em;
+    text-indent: .1em;
     color: var(--shop-sub);
     white-space: nowrap;
 }
@@ -1748,8 +1755,8 @@
        提灯を少し小さくし、そのぶんの余白を右に確保して重ならないようにする */
     .shop-logo { padding-right: 56px; }
     .shop-logo__seal { top: 11px; right: 9px; width: 36px; height: 48px; font-size: 22px; }
-    .shop-nav__label { font-size: 13px; }
-    .shop-nav__icon svg { width: 28px; height: 28px; }
+    .shop-nav__label { font-size: 13px; letter-spacing: .06em; text-indent: .06em; }
+    .shop-nav__icon svg { width: 25px; height: 25px; }
     .shop-search input { width: 130px; }
     /* ガイドの3列は窮屈になるので、この幅では左右2列に */
     .guide-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
@@ -1832,8 +1839,8 @@
         padding: 11px 14px;
         white-space: nowrap;
     }
-    .shop-nav__icon svg { width: 20px; height: 20px; }
-    .shop-nav__label { font-size: 12.5px; }
+    .shop-nav__icon svg { width: 19px; height: 19px; }
+    .shop-nav__label { font-size: 12.5px; letter-spacing: .04em; text-indent: .04em; }
 
     /* ヒーロー：縦書きのままだと文字が大きすぎるので少し詰める */
     .hero-slide__copy { right: 18px; gap: 8px; }
@@ -1866,15 +1873,16 @@
     /* 店舗のご案内：写真を上、文章を下に積む */
     .shop-store__inner { grid-template-columns: 1fr; gap: 28px; }
     .store-slider { order: -1; }
-    .shop-store__title { font-size: 28px; }
-    .shop-store__body { column-gap: 16px; padding: 24px 16px 22px; }
-    .shop-store__txt p { font-size: 13.5px; line-height: 2; letter-spacing: .02em; }
-    .shop-store__tel { font-size: 12px; }
-    .shop-store__tel a { font-size: 16px; }
-    .shop-store__links { gap: 8px; margin-top: 18px; }
-    .shop-store__links a { padding: 9px 13px; font-size: 11.5px; }
-    .shop-store__more { margin-top: 20px; }
-    .shop-store__more a { font-size: 12px; }
+    .shop-store__title { font-size: 24px; letter-spacing: .12em; }
+    .shop-store__body { column-gap: 14px; padding: 22px 14px 20px; }
+    .shop-store__txt p { font-size: 12.5px; line-height: 1.95; letter-spacing: .01em; }
+    .shop-store__txt p + p { margin-top: 16px; }
+    .shop-store__tel { font-size: 11px; }
+    .shop-store__tel a { font-size: 15px; margin-left: 6px; }
+    .shop-store__links { gap: 7px; margin-top: 16px; }
+    .shop-store__links a { padding: 8px 12px; font-size: 11px; letter-spacing: .04em; }
+    .shop-store__more { margin-top: 18px; }
+    .shop-store__more a { font-size: 11.5px; }
     .shop-store::before { display: none; }
 
     /* スマホは1列。列ごとに細い罫で区切って続きが分かるように */
@@ -1901,16 +1909,17 @@
         gap: 12px 22px;
         padding-bottom: 18px;
     }
-    .shop-footer__nav a { font-size: 13.5px; }
-    .shop-footer__sub { justify-content: center; gap: 10px 16px; }
-    .shop-footer__sub a { font-size: 11.5px; }
-    .shop-footer__place { font-size: 11px; letter-spacing: .14em; }
-    .shop-footer__tel { font-size: 11px; }
-    .shop-footer__tel a { font-size: 17px; }
-    .shop-footer__btn a { padding: 12px 22px; font-size: 13px; }
-    .shop-footer__nav .shop-footer__icon { width: 36px; height: 36px; }
-    .shop-footer__nav .shop-footer__icon svg { width: 19px; height: 19px; }
-    .shop-footer .copyright { margin-top: 32px; font-size: 11px; }
+    .shop-footer__nav a { font-size: 12.5px; letter-spacing: .06em; }
+    .shop-footer__sub { justify-content: center; gap: 8px 14px; }
+    .shop-footer__sub a { font-size: 11px; }
+    .shop-footer__logo { --logo-size: 28px; }
+    .shop-footer__place { font-size: 10.5px; letter-spacing: .12em; margin-top: 12px; }
+    .shop-footer__tel { font-size: 10.5px; }
+    .shop-footer__tel a { font-size: 16px; }
+    .shop-footer__btn a { padding: 11px 20px; font-size: 12.5px; }
+    .shop-footer__nav .shop-footer__icon { width: 34px; height: 34px; }
+    .shop-footer__nav .shop-footer__icon svg { width: 18px; height: 18px; }
+    .shop-footer .copyright { margin-top: 30px; font-size: 10.5px; }
 
     /* 法定表記の表は縦積みにして横スクロールを避ける */
     .legal-table,
