@@ -200,6 +200,14 @@
 
         // ページトップボタンの表示切替
         if (pagetop) {
+            // クリックしたときはなめらかに戻す
+            // （動きを控える設定のときは一瞬で戻す）
+            pagetop.addEventListener('click', function (e) {
+                e.preventDefault();
+                const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            });
+
             const onScroll = function () {
                 if (window.pageYOffset > 400) {
                     pagetop.classList.add('is-show');

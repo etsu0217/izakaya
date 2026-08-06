@@ -50,8 +50,9 @@
        （狭い画面での重なりは 1024px 以下のメディアクエリで調整） */
     padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
-    /* フッターと同じ濃い茶色でベタ塗り */
-    background-color: var(--dark);
+    /* フッターと同じ濃い茶色を、ほんの少しだけ透かす
+       （文字まで薄くならないよう opacity ではなく rgba で指定） */
+    background-color: rgba(36, 26, 19, .9);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
@@ -352,7 +353,7 @@
 .hero-slide__big {
     font-family: "Yuji Syuku", var(--font);
     font-size: clamp(38px, 5.4vw, 82px);
-    letter-spacing: .14em;
+    letter-spacing: .04em;   /* 字間はやや詰めて塊で見せる */
     line-height: 1.1;
     margin-top: .55em;
 }
@@ -417,35 +418,106 @@
    3つの約束
    ========================================================= */
 .shop-points {
-    padding: clamp(40px, 6vw, 72px) clamp(16px, 4vw, 48px);
-    background: #efe7d8;
+    padding: clamp(48px, 7vw, 92px) clamp(16px, 4vw, 48px);
+    background: var(--dark);
 }
 .shop-points ul {
     list-style: none;          /* 行頭の点を消す */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(20px, 3vw, 44px);
-    max-width: 1100px;
+    max-width: 1240px;
     margin: 0 auto;
 }
-.shop-points li { text-align: center; }
+/* 写真＋縦書きの見出し＋矢印を1枚の札のように組む。
+   写真は左、縦書きは右。行の高さは背の高いほうに合わせ、
+   どちらも下端をそろえる（縦書きが写真より上に伸びる） */
+.shop-points__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 14px clamp(10px, 1.4vw, 20px);
+    color: var(--cream);
+}
+.shop-points__photo {
+    grid-column: 1;
+    overflow: hidden;
+    /* 右下の角を落として和の札らしく */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+}
+.shop-points__photo img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform .6s ease;
+}
+.shop-points__card:hover .shop-points__photo img { transform: scale(1.05); }
+/* 縦書き2列（右が見出し、左が添え字） */
+.shop-points__text {
+    grid-column: 2;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    display: flex;
+    flex-direction: column;   /* 縦書きでは列が横に並ぶ */
+    align-items: flex-start;
+    gap: clamp(8px, 1vw, 16px);
+}
+.shop-points__text > * { white-space: nowrap; }
+.shop-points__title {
+    font-size: clamp(19px, 1.9vw, 27px);
+    font-weight: 500;
+    letter-spacing: .12em;
+    line-height: 1;
+}
+.shop-points__sub {
+    font-size: clamp(11px, .95vw, 13px);
+    letter-spacing: .16em;
+    line-height: 1;
+    color: rgba(247,242,232,.68);
+}
+/* 下の行：英字ラベルと矢印を右端にそろえる */
+.shop-points__more {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
 .shop-points__en {
     font-family: var(--font-en);
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: .28em;
     color: var(--gold);
 }
-.shop-points__title {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: .05em;
+.shop-points__arrow {
+    position: relative;
+    display: block;
+    width: 54px;
+    height: 1px;
+    background: rgba(247,242,232,.55);
+    transition: width .3s ease, background .3s ease;
 }
-.shop-points__txt {
-    margin-top: 8px;
-    font-size: 14px;
-    line-height: 1.9;
-    color: rgba(42,33,26,.75);
+.shop-points__arrow::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    border-top: 1px solid rgba(247,242,232,.55);
+    border-right: 1px solid rgba(247,242,232,.55);
+    transform: rotate(45deg);
+    transition: border-color .3s ease;
+}
+.shop-points__card:hover .shop-points__arrow { width: 70px; background: var(--gold); }
+.shop-points__card:hover .shop-points__arrow::after { border-color: var(--gold); }
+.shop-points__card:hover { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+    .shop-points__photo img,
+    .shop-points__arrow,
+    .shop-points__arrow::after { transition: none; }
 }
 
 /* =========================================================
@@ -732,7 +804,7 @@
 .txt-lg .item-card__text,
 .txt-lg .guide-box p,
 .txt-lg .faq-item dd,
-.txt-lg .shop-points__txt,
+.txt-lg .shop-points__sub,
 .txt-lg .legal-table th,
 .txt-lg .legal-table td,
 .txt-lg .legal-body p,
@@ -910,7 +982,13 @@
     .hero-slide__lead { margin-top: 2em; }
     .hero-slider__dots { bottom: 12px; }
 
-    .shop-points ul { grid-template-columns: 1fr; gap: 26px; }
+    /* スマホは1枚ずつ。写真＋縦書きの組み方はそのまま */
+    .shop-points ul { grid-template-columns: 1fr; gap: 30px; }
+    .shop-points__title { font-size: 22px; }
+    .shop-points__photo {
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+    }
+    .shop-points__arrow { width: 42px; }
 
     .item-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .item-card__body { padding: 14px 12px 16px; }
