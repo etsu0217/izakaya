@@ -642,9 +642,8 @@
 .item-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: clamp(12px, 1.6vw, 20px);
-    /* 4列のまま横幅を絞って、カード1枚ずつをコンパクトに */
-    max-width: 880px;
+    gap: clamp(14px, 1.8vw, 26px);
+    max-width: 1120px;
     margin: 0 auto;
 }
 .item-card {
@@ -708,12 +707,12 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 13px 12px 15px;
+    padding: 16px 16px 18px;
 }
 .item-card__name {
-    padding-bottom: 8px;
+    padding-bottom: 9px;
     border-bottom: 1px solid rgba(42,33,26,.1);
-    font-size: 14.5px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: .03em;
     line-height: 1.5;
@@ -737,12 +736,12 @@
     /* 数字の高さを揃え、桁も等幅にして見やすく */
     font-variant-numeric: lining-nums tabular-nums;
     font-feature-settings: "lnum" 1, "tnum" 1;
-    font-size: 21px;
+    font-size: 23px;
     font-weight: 600;
     line-height: 1;
     letter-spacing: .01em;
 }
-.item-card__price span { font-size: 14px; font-weight: 500; margin-right: 3px; }
+.item-card__price span { font-size: 15px; font-weight: 500; margin-right: 3px; }
 .item-card__price em {
     font-family: var(--font);
     font-size: 10.5px;
@@ -760,9 +759,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 13px;
-    padding: 11px 10px;
+    gap: 9px;
+    margin-top: 15px;
+    padding: 13px 10px;
     /* 地は濃茶。金色の帯を左から広げてホバーさせる */
     background:
         linear-gradient(var(--gold), var(--gold)) left / 0 100% no-repeat,
