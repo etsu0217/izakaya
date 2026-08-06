@@ -1886,7 +1886,13 @@
     .shop-store__txt p { font-size: 11.5px; line-height: 1.7; letter-spacing: .01em; }
     .shop-store__txt p + p { margin-top: 12px; }
     .shop-store__tel { font-size: 11px; }
-    .shop-store__tel a { font-size: 15px; margin-left: 6px; }
+    /* 「ご予約・お問い合わせ」の後で改行し、電話番号を次の行に */
+    .shop-store__tel a {
+        display: block;
+        margin-left: 0;
+        margin-top: 4px;
+        font-size: 16px;
+    }
     /* こだわり／お品書き／アクセスは折り返さず、3つを1行に均等割り */
     .shop-store__links {
         flex-wrap: nowrap;
