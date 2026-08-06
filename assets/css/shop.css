@@ -1924,13 +1924,20 @@
 
     /* スマホは1列。列ごとに細い罫で区切って続きが分かるように。
        縦に長くなりすぎないよう、余白と文字を全体に詰める */
-    .shop-guide { padding: 36px 16px 40px; }
-    .shop-guide .shop-head { margin-bottom: 22px; }
+    .shop-guide { padding: 26px 16px 36px; }
+    /* GUIDE〜「配送・送料について」までの縦の間を詰める */
+    .shop-guide .shop-head { margin-bottom: 14px; }
+    .shop-guide .shop-head .en { font-size: 11px; gap: 10px; }
+    .shop-guide .shop-head h2 {
+        margin-top: 8px;
+        padding-bottom: 11px;
+        font-size: 19px;
+    }
     .guide-grid { grid-template-columns: 1fr; gap: 22px; }
     .guide-box + .guide-box { padding-top: 22px; border-top: 1px solid rgba(42,33,26,.12); }
-    .guide-box__icon { margin-bottom: 10px; }
-    .guide-box__icon svg { width: 34px; height: 34px; }
-    .guide-box h3 { padding-bottom: 12px; font-size: 15px; letter-spacing: .1em; text-indent: .1em; }
+    .guide-box__icon { margin-bottom: 7px; }
+    .guide-box__icon svg { width: 30px; height: 30px; }
+    .guide-box h3 { padding-bottom: 9px; font-size: 15px; letter-spacing: .1em; text-indent: .1em; }
     .guide-list { margin-top: 16px; }
     .guide-list dt { font-size: 13px; }
     .guide-list dt + dd { margin-top: 5px; }
