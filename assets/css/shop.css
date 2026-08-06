@@ -837,6 +837,22 @@
 .guide-list dd + dt {
     margin-top: 24px;
 }
+/* カードブランドのロゴ */
+.card-brands {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+.card-brands img {
+    display: block;
+    width: 38px;
+    height: auto;
+    background: #fff;
+    border: 1px solid rgba(42,33,26,.12);
+    border-radius: 3px;
+}
 .guide-list dd a {
     color: inherit;
     border-bottom: 1px solid rgba(42,33,26,.35);
