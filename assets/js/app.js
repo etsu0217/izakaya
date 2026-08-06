@@ -46,6 +46,9 @@
             // マウスが使える環境かどうか。ウィンドウ幅ではなく入力方法で判定するので、
             // ブラウザを細くしただけのレスポンシブ確認では消えない
             const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+            // 開発者ツールのデバイス表示は pointer:coarse を返すが、実際はマウスで
+            // 操作している。指で触られるまではマウスとして扱う
+            let touching = false;
 
             function show() {
                 dot.classList.add('is-visible');
@@ -78,7 +81,7 @@
 
             document.addEventListener('mousemove', function (e) {
                 // タッチ由来の擬似 mousemove は無視する
-                if (!fine.matches) return;
+                if (touching) return;
                 enable();
                 mouseX = e.clientX;
                 mouseY = e.clientY;
@@ -101,7 +104,14 @@
 
             // 指で触られたら即座に標準カーソルへ戻す（タッチ対応ノートPC・開発者ツールのデバイス表示）
             document.addEventListener('pointerdown', function (e) {
-                if (e.pointerType === 'touch' || e.pointerType === 'pen') disable();
+                if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+                    touching = true;
+                    disable();
+                }
+            }, { passive: true });
+            // マウスが動いたらまたマウス操作として扱う
+            document.addEventListener('pointermove', function (e) {
+                if (e.pointerType === 'mouse') touching = false;
             }, { passive: true });
 
             // 入力方法や設定が途中で変わった場合にも追従する
@@ -109,7 +119,7 @@
                 if (mql.addEventListener) mql.addEventListener('change', fn);
                 else if (mql.addListener) mql.addListener(fn);   // 旧Safari向け
             }
-            watch(fine, function () { if (!fine.matches) disable(); });
+            watch(fine, function () { if (!fine.matches && touching) disable(); });
             watch(reduce, function () { ease = reduce.matches ? 1 : 0.18; });
 
             // マウスがある環境なら最初から有効化しておく
