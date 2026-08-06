@@ -120,12 +120,13 @@
             ? '<span class="item-card__badge">' + esc(p.badge) + '</span>'
             : '';
 
-        // Stripeの決済リンクが未設定のうちは電話注文のボタンにしておく
+        // Stripeの決済リンクを入れればそのまま本番の購入ボタンになる。
+        // 未設定のうちはデモのカートに入れるボタンにしておく
         const buy = p.stripe
             ? '<a class="item-card__buy" href="' + esc(p.stripe) + '" target="_blank" rel="noopener noreferrer">' +
               'カートに入れる<span>&rarr;</span></a>'
-            : '<a class="item-card__buy is-tel" href="tel:09019593572">' +
-              'お電話でご注文<span>090-1959-3572</span></a>';
+            : '<button type="button" class="item-card__buy" data-add="' + esc(p.id) + '">' +
+              'カートに入れる<span>&rarr;</span></button>';
 
         return '' +
             '<article class="item-card">' +
@@ -145,6 +146,198 @@
     }).join('');
 
     grid.innerHTML = html;
+
+    /* =========================================================
+       カート（デモ）
+       ---------------------------------------------------------
+       買い物かごの動きを体験していただくためのもので、
+       実際の決済・注文は行われません。中身はブラウザに保存され、
+       次に開いたときも残ります。
+       商品データの stripe に決済リンクを入れると、その商品は
+       本物の購入ボタンに切り替わります。
+       ========================================================= */
+    const SHIPPING  = 1200;     // 送料（全国一律）
+    const FREE_LINE = 10000;    // この金額以上で送料無料
+    const CART_KEY  = 'izakayaR-cart';
+
+    const cartBox  = document.getElementById('cart');
+    const cartBody = document.getElementById('cartBody');
+    const cartFoot = document.getElementById('cartFoot');
+
+    let items = [];   // [{ id: 'oden', qty: 2 }]
+    try { items = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { items = []; }
+    // 商品を削除した後などに備えて、実在するものだけ残す
+    items = items.filter(function (it) { return !!product(it.id); });
+
+    function product(id) {
+        return PRODUCTS.filter(function (p) { return p.id === id; })[0];
+    }
+    function saveCart() {
+        try { localStorage.setItem(CART_KEY, JSON.stringify(items)); } catch (e) { /* 保存できなくても動く */ }
+    }
+    function totalQty() {
+        return items.reduce(function (n, it) { return n + it.qty; }, 0);
+    }
+    function subtotal() {
+        return items.reduce(function (n, it) { return n + product(it.id).price * it.qty; }, 0);
+    }
+
+    // ヘッダー・フッターのカートアイコンに個数を出す
+    function paintCount() {
+        const n = totalQty();
+        document.querySelectorAll('[data-cart-count]').forEach(function (el) {
+            el.textContent = n;
+            el.hidden = n === 0;
+        });
+    }
+
+    function addToCart(id, qty) {
+        const found = items.filter(function (it) { return it.id === id; })[0];
+        if (found) found.qty = Math.min(found.qty + (qty || 1), 99);
+        else items.push({ id: id, qty: qty || 1 });
+        saveCart();
+        paintCount();
+        renderCart();
+    }
+    function setQty(id, qty) {
+        if (qty <= 0) {
+            items = items.filter(function (it) { return it.id !== id; });
+        } else {
+            items.forEach(function (it) { if (it.id === id) it.qty = Math.min(qty, 99); });
+        }
+        saveCart();
+        paintCount();
+        renderCart();
+    }
+
+    function renderCart() {
+        if (!cartBody || !cartFoot) return;
+
+        if (!items.length) {
+            cartBody.innerHTML =
+                '<p class="cart__empty">カートに商品がありません。<br>気になる一品を「カートに入れる」から追加してください。</p>';
+            cartFoot.innerHTML =
+                '<button type="button" class="cart__continue" data-cart-close>買い物を続ける</button>';
+            return;
+        }
+
+        cartBody.innerHTML = '<ul class="cart__list">' + items.map(function (it) {
+            const p = product(it.id);
+            return '' +
+                '<li class="cart-row">' +
+                    '<img class="cart-row__img" src="' + esc(p.img) + '" alt="" loading="lazy">' +
+                    '<div class="cart-row__body">' +
+                        '<p class="cart-row__name">' + esc(p.name) + '</p>' +
+                        '<p class="cart-row__unit">&yen;' + yen(p.price) + '（税込）</p>' +
+                        '<div class="cart-row__qty">' +
+                            '<button type="button" data-minus="' + esc(p.id) + '" aria-label="' + esc(p.name) + 'を1つ減らす">－</button>' +
+                            '<span>' + it.qty + '</span>' +
+                            '<button type="button" data-plus="' + esc(p.id) + '" aria-label="' + esc(p.name) + 'を1つ増やす">＋</button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="cart-row__right">' +
+                        '<p class="cart-row__price">&yen;' + yen(p.price * it.qty) + '</p>' +
+                        '<button type="button" class="cart-row__del" data-del="' + esc(p.id) + '">削除</button>' +
+                    '</div>' +
+                '</li>';
+        }).join('') + '</ul>';
+
+        const sub  = subtotal();
+        const ship = sub >= FREE_LINE ? 0 : SHIPPING;
+        const rest = FREE_LINE - sub;
+
+        cartFoot.innerHTML = '' +
+            '<dl class="cart__sums">' +
+                '<div><dt>小計</dt><dd>&yen;' + yen(sub) + '</dd></div>' +
+                '<div><dt>送料</dt><dd>' + (ship ? '&yen;' + yen(ship) : '無料') + '</dd></div>' +
+                '<div class="cart__total"><dt>合計</dt><dd>&yen;' + yen(sub + ship) + '</dd></div>' +
+            '</dl>' +
+            (rest > 0
+                ? '<p class="cart__free">あと&yen;' + yen(rest) + 'のお買い上げで送料無料になります。</p>'
+                : '<p class="cart__free is-done">送料無料でお届けします。</p>') +
+            '<button type="button" class="cart__checkout" data-checkout>ご注文手続きへ</button>' +
+            '<p class="cart__note">※ こちらはデモです。実際のご注文・お支払いは行われません。' +
+                'お急ぎの場合はお電話（<a href="tel:09019593572">090-1959-3572</a>）でも承ります。</p>';
+    }
+
+    // 注文完了の画面（デモ）
+    function showDone() {
+        const sub  = subtotal();
+        const ship = sub >= FREE_LINE ? 0 : SHIPPING;
+        cartBody.innerHTML = '' +
+            '<div class="cart__done">' +
+                '<p class="cart__done-mark" aria-hidden="true">承</p>' +
+                '<p class="cart__done-title">ご注文ありがとうございます</p>' +
+                '<p class="cart__done-txt">合計 &yen;' + yen(sub + ship) + ' のご注文を承りました……という流れになります。<br>' +
+                    'こちらはデモのため、実際の注文・決済は行われていません。</p>' +
+            '</div>';
+        cartFoot.innerHTML = '<button type="button" class="cart__continue" data-cart-close>買い物を続ける</button>';
+        items = [];
+        saveCart();
+        paintCount();
+    }
+
+    function openCart() {
+        if (!cartBox) return;
+        cartBox.hidden = false;
+        // hidden を外した直後にクラスを付けて、滑り込む動きにする
+        requestAnimationFrame(function () { cartBox.classList.add('is-open'); });
+        document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+        if (!cartBox) return;
+        cartBox.classList.remove('is-open');
+        document.body.style.overflow = '';
+        setTimeout(function () { cartBox.hidden = true; }, 300);
+    }
+
+    // 「カートに入れました」の一言（数秒で消える）
+    let toast = null, toastTimer = null;
+    function showToast(name) {
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'cart-toast';
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = '<span>' + esc(name) + 'をカートに入れました</span>' +
+            '<button type="button" data-cart-open>カートを見る</button>';
+        toast.classList.add('is-show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.classList.remove('is-show'); }, 3200);
+    }
+
+    // クリックの受け付けはページ全体でまとめて見る
+    document.addEventListener('click', function (e) {
+        const add = e.target.closest('[data-add]');
+        if (add) {
+            const p = product(add.getAttribute('data-add'));
+            if (p) { addToCart(p.id, 1); showToast(p.name); }
+            return;
+        }
+        if (e.target.closest('[data-cart-open]')) { renderCart(); openCart(); return; }
+        if (e.target.closest('[data-cart-close]')) { closeCart(); return; }
+        if (e.target.closest('[data-checkout]')) { showDone(); return; }
+
+        const plus  = e.target.closest('[data-plus]');
+        const minus = e.target.closest('[data-minus]');
+        const del   = e.target.closest('[data-del]');
+        if (plus || minus || del) {
+            const id = plus  ? plus.getAttribute('data-plus')
+                     : minus ? minus.getAttribute('data-minus')
+                     :         del.getAttribute('data-del');
+            const now = items.filter(function (it) { return it.id === id; })[0];
+            if (!now) return;
+            if (del) setQty(id, 0);
+            else setQty(id, now.qty + (plus ? 1 : -1));
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && cartBox && !cartBox.hidden) closeCart();
+    });
+
+    paintCount();
+    renderCart();
 
     /* =========================================================
        商品検索（ヘッダーの検索窓で絞り込み）

@@ -111,6 +111,10 @@
                 <a class="shop-util__icon" href="#faq" aria-label="よくある質問">
                     <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M15 16a5 5 0 1 1 6 5v3"/><path d="M20 28.5v.5"/></svg>
                 </a>
+                <button type="button" class="shop-util__icon shop-util__cart" data-cart-open aria-label="カートを見る">
+                    <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 8h4.4l4.4 15.8h14.2l3.7-11.2H12"/><circle cx="16.6" cy="30.6" r="2.4"/><circle cx="27.4" cy="30.6" r="2.4"/></svg>
+                    <span class="shop-util__count" data-cart-count hidden>0</span>
+                </button>
             </div>
             <div class="shop-util__bottom">
                 <a href="#guide">ご利用案内</a>
@@ -225,7 +229,8 @@
         <div class="item-grid" id="itemGrid"></div>
 
         <p class="shop-items__note">
-            ※ 表示価格・内容量は変更になる場合があります。アレルギーや原材料についてはお気軽にお問い合わせください。
+            ※ 表示価格・内容量は変更になる場合があります。アレルギーや原材料についてはお気軽にお問い合わせください。<br>
+            ※ 現在カートはデモ表示です。実際のご注文はお電話（090-1959-3572）で承ります。
         </p>
     </section>
 
@@ -352,6 +357,21 @@
                     <li><a href="#guide">ご利用ガイド</a></li>
                     <li><a href="#faq">よくある質問</a></li>
                     <li><a href="index.html">お店のサイト</a></li>
+                    <li class="shop-footer__icons">
+                        <a class="shop-footer__icon" href="tel:09019593572" aria-label="電話で注文する">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="9" r="3.4" />
+                                <path d="M5.5 19.5a6.5 6.5 0 0 1 13 0" />
+                            </svg>
+                        </a>
+                        <button type="button" class="shop-footer__icon" data-cart-open aria-label="カートを見る">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M3 4.5h2.6l2.6 9.4h8.5l2.2-6.7H7" />
+                                <circle cx="10" cy="18.4" r="1.4" />
+                                <circle cx="16.4" cy="18.4" r="1.4" />
+                            </svg>
+                        </button>
+                    </li>
                 </ul>
                 <ul class="shop-footer__sub">
                     <li><a href="tokushoho.html">特定商取引法に基づく表記</a></li>
@@ -362,6 +382,21 @@
         </div>
         <p class="copyright">&copy; 西成居酒屋Ｒ All Rights Reserved.</p>
     </footer>
+
+    <!-- ===== カート（デモ） ===== -->
+    <div class="cart" id="cart" hidden>
+        <div class="cart__overlay" data-cart-close></div>
+        <aside class="cart__panel" role="dialog" aria-modal="true" aria-label="カートの中身">
+            <div class="cart__head">
+                <p class="cart__title">カート<span class="cart__tag">デモ</span></p>
+                <button type="button" class="cart__close" data-cart-close aria-label="カートを閉じる">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                </button>
+            </div>
+            <div class="cart__body" id="cartBody"></div>
+            <div class="cart__foot" id="cartFoot"></div>
+        </aside>
+    </div>
 
     <!-- ページ上部へ戻る -->
     <a href="#top" id="pagetop" class="pagetop" aria-label="ページ上部へ">
