@@ -1881,8 +1881,19 @@
     /* 店舗のご案内：写真を上、文章を下に積む */
     .shop-store__inner { grid-template-columns: 1fr; gap: 28px; }
     .store-slider { order: -1; }
-    .shop-store__title { font-size: 24px; letter-spacing: .12em; }
-    .shop-store__body { column-gap: 14px; padding: 22px 14px 20px; }
+    /* スマホは段違いをやめ、縦書きの見出しを白枠の高さの中央に置く */
+    .shop-store__title {
+        font-size: 24px;
+        letter-spacing: .12em;
+        top: 0;
+        align-self: center;
+    }
+    .shop-store__body {
+        --stagger: 0px;
+        column-gap: 14px;
+        padding: 26px 14px 26px;
+        align-items: center;
+    }
     .shop-store__txt p { font-size: 11.5px; line-height: 1.7; letter-spacing: .01em; }
     .shop-store__txt p + p { margin-top: 12px; }
     .shop-store__tel { font-size: 11px; }
