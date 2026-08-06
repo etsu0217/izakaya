@@ -167,8 +167,8 @@
 /* --- 提灯と御神輿を左右に揺らす（PC・スマホ共通） --- */
 /* 提灯：軒先から吊られているように、上端を支点にゆっくり振れる */
 @keyframes chochin-sway {
-    0%, 100% { transform: rotate(-9deg); }
-    50%      { transform: rotate(2deg); }
+    0%, 100% { transform: rotate(-16deg); }
+    50%      { transform: rotate(9deg); }
 }
 .shop-logo__seal {
     transform-origin: 50% -6px;
@@ -176,8 +176,8 @@
 }
 /* 御神輿：担がれているように、少し速く左右へ */
 @keyframes mikoshi-sway {
-    0%, 100% { transform: translateX(-2px) rotate(-3.5deg); }
-    50%      { transform: translateX(2px)  rotate(3.5deg); }
+    0%, 100% { transform: translateX(-5px) rotate(-8deg); }
+    50%      { transform: translateX(5px)  rotate(8deg); }
 }
 .shop-logo__mikoshi {
     transform-origin: 50% 100%;
@@ -1820,8 +1820,8 @@
     }
     .shop-logo__seal::before,
     .shop-logo__seal::after { width: 12px; height: 4px; }
-    .shop-logo__mikoshi { left: 6px; bottom: 8px; }
-    .shop-logo__mikoshi img { width: 46px; }
+    .shop-logo__mikoshi { left: 6px; bottom: 6px; }
+    .shop-logo__mikoshi img { width: 62px; }
     .shop-logo a { padding: 0 4px; }
     /* 検索とアイコンはロゴの下、2段目いっぱいに（右寄せ） */
     .shop-util {
@@ -2052,6 +2052,6 @@
         width: 24px; height: 32px;
         font-size: 14px;
     }
-    .shop-logo__mikoshi { left: 4px; bottom: 7px; }
-    .shop-logo__mikoshi img { width: 38px; }
+    .shop-logo__mikoshi { left: 4px; bottom: 6px; }
+    .shop-logo__mikoshi img { width: 54px; }
 }
