@@ -617,8 +617,9 @@
 .item-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: clamp(18px, 2.4vw, 32px);
-    max-width: 1240px;
+    gap: clamp(14px, 1.8vw, 24px);
+    /* 4列のまま横幅を絞って、カード1枚ずつをコンパクトに */
+    max-width: 980px;
     margin: 0 auto;
 }
 .item-card {
@@ -652,7 +653,7 @@
     aspect-ratio: 4 / 3;
     overflow: hidden;
     /* 御案内の写真と同じく右下の角を落とす */
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
 }
 .item-card__img img {
     width: 100%;
@@ -665,15 +666,15 @@
 .item-card__badge {
     position: absolute;
     top: 0;
-    left: 14px;
+    left: 12px;
     z-index: 1;
-    padding: 10px 7px 12px;
+    padding: 8px 6px 10px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     background: var(--gold);
     color: #fff;
-    font-size: 12px;
-    letter-spacing: .16em;
+    font-size: 11px;
+    letter-spacing: .14em;
     box-shadow: 0 2px 8px rgba(42,33,26,.25);
     /* 下端を旗のように切り欠く */
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 7px), 0 100%);
@@ -682,46 +683,46 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 18px 18px 22px;
+    padding: 14px 14px 17px;
 }
 .item-card__name {
-    padding-bottom: 10px;
+    padding-bottom: 9px;
     border-bottom: 1px solid rgba(42,33,26,.1);
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 500;
-    letter-spacing: .04em;
+    letter-spacing: .03em;
     line-height: 1.5;
 }
 .item-card__sub {
-    margin-top: 10px;
-    font-size: 11px;
-    letter-spacing: .14em;
+    margin-top: 8px;
+    font-size: 10.5px;
+    letter-spacing: .1em;
     color: var(--shop-sub);
 }
 .item-card__text {
-    margin-top: 10px;
-    font-size: 13px;
-    line-height: 1.9;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.8;
     color: rgba(42,33,26,.8);
 }
 .item-card__price {
     margin-top: auto;
-    padding-top: 18px;
+    padding-top: 14px;
     font-family: var(--font-num);
     /* 数字の高さを揃え、桁も等幅にして見やすく */
     font-variant-numeric: lining-nums tabular-nums;
     font-feature-settings: "lnum" 1, "tnum" 1;
-    font-size: 25px;
+    font-size: 21px;
     font-weight: 600;
     line-height: 1;
     letter-spacing: .01em;
 }
-.item-card__price span { font-size: 17px; font-weight: 500; margin-right: 3px; }
+.item-card__price span { font-size: 14px; font-weight: 500; margin-right: 3px; }
 .item-card__price em {
     font-family: var(--font);
-    font-size: 11px;
+    font-size: 10.5px;
     font-style: normal;
-    margin-left: 8px;
+    margin-left: 6px;
     color: rgba(42,33,26,.6);
 }
 .item-card__buy {
@@ -734,16 +735,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-top: 16px;
-    padding: 14px;
+    gap: 8px;
+    margin-top: 13px;
+    padding: 11px 10px;
     /* 地は濃茶。金色の帯を左から広げてホバーさせる */
     background:
         linear-gradient(var(--gold), var(--gold)) left / 0 100% no-repeat,
         var(--dark);
     color: var(--cream);
-    font-size: 14px;
-    letter-spacing: .08em;
+    font-size: 13px;
+    letter-spacing: .06em;
     transition: background-size .4s ease;
 }
 .item-card__buy span { transition: transform .3s ease; }
@@ -756,13 +757,13 @@
     background: #fff;
     color: var(--ink);
     border: 1px solid var(--ink);
-    padding: 11px;
+    padding: 9px 8px;
     transition: background .3s ease, color .3s ease;
 }
 .item-card__buy.is-tel:hover span { transform: none; }
 .item-card__buy.is-tel span {
     font-family: var(--font-num);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: .02em;
 }
