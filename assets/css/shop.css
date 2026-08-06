@@ -49,8 +49,9 @@
        （右は提灯の幅42px＋余白ぶんを確保して「Ｒ」と重ねない） */
     padding: 16px clamp(58px, 5vw, 68px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
-    /* フッターと同じ濃い茶色（--dark）でベタ塗り */
-    background-color: var(--dark);
+    /* フッターと同じ濃い茶色（--dark = #241a13）を少しだけ透かす。
+       文字まで薄くならないよう opacity ではなく rgba で指定 */
+    background-color: rgba(36, 26, 19, .88);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
