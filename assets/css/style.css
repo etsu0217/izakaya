@@ -1008,15 +1008,25 @@ a:hover { opacity: .8; }
         margin: 0 auto;
         text-align: center;
     }
+    /* 見出しも一回り小さく */
+    .concept .section-head .en { font-size: 11px; letter-spacing: .3em; margin-bottom: 8px; }
+    .concept .section-head h2 { font-size: 22px; letter-spacing: .06em; margin-bottom: 24px; }
     /* 本文だけは行頭を揃えて読みやすく（見出し・リード文は中央のまま） */
-    .concept .concept-txt p { text-align: left; }
+    .concept .concept-txt p {
+        text-align: left;
+        font-size: 13px;
+        line-height: 1.95;
+        margin-bottom: 1.2em;
+    }
     .concept .concept-txt .lead {
         text-align: center;
         /* 折り返さず一行に。画面幅に合わせて文字を縮める */
         white-space: nowrap;
-        font-size: min(4.8vw, 22px);
+        font-size: min(4.2vw, 19px);
+        margin-bottom: 1.3em;
     }
-    .concept-btn a { min-width: 0; width: 100%; gap: 20px; padding: 18px 24px; font-size: 15px; }
+    .concept-btn { margin-top: 28px; }
+    .concept-btn a { min-width: 0; width: 100%; gap: 20px; padding: 16px 22px; font-size: 14px; }
 }
 
 /* =========================================================
@@ -2076,9 +2086,20 @@ a:hover { opacity: .8; }
 @media (max-width: 900px) {
     .section { padding: 56px 18px 64px; }
 
-    /* Menu：2列のまま／名物も枠内に収める */
-    .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .menu-card.feature { grid-column: span 2; }
+    /* --- 見出し（こだわり〜アクセス共通）：一回り小さく --- */
+    .section-head { margin-bottom: 30px; }
+    .section-head .en { font-size: 11px; letter-spacing: .3em; margin-bottom: 8px; }
+    .section-head h2 { font-size: 22px; letter-spacing: .06em; padding-bottom: 13px; }
+    .section-head h2::after { height: 1.5px; }
+    .section-note { margin-top: 12px; font-size: 11px; line-height: 1.7; }
+
+    /* Menu：1列。写真が大きくなりすぎないよう幅を絞って中央に */
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 420px;
+    }
+    .menu-card.feature { grid-column: auto; }
     .menu-card.feature .menu-thumb { aspect-ratio: 16 / 10; }
     .menu-card figcaption { padding: 14px 13px 18px; }
     /* 2列で幅が狭いぶん、字間を詰めて折り返しを減らす */
@@ -2098,15 +2119,18 @@ a:hover { opacity: .8; }
     .menu-card.feature .menu-thumb::after { padding: 6px 13px; font-size: 11px; letter-spacing: .2em; text-indent: .2em; }
     .menu-card::after { display: none; }
 
-    /* Drink：縦積み。写真が先頭に来るので上の余白を詰める */
+    /* Drink：縦積み（1列）。写真が先頭に来るので上の余白を詰める */
     .drink { padding-top: 24px; }
-    .drink-inner { flex-direction: column; gap: 26px; }
+    .drink-inner { flex-direction: column; gap: 26px; max-width: 420px; }
     .drink-img img { min-height: 220px; }
-    .drink-list li { flex-direction: column; gap: 4px; }
-    .drink-list li span { min-width: 0; }
+    .drink-body .lead { font-size: 18px; letter-spacing: .04em; }
+    .drink-body > p { font-size: 13px; line-height: 1.9; }
+    .drink-list { margin-top: 22px; }
+    .drink-list li { flex-direction: column; gap: 4px; padding: 12px 2px; font-size: 13px; }
+    .drink-list li span { min-width: 0; font-size: 13.5px; }
 
-    /* Gallery：2列 */
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    /* Gallery：1列。幅を絞って中央に */
+    .gallery-grid { grid-template-columns: 1fr; max-width: 420px; gap: 12px; }
 
     /* News：日付＋カテゴリを上段、タイトルを下段に */
     .news-item a {
@@ -2120,8 +2144,11 @@ a:hover { opacity: .8; }
     .news-date  { grid-area: date; align-self: center; }
     .news-cat   { grid-area: cat; justify-self: start; min-width: 0; }
     .news-arrow { grid-area: arrow; }
-    .news-title { grid-area: title; white-space: normal; }
-    .news-more a { width: 100%; justify-content: center; }
+    .news-title { grid-area: title; white-space: normal; font-size: 13px; line-height: 1.75; }
+    .news-date em { font-size: 13px; }
+    .news-cat { padding: 4px 10px; font-size: 11px; }
+    .news-more { margin-top: 26px; }
+    .news-more a { width: 100%; justify-content: center; padding: 13px 20px; font-size: 13px; }
 
     /* Info：縦積み。全体を一回り小さく、幅も絞って中央に */
     .info-body {
@@ -2138,18 +2165,18 @@ a:hover { opacity: .8; }
     /* 項目名と内容は横並びのまま、幅を詰めて小さく */
     .info-table dl { gap: 12px; padding: 12px 2px; }
     .info-table dt {
-        width: 84px;
-        font-size: 13px;
+        width: 78px;
+        font-size: 12px;
         letter-spacing: .04em;
-        padding-left: 13px;
+        padding-left: 12px;
     }
     .info-table dt::before { width: 5px; height: 5px; }
-    .info-table dd { font-size: 13px; line-height: 1.75; }
-    .info-cta { font-size: 13px; }
-    .info-tel a { font-size: min(6.8cqw, 26px); }
-    .info-map-link { font-size: 12px; margin-bottom: 16px; }
+    .info-table dd { font-size: 12px; line-height: 1.75; }
+    .info-cta { font-size: 12px; }
+    .info-tel a { font-size: min(6.2cqw, 24px); }
+    .info-map-link { font-size: 11px; margin-bottom: 16px; }
     .info-btn { margin-top: 14px; }
-    .info-btn a { padding: 13px; font-size: 14px; }
+    .info-btn a { padding: 12px; font-size: 13px; }
 
     /* Footer */
     .footer-nav li { padding: 0 14px; }
