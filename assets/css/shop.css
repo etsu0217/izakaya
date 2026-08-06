@@ -13,6 +13,10 @@
     --shop-frame: #f4eddc;
     --shop-sub:   #8a8172;
     /* 数字用の書体 --font-num は style.css の :root で定義しています */
+
+    /* ショップの本文書体（お店のサイト側とは分ける） */
+    --font: 'Roboto', 'Shippori Mincho B1', sans-serif;
+    font-family: var(--font);
 }
 .pc-br { display: inline; }
 
@@ -787,22 +791,10 @@
 .shop-store {
     position: relative;
     padding: clamp(48px, 7vw, 96px) clamp(16px, 4vw, 48px);
-    background: var(--cream);
+    /* 市松の地紋を敷く */
+    background: #fff url('../image/shop/bg2.png') repeat;
+    background-size: 200px auto;
     overflow: hidden;
-}
-/* 左上に霞のような飾り */
-.shop-store::before {
-    content: "";
-    position: absolute;
-    left: -60px;
-    top: 30px;
-    width: 320px;
-    height: 150px;
-    background:
-        linear-gradient(to right, rgba(184,137,75,.28), rgba(184,137,75,0)) left 20px / 240px 8px no-repeat,
-        linear-gradient(to right, rgba(184,137,75,.22), rgba(184,137,75,0)) left 60px / 180px 8px no-repeat,
-        linear-gradient(to right, rgba(184,137,75,.16), rgba(184,137,75,0)) left 100px / 280px 8px no-repeat;
-    pointer-events: none;
 }
 .shop-store__inner {
     position: relative;
@@ -813,15 +805,19 @@
     max-width: 1240px;
     margin: 0 auto;
 }
-/* 左：縦書きの大見出し＋本文 */
+/* 左：縦書きの大見出し＋本文。見出しと本文は高さをずらして置く */
 .shop-store__body {
+    --stagger: clamp(20px, 3.4vw, 52px);
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    column-gap: clamp(16px, 2.4vw, 34px);
+    column-gap: clamp(30px, 4.6vw, 72px);
     align-items: start;
 }
 .shop-store__title {
     grid-row: 1 / 5;
+    /* 位置だけ上へずらす（relative なので余白は増えない） */
+    position: relative;
+    top: calc(var(--stagger) * -1);
     writing-mode: vertical-rl;
     text-orientation: mixed;
     font-size: clamp(30px, 3.6vw, 46px);
