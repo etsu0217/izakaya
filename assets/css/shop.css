@@ -1967,32 +1967,34 @@
         line-height: 1.8;
     }
     .faq-item__a::before { left: 3px; top: -3px; font-size: 15px; }
-    /* フッターは縦積みにして中央そろえ */
+    /* フッターは縦積みにして中央そろえ。全体をコンパクトに */
+    .shop-footer { padding: 28px 16px 24px; }
     .shop-footer__inner {
         flex-direction: column;
         align-items: center;
-        gap: 30px;
+        gap: 18px;
         text-align: center;
     }
     .shop-footer__links { grid-template-columns: 1fr; justify-items: center; width: 100%; }
     .shop-footer__sub { grid-column: 1; }
-    .shop-footer__btn { grid-column: 1; margin-top: 24px; }
+    .shop-footer__btn { grid-column: 1; margin-top: 14px; }
     .shop-footer__nav {
         justify-content: center;
-        gap: 12px 22px;
-        padding-bottom: 18px;
+        gap: 9px 18px;
+        padding-bottom: 13px;
     }
-    .shop-footer__nav a { font-size: 12.5px; letter-spacing: .06em; }
-    .shop-footer__sub { justify-content: center; gap: 8px 14px; }
-    .shop-footer__sub a { font-size: 11px; }
-    .shop-footer__logo { --logo-size: 28px; }
-    .shop-footer__place { font-size: 10.5px; letter-spacing: .12em; margin-top: 12px; }
-    .shop-footer__tel { font-size: 10.5px; }
-    .shop-footer__tel a { font-size: 16px; }
-    .shop-footer__btn a { padding: 11px 20px; font-size: 12.5px; }
-    .shop-footer__nav .shop-footer__icon { width: 34px; height: 34px; }
-    .shop-footer__nav .shop-footer__icon svg { width: 18px; height: 18px; }
-    .shop-footer .copyright { margin-top: 30px; font-size: 10.5px; }
+    .shop-footer__nav a { font-size: 12px; letter-spacing: .04em; }
+    .shop-footer__sub { justify-content: center; gap: 6px 14px; margin-top: 13px; }
+    .shop-footer__sub a { font-size: 10.5px; }
+    .shop-footer__logo { --logo-size: 25px; }
+    .shop-footer__place { font-size: 10px; letter-spacing: .1em; margin-top: 8px; }
+    .shop-footer__tel { font-size: 10px; margin-top: 5px; }
+    .shop-footer__tel a { font-size: 15px; }
+    .shop-footer__btn a { padding: 9px 18px; font-size: 12px; }
+    .shop-footer__icons { gap: 8px; }
+    .shop-footer__nav .shop-footer__icon { width: 30px; height: 30px; }
+    .shop-footer__nav .shop-footer__icon svg { width: 16px; height: 16px; }
+    .shop-footer .copyright { margin-top: 18px; padding-top: 14px; font-size: 10px; }
 
     /* 法定表記の表は縦積みにして横スクロールを避ける */
     .legal-table,
