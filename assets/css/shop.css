@@ -617,9 +617,9 @@
 .item-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: clamp(14px, 1.8vw, 24px);
+    gap: clamp(12px, 1.6vw, 20px);
     /* 4列のまま横幅を絞って、カード1枚ずつをコンパクトに */
-    max-width: 980px;
+    max-width: 880px;
     margin: 0 auto;
 }
 .item-card {
@@ -683,12 +683,12 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 14px 14px 17px;
+    padding: 13px 12px 15px;
 }
 .item-card__name {
-    padding-bottom: 9px;
+    padding-bottom: 8px;
     border-bottom: 1px solid rgba(42,33,26,.1);
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 500;
     letter-spacing: .03em;
     line-height: 1.5;
