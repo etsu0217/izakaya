@@ -151,12 +151,35 @@
     </main>
 
     <footer class="shop-footer">
-        <ul class="shop-footer__nav">
-            <li><a href="index.html">お店のサイト</a></li>
-            <li><a href="shop.html">オンラインショップ</a></li>
-            <li><a href="tokushoho.html">特定商取引法に基づく表記</a></li>
-            <li><a href="privacy.html">プライバシーポリシー</a></li>
-        </ul>
+        <div class="shop-footer__inner">
+            <!-- 左：ロゴと連絡先 -->
+            <div class="shop-footer__brand">
+                <p class="shop-footer__logo">
+                    <a href="index.html" aria-label="西成居酒屋Ｒ">
+                        <span class="logo-text">居酒屋</span>
+                        <img src="assets/image/logo-fish.png" alt="" class="logo-fish">
+                        <span class="logo-text logo-r">R</span>
+                    </a>
+                </p>
+                <p class="shop-footer__place">大阪・西成 萩之茶屋</p>
+                <p class="shop-footer__tel">TEL <a href="tel:09019593572">090-1959-3572</a></p>
+            </div>
+
+            <!-- 右：ナビ（主なリンク→細い罫→補助リンク→ボタン） -->
+            <div class="shop-footer__links">
+                <ul class="shop-footer__nav">
+                    <li><a href="shop.html#items">商品一覧</a></li>
+                    <li><a href="shop.html#guide">ご利用ガイド</a></li>
+                    <li><a href="shop.html#faq">よくある質問</a></li>
+                    <li><a href="index.html">お店のサイト</a></li>
+                </ul>
+                <ul class="shop-footer__sub">
+                    <li><a href="tokushoho.html">特定商取引法に基づく表記</a></li>
+                    <li><a href="privacy.html">プライバシーポリシー</a></li>
+                </ul>
+                <p class="shop-footer__btn"><a href="tel:09019593572">お電話でのご注文</a></p>
+            </div>
+        </div>
         <p class="copyright">&copy; 西成居酒屋Ｒ All Rights Reserved.</p>
     </footer>
 
