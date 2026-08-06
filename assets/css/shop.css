@@ -1772,10 +1772,14 @@
         align-items: center;
         padding: 0;
     }
+    /* ロゴ札は1段目を左右いっぱいに使う（提灯＝右端／御神輿＝左端） */
     .shop-logo {
         --logo-size: 26px;
-        /* 右は提灯の幅ぶんを空けて「Ｒ」と重ねない */
-        padding: 10px 42px 9px 30px;
+        flex: 1 1 100%;
+        width: 100%;
+        justify-content: center;
+        /* 左右とも提灯・御神輿の幅ぶんを空けて「Ｒ」と重ねない */
+        padding: 10px 44px 9px 44px;
         border-right: 0;
         /* 2段組みではロゴの下にヘッダーの罫が来ないので打ち消す */
         margin-bottom: 0;
@@ -1790,24 +1794,25 @@
     }
     .shop-logo__seal::before,
     .shop-logo__seal::after { width: 12px; height: 4px; }
-    .shop-logo__mikoshi { left: 4px; bottom: 8px; }
+    .shop-logo__mikoshi { left: 6px; bottom: 8px; }
     .shop-logo__mikoshi img { width: 46px; }
-    /* ロゴ側で右余白を使うぶん、左右の内側余白を詰める */
     .shop-logo a { padding: 0 4px; }
-    /* 検索とアイコンは1段目の残り幅に収める（はみ出して崩れないように） */
+    /* 検索とアイコンはロゴの下、2段目いっぱいに（右寄せ） */
     .shop-util {
-        flex: 1 1 auto;
+        flex: 1 1 100%;
+        width: 100%;
         min-width: 0;
-        margin-left: auto;
-        padding: 8px 10px;
+        margin-left: 0;
+        padding: 7px 12px;
         gap: 0;
+        border-top: 1px solid var(--shop-line);
     }
     .shop-util__top {
         flex-wrap: nowrap;
         justify-content: flex-end;
         gap: 8px;
     }
-    .shop-search { flex: 0 1 auto; min-width: 0; }
+    .shop-search { flex: 0 1 240px; min-width: 0; }
     .shop-search input {
         width: 100%;
         min-width: 0;
@@ -1817,8 +1822,6 @@
     .shop-search button { padding: 0 8px; }
     .shop-search svg,
     .shop-util__icon svg { width: 22px; height: 22px; }
-    /* 狭い1段目に4つは多いので、質問アイコンは省く（ナビから行ける） */
-    .shop-util__icon--faq { display: none; }
     .shop-util__icon { flex: 0 0 auto; }
 
     /* 2段目のナビは4つを均等割りにして、横スクロールなしで画面に収める */
@@ -1947,13 +1950,13 @@
     /* ごく狭い画面：ロゴ全体を一段小さくして提灯との間隔を保つ */
     .shop-logo {
         --logo-size: 23px;
-        padding: 9px 36px 8px 26px;
+        padding: 9px 36px 8px 36px;
     }
     .shop-logo__seal {
         top: 6px; right: 5px;
         width: 24px; height: 32px;
         font-size: 14px;
     }
-    .shop-logo__mikoshi { left: 2px; bottom: 7px; }
+    .shop-logo__mikoshi { left: 4px; bottom: 7px; }
     .shop-logo__mikoshi img { width: 38px; }
 }
