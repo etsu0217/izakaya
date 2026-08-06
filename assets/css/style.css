@@ -2129,8 +2129,8 @@ a:hover { opacity: .8; }
     .drink-list li { flex-direction: column; gap: 4px; padding: 12px 2px; font-size: 13px; }
     .drink-list li span { min-width: 0; font-size: 13.5px; }
 
-    /* Gallery：1列。幅を絞って中央に */
-    .gallery-grid { grid-template-columns: 1fr; max-width: 420px; gap: 12px; }
+    /* Gallery：1列。写真が大きくなりすぎないよう幅をさらに絞って中央に */
+    .gallery-grid { grid-template-columns: 1fr; max-width: 300px; gap: 10px; }
 
     /* News：日付＋カテゴリを上段、タイトルを下段に */
     .news-item a {
