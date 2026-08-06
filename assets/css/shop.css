@@ -1887,8 +1887,20 @@
     .shop-store__txt p + p { margin-top: 12px; }
     .shop-store__tel { font-size: 11px; }
     .shop-store__tel a { font-size: 15px; margin-left: 6px; }
-    .shop-store__links { gap: 7px; margin-top: 16px; }
-    .shop-store__links a { padding: 8px 12px; font-size: 11px; letter-spacing: .04em; }
+    /* こだわり／お品書き／アクセスは折り返さず、3つを1行に均等割り */
+    .shop-store__links {
+        flex-wrap: nowrap;
+        gap: 6px;
+        margin-top: 16px;
+    }
+    .shop-store__links li { flex: 1 1 0; min-width: 0; }
+    .shop-store__links a {
+        padding: 8px 4px;
+        text-align: center;
+        font-size: min(3vw, 11.5px);
+        letter-spacing: .02em;
+        white-space: nowrap;
+    }
     .shop-store__more { margin-top: 18px; }
     .shop-store__more a { font-size: 11.5px; }
     .shop-store::before { display: none; }
