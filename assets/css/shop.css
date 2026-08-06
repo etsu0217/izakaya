@@ -1953,10 +1953,20 @@
     .card-brands { gap: 6px; margin-top: 8px; }
     .card-brands img { width: 32px; }
 
-    .faq-item__q { font-size: 15px; padding: 20px 40px 20px 32px; }
-    .faq-item__q::before { left: 4px; top: 18px; font-size: 18px; }
-    .faq-item__a { padding: 0 40px 22px 32px; }
-    .faq-item__a::before { left: 4px; font-size: 18px; }
+    /* よくある質問：見出し・質問・答えを小さくして高さも詰める */
+    .shop-faq { padding: 26px 16px 34px; }
+    .shop-faq .shop-head { margin-bottom: 14px; }
+    .shop-faq .shop-head .en { font-size: 11px; gap: 10px; }
+    .shop-faq .shop-head h2 { margin-top: 8px; padding-bottom: 11px; font-size: 19px; }
+    .faq-item__q { font-size: 13px; padding: 13px 30px 13px 26px; }
+    .faq-item__q::before { left: 3px; top: 12px; font-size: 15px; }
+    .faq-item__q::after { right: 11px; width: 7px; height: 7px; }
+    .faq-item__a {
+        padding: 0 30px 15px 26px;
+        font-size: 12.5px;
+        line-height: 1.8;
+    }
+    .faq-item__a::before { left: 3px; top: -3px; font-size: 15px; }
     /* フッターは縦積みにして中央そろえ */
     .shop-footer__inner {
         flex-direction: column;
