@@ -782,27 +782,66 @@
 }
 .guide-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(18px, 2.4vw, 32px);
-    max-width: 1000px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(28px, 4.5vw, 64px);
+    max-width: 1180px;
     margin: 0 auto;
 }
+/* 箱で囲わず、アイコン→見出し→細い罫→本文の縦の流れで見せる */
 .guide-box {
-    padding: 28px 26px;
-    background: var(--cream);
-    border-left: 3px solid var(--gold);
+    padding: 0;
+    background: none;
+    border: 0;
+}
+.guide-box__icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+.guide-box__icon svg {
+    width: 46px;
+    height: 46px;
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 .guide-box h3 {
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(42,33,26,.16);
+    text-align: center;
     font-size: 17px;
     font-weight: 500;
+    letter-spacing: .14em;
+    text-indent: .14em;   /* 字間ぶんの右寄りを打ち消して中央に */
+}
+/* 小見出し＋説明を積み重ねる */
+.guide-list {
+    margin-top: 26px;
+}
+.guide-list dt {
+    font-size: 14px;
+    font-weight: 600;
     letter-spacing: .06em;
 }
-.guide-box p {
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 2;
-    color: rgba(42,33,26,.8);
+.guide-list dt + dd {
+    margin-top: 8px;
 }
+.guide-list dd {
+    margin-left: 0;
+    font-size: 13.5px;
+    line-height: 2;
+    color: rgba(42,33,26,.78);
+}
+.guide-list dd + dt {
+    margin-top: 24px;
+}
+.guide-list dd a {
+    color: inherit;
+    border-bottom: 1px solid rgba(42,33,26,.35);
+}
+.guide-list dd a:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
 /* =========================================================
    よくある質問
@@ -900,7 +939,7 @@
 .txt-lg .faq-item dt { font-size: 18px; }
 .txt-lg .item-card__sub { font-size: 14px; }
 .txt-lg .item-card__text,
-.txt-lg .guide-box p,
+.txt-lg .guide-list dd,
 .txt-lg .faq-item dd,
 .txt-lg .shop-points__sub,
 .txt-lg .legal-table th,
@@ -1015,6 +1054,8 @@
     .shop-nav__label { font-size: 13px; }
     .shop-nav__icon svg { width: 28px; height: 28px; }
     .shop-search input { width: 130px; }
+    /* ガイドの3列は窮屈になるので、この幅では左右2列に */
+    .guide-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
 }
 
 /* =========================================================
@@ -1101,8 +1142,10 @@
     .item-card__price { font-size: 22px; padding-top: 14px; }
     .item-card__buy { padding: 12px 8px; font-size: 13px; }
 
-    .guide-grid { grid-template-columns: 1fr; }
-    .guide-box { padding: 22px 20px; }
+    /* スマホは1列。列ごとに細い罫で区切って続きが分かるように */
+    .guide-grid { grid-template-columns: 1fr; gap: 34px; }
+    .guide-box + .guide-box { padding-top: 34px; border-top: 1px solid rgba(42,33,26,.12); }
+    .guide-box__icon svg { width: 40px; height: 40px; }
 
     .faq-item dt { font-size: 15px; }
     .shop-footer__nav { gap: 10px 18px; }
