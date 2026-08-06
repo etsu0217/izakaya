@@ -1043,7 +1043,8 @@
     align-items: center;
     gap: 10px;
 }
-.shop-footer__icon {
+/* 色は .shop-footer__nav a より強く指定する（白丸に白い線になってしまうため） */
+.shop-footer__nav .shop-footer__icon {
     position: relative;
     display: flex;
     align-items: center;
@@ -1058,21 +1059,22 @@
     cursor: pointer;
     transition: background .25s ease, transform .25s ease;
 }
-.shop-footer__icon svg {
+.shop-footer__nav .shop-footer__icon svg {
     width: 21px;
     height: 21px;
     fill: none;
-    stroke: currentColor;
+    stroke: var(--dark);
     stroke-width: 1.4;
     stroke-linecap: round;
     stroke-linejoin: round;
+    transition: stroke .25s ease;
 }
-.shop-footer__icon:hover {
+.shop-footer__nav .shop-footer__icon:hover {
     background: var(--gold);
-    color: #fff;
     opacity: 1;
     transform: translateY(-2px);
 }
+.shop-footer__nav .shop-footer__icon:hover svg { stroke: #fff; }
 
 /* 枠だけのボタン */
 .shop-footer__btn { grid-column: 2; margin-top: 22px; }
