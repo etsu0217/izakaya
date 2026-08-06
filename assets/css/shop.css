@@ -805,13 +805,17 @@
     max-width: 1240px;
     margin: 0 auto;
 }
-/* 左：縦書きの大見出し＋本文。見出しと本文は高さをずらして置く */
+/* 左：縦書きの大見出し＋本文。見出しと本文は高さをずらして置く。
+   地紋の上だと文章が読みにくいので、白い札の上に載せる */
 .shop-store__body {
-    --stagger: clamp(20px, 3.4vw, 52px);
+    --stagger: clamp(16px, 2.6vw, 38px);
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    column-gap: clamp(30px, 4.6vw, 72px);
+    column-gap: clamp(26px, 4vw, 60px);
     align-items: start;
+    padding: calc(clamp(26px, 3.2vw, 44px) + var(--stagger)) clamp(22px, 2.8vw, 40px) clamp(26px, 3.2vw, 44px);
+    background: rgba(255, 255, 255, .93);
+    box-shadow: 0 2px 20px rgba(42, 33, 26, .07);
 }
 .shop-store__title {
     grid-row: 1 / 5;
@@ -827,11 +831,12 @@
     white-space: nowrap;
 }
 .shop-store__txt p {
-    font-size: 14px;
-    line-height: 2.1;
-    color: rgba(42,33,26,.85);
+    font-size: 15px;
+    line-height: 2.2;
+    letter-spacing: .03em;
+    color: rgba(42,33,26,.92);
 }
-.shop-store__txt p + p { margin-top: 20px; }
+.shop-store__txt p + p { margin-top: 22px; }
 .shop-store__tel {
     font-size: 13px;
     letter-spacing: .06em;
@@ -1840,8 +1845,8 @@
     .shop-store__inner { grid-template-columns: 1fr; gap: 28px; }
     .store-slider { order: -1; }
     .shop-store__title { font-size: 28px; }
-    .shop-store__body { column-gap: 16px; }
-    .shop-store__txt p { font-size: 13.5px; line-height: 2; }
+    .shop-store__body { column-gap: 18px; padding: 26px 18px 24px; }
+    .shop-store__txt p { font-size: 14.5px; line-height: 2.05; }
     .shop-store__links { gap: 8px; margin-top: 20px; }
     .shop-store__links a { padding: 10px 14px; font-size: 12px; }
     .shop-store::before { display: none; }
