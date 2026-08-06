@@ -234,6 +234,65 @@
         </p>
     </section>
 
+    <!-- ===== 店舗のご案内 ===== -->
+    <section id="store" class="shop-store">
+        <div class="shop-store__inner">
+            <!-- 左：縦書きの見出しと本文 -->
+            <div class="shop-store__body">
+                <h2 class="shop-store__title">店舗のご案内</h2>
+                <div class="shop-store__txt">
+                    <p>
+                        大阪市西成区・萩之茶屋の「居酒屋Ｒ」。<br>
+                        新鮮な食材を使った一品料理と、<br>
+                        お酒に合う名物をご用意しています。
+                    </p>
+                    <p>
+                        お取り寄せの商品は、<br>
+                        すべてこの店で仕込んだ味そのままです。
+                    </p>
+                    <p>
+                        店頭でのお受け取りも承ります。<br>
+                        ご注文時に「店頭受取希望」とお伝えください。
+                    </p>
+                    <p class="shop-store__tel">
+                        ご予約・お問い合わせ <a href="tel:09019593572">090-1959-3572</a>
+                    </p>
+                </div>
+                <ul class="shop-store__links">
+                    <li><a href="index.html#concept">こだわり</a></li>
+                    <li><a href="index.html#menu">お品書き</a></li>
+                    <li><a href="index.html#info">アクセス</a></li>
+                </ul>
+                <p class="shop-store__more"><a href="index.html">もっと見る</a></p>
+            </div>
+
+            <!-- 右：店内の写真（自動で切り替わります） -->
+            <div class="store-slider" id="storeSlider">
+                <div class="store-slider__track">
+                    <div class="store-slide is-active">
+                        <img src="assets/image/640x640_rect_149215378.jpg" alt="居酒屋Ｒのカウンター席" loading="lazy">
+                    </div>
+                    <div class="store-slide">
+                        <img src="assets/image/640x640_rect_149215514.jpg" alt="居酒屋Ｒのテーブル席" loading="lazy">
+                    </div>
+                    <div class="store-slide">
+                        <img src="assets/image/12B42235-FE5C-4FDA-B285-809FDA777590.jpg" alt="黒板メニューの並ぶ店内" loading="lazy">
+                    </div>
+                    <div class="store-slide">
+                        <img src="assets/image/640x640_rect_149215510.jpg" alt="居酒屋Ｒの店内" loading="lazy">
+                    </div>
+                </div>
+                <button type="button" class="store-slider__arrow store-slider__arrow--prev" aria-label="前の写真">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8" /></svg>
+                </button>
+                <button type="button" class="store-slider__arrow store-slider__arrow--next" aria-label="次の写真">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" /></svg>
+                </button>
+                <div class="store-slider__dots" id="storeDots" role="tablist" aria-label="写真の切り替え"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== ご利用ガイド ===== -->
     <section id="guide" class="shop-guide">
         <div class="shop-head">

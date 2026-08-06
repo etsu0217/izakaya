@@ -782,6 +782,210 @@
 }
 
 /* =========================================================
+   店舗のご案内
+   ========================================================= */
+.shop-store {
+    position: relative;
+    padding: clamp(48px, 7vw, 96px) clamp(16px, 4vw, 48px);
+    background: var(--cream);
+    overflow: hidden;
+}
+/* 左上に霞のような飾り */
+.shop-store::before {
+    content: "";
+    position: absolute;
+    left: -60px;
+    top: 30px;
+    width: 320px;
+    height: 150px;
+    background:
+        linear-gradient(to right, rgba(184,137,75,.28), rgba(184,137,75,0)) left 20px / 240px 8px no-repeat,
+        linear-gradient(to right, rgba(184,137,75,.22), rgba(184,137,75,0)) left 60px / 180px 8px no-repeat,
+        linear-gradient(to right, rgba(184,137,75,.16), rgba(184,137,75,0)) left 100px / 280px 8px no-repeat;
+    pointer-events: none;
+}
+.shop-store__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: clamp(28px, 5vw, 72px);
+    max-width: 1240px;
+    margin: 0 auto;
+}
+/* 左：縦書きの大見出し＋本文 */
+.shop-store__body {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: clamp(16px, 2.4vw, 34px);
+    align-items: start;
+}
+.shop-store__title {
+    grid-row: 1 / 5;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: clamp(30px, 3.6vw, 46px);
+    font-weight: 500;
+    letter-spacing: .16em;
+    line-height: 1;
+    white-space: nowrap;
+}
+.shop-store__txt p {
+    font-size: 14px;
+    line-height: 2.1;
+    color: rgba(42,33,26,.85);
+}
+.shop-store__txt p + p { margin-top: 20px; }
+.shop-store__tel {
+    font-size: 13px;
+    letter-spacing: .06em;
+    color: var(--shop-sub);
+}
+.shop-store__tel a {
+    margin-left: 8px;
+    font-family: var(--font-num);
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+}
+.shop-store__tel a:hover { color: var(--gold); opacity: 1; }
+/* 枠だけの小さなボタンを横並びに */
+.shop-store__links {
+    grid-column: 2;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+}
+.shop-store__links a {
+    display: block;
+    padding: 11px 20px;
+    border: 1px solid rgba(42,33,26,.35);
+    font-size: 13px;
+    letter-spacing: .08em;
+    transition: background .3s ease, border-color .3s ease, color .3s ease;
+}
+.shop-store__links a:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--cream);
+    opacity: 1;
+}
+/* 「もっと見る」＋伸びる矢印 */
+.shop-store__more {
+    grid-column: 2;
+    margin-top: 26px;
+}
+.shop-store__more a {
+    position: relative;
+    display: inline-block;
+    padding: 0 0 12px 6px;
+    font-size: 13px;
+    letter-spacing: .12em;
+}
+.shop-store__more a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(42,33,26,.45);
+    transition: width .3s ease, background .3s ease;
+}
+.shop-store__more a::after {
+    content: "";
+    position: absolute;
+    right: -4px;
+    bottom: -3px;
+    width: 7px;
+    height: 7px;
+    border-top: 1px solid rgba(42,33,26,.45);
+    border-right: 1px solid rgba(42,33,26,.45);
+    transform: rotate(45deg);
+    transition: border-color .3s ease, transform .3s ease;
+}
+.shop-store__more a:hover { opacity: 1; color: var(--gold); }
+.shop-store__more a:hover::before { width: 116%; background: var(--gold); }
+.shop-store__more a:hover::after { border-color: var(--gold); transform: translateX(6px) rotate(45deg); }
+
+/* 右：店内写真のスライド */
+.store-slider {
+    position: relative;
+}
+.store-slider__track {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+.store-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .8s ease;
+}
+.store-slide.is-active { opacity: 1; }
+.store-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.store-slider__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.16);
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    transition: background .25s ease;
+}
+.store-slider__arrow:hover { background: rgba(0,0,0,.35); }
+.store-slider__arrow svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.5));
+}
+.store-slider__arrow--prev { left: 6px; }
+.store-slider__arrow--next { right: 6px; }
+.store-slider__dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+}
+.store-slider__dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    background: rgba(42,33,26,.25);
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background .25s ease, transform .25s ease;
+}
+.store-slider__dots button.is-active {
+    background: var(--ink);
+    transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .store-slide { transition: none; }
+}
+
+/* =========================================================
    ご利用ガイド
    ========================================================= */
 .shop-guide {
@@ -1635,6 +1839,16 @@
     .item-card__text { display: none; }
     .item-card__price { font-size: 22px; padding-top: 14px; }
     .item-card__buy { padding: 12px 8px; font-size: 13px; }
+
+    /* 店舗のご案内：写真を上、文章を下に積む */
+    .shop-store__inner { grid-template-columns: 1fr; gap: 28px; }
+    .store-slider { order: -1; }
+    .shop-store__title { font-size: 28px; }
+    .shop-store__body { column-gap: 16px; }
+    .shop-store__txt p { font-size: 13.5px; line-height: 2; }
+    .shop-store__links { gap: 8px; margin-top: 20px; }
+    .shop-store__links a { padding: 10px 14px; font-size: 12px; }
+    .shop-store::before { display: none; }
 
     /* スマホは1列。列ごとに細い罫で区切って続きが分かるように */
     .guide-grid { grid-template-columns: 1fr; gap: 34px; }

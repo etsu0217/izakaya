@@ -437,6 +437,69 @@
 })();
 
 /* =========================================================
+   店舗のご案内の写真スライド
+   ========================================================= */
+(function () {
+    'use strict';
+
+    const slider = document.getElementById('storeSlider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll('.store-slide');
+    const dotsBox = document.getElementById('storeDots');
+    const prev = slider.querySelector('.store-slider__arrow--prev');
+    const next = slider.querySelector('.store-slider__arrow--next');
+    if (slides.length < 2) return;
+
+    let current = 0;
+    let timer = null;
+    const INTERVAL = 5500;
+
+    const dots = [];
+    for (let i = 0; i < slides.length; i++) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', (i + 1) + '枚目を表示');
+        b.addEventListener('click', function () { go(i); });
+        dotsBox.appendChild(b);
+        dots.push(b);
+    }
+
+    function go(n) {
+        current = (n + slides.length) % slides.length;
+        slides.forEach(function (s, i) { s.classList.toggle('is-active', i === current); });
+        dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
+        restart();
+    }
+    function restart() {
+        clearInterval(timer);
+        timer = setInterval(function () { go(current + 1); }, INTERVAL);
+    }
+
+    prev.addEventListener('click', function () { go(current - 1); });
+    next.addEventListener('click', function () { go(current + 1); });
+
+    // 指でのスワイプにも対応
+    let startX = null;
+    slider.addEventListener('touchstart', function (e) {
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+    slider.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        const diff = e.changedTouches[0].clientX - startX;
+        if (Math.abs(diff) > 50) go(current + (diff < 0 ? 1 : -1));
+        startX = null;
+    });
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) clearInterval(timer);
+        else restart();
+    });
+
+    go(0);
+})();
+
+/* =========================================================
    文字サイズの切り替え（普通 / 大）
    ========================================================= */
 (function () {
