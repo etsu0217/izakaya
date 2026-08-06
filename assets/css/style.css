@@ -1104,15 +1104,25 @@ a:hover { opacity: .8; }
 .dish-gallery.is-inview .dish-gallery__item--br   { transition-delay: .56s; }
 
 @media (max-width: 900px) {
+    .dish-gallery { padding-bottom: clamp(48px, 8vw, 70px); }
     .dish-gallery__grid {
         grid-template-columns: 1fr;
         grid-template-areas:
             "tr"
             "left"
             "br";
-        row-gap: 22px;
+        row-gap: 18px;
+        /* 写真が画面いっぱいに大きくならないよう幅を絞って中央に */
+        max-width: 300px;
     }
-    .dish-gallery__item--left { margin-top: 0; }
+    /* PCの左右へのはみ出し・段違いは打ち消して、3枚とも同じ幅に */
+    .dish-gallery__item--left,
+    .dish-gallery__item--br {
+        width: 100%;
+        margin-top: 0;
+        margin-left: 0;
+    }
+    .dish-gallery__item { box-shadow: 0 12px 30px rgba(0, 0, 0, .45); }
 }
 @media (prefers-reduced-motion: reduce) {
     .dish-gallery__item { transition: none; opacity: 1; transform: none; }
