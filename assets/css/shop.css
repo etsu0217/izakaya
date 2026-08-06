@@ -866,44 +866,83 @@
     padding: clamp(48px, 7vw, 96px) clamp(16px, 4vw, 48px);
 }
 .faq-list {
-    max-width: 860px;
+    max-width: 900px;
     margin: 0 auto;
 }
+/* 質問をクリックすると答えが開く（details/summary なのでJSは不要） */
 .faq-item {
-    padding: 24px 4px;
     border-bottom: 1px solid rgba(42,33,26,.14);
+    transition: background .3s ease;
 }
 .faq-item:first-child { border-top: 1px solid rgba(42,33,26,.14); }
-.faq-item dt {
+.faq-item[open] { background: rgba(255,255,255,.5); }
+.faq-item__q {
     position: relative;
-    padding-left: 34px;
+    padding: 24px 52px 24px 40px;
+    cursor: pointer;
+    list-style: none;          /* 標準の三角を消す */
     font-size: 16px;
     font-weight: 500;
     letter-spacing: .04em;
+    transition: color .25s ease;
 }
-.faq-item dt::before {
+.faq-item__q::-webkit-details-marker { display: none; }
+.faq-item__q:hover { color: var(--gold); }
+/* 左の「Q」 */
+.faq-item__q::before {
     content: "Q";
     position: absolute;
-    left: 0; top: -2px;
+    left: 8px;
+    top: 21px;
     font-family: var(--font-en);
     font-size: 20px;
+    line-height: 1;
     color: var(--gold);
 }
-.faq-item dd {
+/* 右の開閉しるし（山形。開くと反転する） */
+.faq-item__q::after {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-right: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform .3s ease;
+}
+.faq-item[open] .faq-item__q::after { transform: translateY(-20%) rotate(-135deg); }
+.faq-item__a {
     position: relative;
-    margin-top: 12px;
-    padding-left: 34px;
+    padding: 0 52px 26px 40px;
     font-size: 14px;
     line-height: 2;
     color: rgba(42,33,26,.8);
+    animation: faq-open .35s ease;
 }
-.faq-item dd::before {
+.faq-item__a::before {
     content: "A";
     position: absolute;
-    left: 0; top: -1px;
+    left: 8px;
+    top: -2px;
     font-family: var(--font-en);
     font-size: 20px;
-    color: rgba(42,33,26,.4);
+    line-height: 1;
+    color: rgba(42,33,26,.35);
+}
+.faq-item__a a {
+    color: inherit;
+    border-bottom: 1px solid rgba(42,33,26,.35);
+}
+.faq-item__a a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+@keyframes faq-open {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .faq-item__a { animation: none; }
+    .faq-item__q::after { transition: none; }
 }
 
 /* =========================================================
@@ -952,11 +991,11 @@
    ========================================================= */
 .txt-lg .item-card__name,
 .txt-lg .guide-box h3,
-.txt-lg .faq-item dt { font-size: 18px; }
+.txt-lg .faq-item__q { font-size: 18px; }
 .txt-lg .item-card__sub { font-size: 14px; }
 .txt-lg .item-card__text,
 .txt-lg .guide-list dd,
-.txt-lg .faq-item dd,
+.txt-lg .faq-item__a,
 .txt-lg .shop-points__sub,
 .txt-lg .legal-table th,
 .txt-lg .legal-table td,
@@ -1163,7 +1202,10 @@
     .guide-box + .guide-box { padding-top: 34px; border-top: 1px solid rgba(42,33,26,.12); }
     .guide-box__icon svg { width: 40px; height: 40px; }
 
-    .faq-item dt { font-size: 15px; }
+    .faq-item__q { font-size: 15px; padding: 20px 40px 20px 32px; }
+    .faq-item__q::before { left: 4px; top: 18px; font-size: 18px; }
+    .faq-item__a { padding: 0 40px 22px 32px; }
+    .faq-item__a::before { left: 4px; font-size: 18px; }
     .shop-footer__nav { gap: 10px 18px; }
 
     /* 法定表記の表は縦積みにして横スクロールを避ける */
