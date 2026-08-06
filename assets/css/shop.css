@@ -164,6 +164,31 @@
     filter: drop-shadow(0 1px 3px rgba(0,0,0,.25));
 }
 
+/* --- 提灯と御神輿を左右に揺らす（PC・スマホ共通） --- */
+/* 提灯：軒先から吊られているように、上端を支点にゆっくり振れる */
+@keyframes chochin-sway {
+    0%, 100% { transform: rotate(-9deg); }
+    50%      { transform: rotate(2deg); }
+}
+.shop-logo__seal {
+    transform-origin: 50% -6px;
+    animation: chochin-sway 3.6s ease-in-out infinite;
+}
+/* 御神輿：担がれているように、少し速く左右へ */
+@keyframes mikoshi-sway {
+    0%, 100% { transform: translateX(-2px) rotate(-3.5deg); }
+    50%      { transform: translateX(2px)  rotate(3.5deg); }
+}
+.shop-logo__mikoshi {
+    transform-origin: 50% 100%;
+    animation: mikoshi-sway 2.4s ease-in-out infinite;
+}
+/* 動きを抑える設定の端末では揺らさない */
+@media (prefers-reduced-motion: reduce) {
+    .shop-logo__seal,
+    .shop-logo__mikoshi { animation: none; }
+}
+
 /* --- 中央：アイコン付きナビ --- */
 .shop-nav { display: flex; }
 .shop-nav ul { display: flex; }
