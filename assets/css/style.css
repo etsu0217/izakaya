@@ -11,7 +11,10 @@
     --cream:   #f7f2e8;
     --ink:     #2a211a;
     --dark:    #241a13;   /* FVの地色 */
-    --font: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "MS PMincho", serif;
+    /* 本文は角の取れた丸ゴシックで、やわらかく親しみのある印象に。
+       Windows/Mac に丸ゴシックが無い環境でも近い雰囲気になるよう並べています */
+    --font: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro",
+            "Yu Gothic", "Meiryo", sans-serif;
     --font-en: "Georgia", "Times New Roman", serif;
     /* 数字（価格・電話番号）専用。Georgia や Amiri は数字の高さが
        不揃いで読みにくいため、数字だけこの書体に揃える */
@@ -210,7 +213,7 @@ input:focus-visible,
     padding: 0 44px;
 }
 /* --- 左上ブランド（キャッチ＋ロゴ） --- */
-.fv-brand { display: flex; flex-direction: column; gap: 8px; }
+.fv-brand { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
 .fv-catch {
     font-family: "Yuji Syuku", serif;   /* 筆文字風 */
     color: #f0e6d2;
@@ -267,29 +270,32 @@ input:focus-visible,
 /* ヘッダー（一番上）のサイズ */
 .fv-logo { --logo-size: 48px; }
 
-.fv-contact { color: #fff; }
+.fv-contact { color: #fff; flex-shrink: 0; margin-left: 16px; }
 .fv-contact__label {
     font-size: 12px;
     letter-spacing: .12em;
     color: #e7d9c2;
     margin-bottom: 2px;
+    white-space: nowrap;
 }
 .fv-contact__tel a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-family: var(--font-num);
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 700;
     color: #fff;
     letter-spacing: .04em;
+    white-space: nowrap;
 }
 .fv-contact__tel a::before {
     content: "\260E";           /* ☎ */
-    font-size: 20px;
+    font-size: 16px;
     color: #e7d9c2;
 }
 
+.fv-reserve { flex-shrink: 0; }
 .fv-reserve a {
     display: inline-block;
     background: #a88228;
@@ -298,6 +304,7 @@ input:focus-visible,
     font-size: 14px;
     letter-spacing: .1em;
     border-radius: 2px;
+    white-space: nowrap;
 }
 .fv-reserve a:hover { opacity: 1; background: #8f6d1e; }
 
@@ -305,10 +312,11 @@ input:focus-visible,
     margin-left: auto;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
-.fv-subnav li { padding: 0 20px; line-height: 1; }
+.fv-subnav li { padding: 0 20px; line-height: 1; flex-shrink: 0; white-space: nowrap; }
 .fv-subnav li + li { border-left: 1px solid rgba(255,255,255,.4); }
-.fv-subnav a { color: #fff; font-size: 14px; letter-spacing: .04em; }
+.fv-subnav a { color: #fff; font-size: 14px; letter-spacing: .04em; white-space: nowrap; }
 
 /* --- 縦書きメインナビ（右から80pxの位置） --- */
 .fv-nav {
