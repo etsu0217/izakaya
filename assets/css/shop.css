@@ -12,6 +12,7 @@
     --shop-line:  #dcd6c8;
     --shop-frame: #f4eddc;
     --shop-sub:   #8a8172;
+    /* 数字用の書体 --font-num は style.css の :root で定義しています */
 }
 .pc-br { display: inline; }
 
@@ -44,8 +45,9 @@
     position: relative;
     display: flex;
     align-items: center;
-    /* 左下に御神輿を置くぶん、左側を広めにとる */
-    padding: 16px clamp(20px, 2.4vw, 36px) 14px clamp(36px, 3.6vw, 46px);
+    /* 左下に御神輿、右上に提灯を置くぶん、左右を広めにとる
+       （右は提灯の幅42px＋余白ぶんを確保して「Ｒ」と重ねない） */
+    padding: 16px clamp(58px, 5vw, 68px) 14px clamp(36px, 3.6vw, 46px);
     border-right: 1px solid var(--shop-line);
     /* パネル全面に #843b17 をかなり薄く透過させて敷く（ベタ塗りにしない） */
     background-color: rgba(132, 59, 23, .12);
@@ -419,6 +421,7 @@
     background: #efe7d8;
 }
 .shop-points ul {
+    list-style: none;          /* 行頭の点を消す */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(20px, 3vw, 44px);
@@ -542,12 +545,16 @@
 .item-card__price {
     margin-top: auto;
     padding-top: 18px;
-    font-family: var(--font-en);
-    font-size: 26px;
+    font-family: var(--font-num);
+    /* 数字の高さを揃え、桁も等幅にして見やすく */
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
+    font-size: 25px;
+    font-weight: 600;
     line-height: 1;
-    letter-spacing: .02em;
+    letter-spacing: .01em;
 }
-.item-card__price span { font-size: 18px; margin-right: 2px; }
+.item-card__price span { font-size: 17px; font-weight: 500; margin-right: 3px; }
 .item-card__price em {
     font-family: var(--font);
     font-size: 11px;
@@ -578,8 +585,10 @@
     padding: 11px;
 }
 .item-card__buy.is-tel span {
-    font-family: var(--font-en);
-    font-size: 17px;
+    font-family: var(--font-num);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .02em;
 }
 .item-card__buy.is-tel:hover {
     background: var(--ink);
@@ -829,6 +838,10 @@
 @media (max-width: 1024px) {
     .item-grid { grid-template-columns: repeat(3, 1fr); }
     .pc-br { display: none; }
+    /* 画面が狭くなるとロゴの「Ｒ」に提灯がかかるので、
+       提灯を少し小さくし、そのぶんの余白を右に確保して重ならないようにする */
+    .shop-logo { padding-right: 56px; }
+    .shop-logo__seal { top: 11px; right: 9px; width: 36px; height: 48px; font-size: 22px; }
     .shop-nav__label { font-size: 13px; }
     .shop-nav__icon svg { width: 28px; height: 28px; }
     .shop-search input { width: 130px; }
@@ -846,7 +859,8 @@
     }
     .shop-logo {
         --logo-size: 26px;
-        padding: 10px 16px 9px 30px;
+        /* 右は提灯の幅ぶんを空けて「Ｒ」と重ねない */
+        padding: 10px 42px 9px 30px;
         border-right: 0;
     }
     .shop-logo::before { inset: 4px; }
@@ -861,13 +875,15 @@
     .shop-logo__seal::after { width: 12px; height: 4px; }
     .shop-logo__mikoshi { left: 4px; bottom: 8px; }
     .shop-logo__mikoshi img { width: 46px; }
+    /* ロゴ側で右余白を使うぶん、左右の内側余白を詰める */
+    .shop-logo a { padding: 0 4px; }
     .shop-util {
         margin-left: auto;
         padding: 8px 12px;
         gap: 0;
     }
     .shop-util__top { gap: 10px; }
-    .shop-search input { width: 34vw; padding: 8px 10px; font-size: 12px; }
+    .shop-search input { width: 30vw; padding: 8px 10px; font-size: 12px; }
     .shop-search svg,
     .shop-util__icon svg { width: 22px; height: 22px; }
 
@@ -928,4 +944,17 @@
 @media (max-width: 400px) {
     .item-grid { grid-template-columns: 1fr; }
     .item-card__text { display: block; }
+
+    /* ごく狭い画面：ロゴ全体を一段小さくして提灯との間隔を保つ */
+    .shop-logo {
+        --logo-size: 23px;
+        padding: 9px 36px 8px 26px;
+    }
+    .shop-logo__seal {
+        top: 6px; right: 5px;
+        width: 24px; height: 32px;
+        font-size: 14px;
+    }
+    .shop-logo__mikoshi { left: 2px; bottom: 7px; }
+    .shop-logo__mikoshi img { width: 38px; }
 }
