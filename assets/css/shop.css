@@ -52,7 +52,7 @@
     border-right: 1px solid var(--shop-line);
     /* フッターと同じ濃い茶色（--dark = #241a13）を少しだけ透かす。
        文字まで薄くならないよう opacity ではなく rgba で指定 */
-    background-color: rgba(36, 26, 19, .88);
+    background-color: rgba(36, 26, 19, .76);
 }
 /* 内側の細い罫（二重枠にして木札らしく） */
 .shop-logo::before {
