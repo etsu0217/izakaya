@@ -50,6 +50,8 @@
     position: relative;
     display: flex;
     align-items: center;
+    /* ヘッダーが窮屈でも、ロゴだけは圧縮されて折り返さないようにする */
+    flex-shrink: 0;
     /* 左下に御神輿を置くぶん、左側を広めにとる。
        PCは提灯とロゴを近づけたいので右は余白をとらない
        （狭い画面での重なりは 1024px 以下のメディアクエリで調整） */
@@ -1778,8 +1780,9 @@
     .item-grid { grid-template-columns: repeat(3, 1fr); }
     .pc-br { display: none; }
     /* 画面が狭くなるとロゴの「Ｒ」に提灯がかかるので、
-       提灯を少し小さくし、そのぶんの余白を右に確保して重ならないようにする */
-    .shop-logo { padding-right: 56px; }
+       提灯を少し小さくし、そのぶんの余白を右に確保して重ならないようにする。
+       あわせてロゴ自体も少し縮め、「居酒屋 R」が2段に折り返さず1列に収まるようにする */
+    .shop-logo { --logo-size: 27px; padding-right: 56px; }
     .shop-logo__seal { top: 11px; right: 9px; width: 36px; height: 48px; font-size: 22px; }
     .shop-nav__label { font-size: 13px; letter-spacing: .06em; text-indent: .06em; }
     .shop-nav__icon svg { width: 25px; height: 25px; }
