@@ -1350,10 +1350,10 @@ input:focus-visible,
 }
 .drawer__nav a {
     writing-mode: vertical-rl;
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(18px, 1vw, 24px);
     letter-spacing: .18em;
     color: var(--ink);
-    padding: 4px 0;
+    padding: 30px 0;
     transition: color .25s;
 }
 .drawer__nav a:hover { color: var(--gold); opacity: 1; }
@@ -1421,7 +1421,7 @@ input:focus-visible,
 .drawer__label { font-size: 13px; letter-spacing: .08em; color: var(--ink); }
 .drawer__tel a {
     font-family: var(--font-num);
-    font-size: 33px;
+    font-size: 21px;
     font-weight: 700;
     letter-spacing: .04em;
     color: var(--ink);
@@ -1429,7 +1429,7 @@ input:focus-visible,
 .drawer__btn a {
     display: inline-block;
     margin-top: 10px;
-    padding: 14px 34px;
+    padding: 2px 34px;
     background: var(--gold);
     color: #fff;
     font-size: 15px;
