@@ -308,6 +308,20 @@ input:focus-visible,
 }
 .fv-reserve a:hover { opacity: 1; background: #8f6d1e; }
 
+.fv-shop { flex-shrink: 0; }
+.fv-shop a {
+    display: inline-block;
+    background: transparent;
+    color: #fff;
+    padding: 9px 18px;
+    font-size: 12px;
+    letter-spacing: .1em;
+    border: 1px solid rgba(255,255,255,.6);
+    border-radius: 2px;
+    white-space: nowrap;
+}
+.fv-shop a:hover { opacity: 1; background: rgba(255,255,255,.12); }
+
 .fv-subnav {
     margin-left: auto;
     display: flex;
@@ -480,6 +494,7 @@ input:focus-visible,
     .fv-catch,
     .fv-contact,
     .fv-reserve,
+    .fv-shop,
     .fv-subnav,
     .fv-side { display: none; }
 
@@ -526,8 +541,7 @@ input:focus-visible,
 .side-sns {
     position: absolute;
     top: 80%;
-    /* 写真は左右100pxずつ空けてあるので、その内側（+20px）に重ねる */
-    right: 120px;
+    right: 30px;
     transform: translateY(-50%);
     z-index: 30;
     display: flex;
