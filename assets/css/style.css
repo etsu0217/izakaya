@@ -589,8 +589,8 @@ input:focus-visible,
 /* ヒーローと画像バンドの間の余白（濃い地色） */
 .hero-gap {
     height: 90px;
-    /* 右端の白い線を画面外にクロップするため拡大＋左寄せ */
-    background: var(--dark) url("../image/haikei_dark.jpg") left center / 118% no-repeat;
+    /* 画像右端の白い線が出ない範囲だけを切り出してタイル状に敷き詰める */
+    background: var(--dark) url("../image/haikei_dark.jpg") left top / auto 2400px no-repeat fixed;
 }
 
 /* =========================================================
@@ -758,7 +758,8 @@ input:focus-visible,
    Intro（紹介文）
    ========================================================= */
 .intro {
-    background: var(--dark) url("../image/haikei_dark.jpg") center/cover no-repeat;
+    /* 画像右端の白い線が出ない範囲だけを切り出してタイル状に敷き詰める */
+    background: var(--dark) url("../image/haikei_dark.jpg") left top / auto 2400px no-repeat fixed;
     color: #f3ead6;
     text-align: center;
     padding: 110px 24px 120px;
@@ -856,8 +857,8 @@ input:focus-visible,
     align-items: flex-start;                 /* 上端そろえ → 各パネルを縦にずらす */
     gap: 0;
     padding: 110px 0 -50px 0 ;                        /* 上下だけ余白（左右は画面ぴったり） */
-    /* 背景テクスチャ（右端の白い線を画面外へ逃がすため拡大＆左寄せ） */
-    background: var(--dark) url("../image/haikei_dark.jpg") left center / 132% no-repeat;
+    /* 背景テクスチャ：画像右端の白い線が出ない範囲だけを切り出してタイル状に敷き詰める */
+    background: var(--dark) url("../image/haikei_dark.jpg") left top / auto 2400px no-repeat fixed;
     overflow: hidden;
 }
 .split-hero__half {
@@ -946,8 +947,8 @@ input:focus-visible,
     margin-top: clamp(-90px, -6vw, -50px);
     /* 引き上げた分、テキストの頭が隠れないよう上に余白を戻す */
     padding: clamp(90px, 8vw, 140px) clamp(24px, 6vw, 110px) clamp(80px, 9vw, 140px);
-    /* 背景 haikei1：右端の白い線を画面外へ逃がすため拡大＆左寄せ */
-    background: var(--dark) url("../image/haikei_dark.jpg") left center / 132% no-repeat;
+    /* 背景 haikei1：画像右端の白い線が出ない範囲だけを切り出してタイル状に敷き詰める */
+    background: var(--dark) url("../image/haikei_dark.jpg") left top / auto 2400px no-repeat fixed;
     color: var(--cream);
 }
 /* 画面半分・右側＝rakurin.com の炭火画像（大きめに） */
@@ -1094,9 +1095,9 @@ input:focus-visible,
    逸品ギャラリー（①右上 → ②左 → ③右下 の順にふわっと浮き出る）
    ========================================================= */
 .dish-gallery {
-    /* 背景は Concept と同じ haikei1 で統一（継ぎ目を出さない）
-       縦長セクションなので cover で全面を埋める。左寄せで右端の白い線を画面外へ逃がす */
-    background: var(--dark) url("../image/haikei_dark.jpg") left center / cover no-repeat;
+    /* 背景は Concept と同じ haikei1 で統一（継ぎ目を出さない）。
+       画像右端の白い線が出ない範囲だけを切り出してタイル状に敷き詰める */
+    background: var(--dark) url("../image/haikei_dark.jpg") left top / auto 2400px no-repeat fixed;
     /* 炭火画像のすぐ下に来るよう上余白は詰める */
     padding: 0 clamp(24px, 6vw, 110px) clamp(70px, 8vw, 110px);
     margin-top: clamp(-90px, -7vw, -40px);
@@ -1362,7 +1363,7 @@ input:focus-visible,
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-top: 22px;
+    margin-top: 10px;
 }
 .drawer__lang-label {
     font-family: var(--font-en);
@@ -1502,7 +1503,7 @@ input:focus-visible,
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
-        margin-top: 18px;
+        margin-top: 8px;
     }
     .drawer__lang-label { text-align: center; }
     .drawer__lang-btns > * {
@@ -1512,19 +1513,19 @@ input:focus-visible,
         font-size: 14px;
     }
 
-    /* 連絡先：縦積みで中央に */
+    /* ロゴと連絡先を横並びのまま、幅に合わせてコンパクトに */
     .drawer__foot {
-        flex-direction: column;
         align-items: center;
-        gap: 16px;
+        justify-content: space-between;
+        gap: 12px;
         margin-top: 26px;
         padding-top: 22px;
     }
-    .drawer__logo { --logo-size: 30px; }
-    .drawer__contact { width: 100%; text-align: center; }
-    .drawer__label { font-size: 12px; }
-    .drawer__tel a { font-size: 28px; }
-    .drawer__btn a { display: block; margin-top: 12px; padding: 14px; font-size: 14px; }
+    .drawer__logo { --logo-size: 26px; }
+    .drawer__contact { text-align: right; }
+    .drawer__label { font-size: 11px; }
+    .drawer__tel a { font-size: 20px; }
+    .drawer__btn a { display: inline-block; margin-top: 8px; padding: 10px 18px; font-size: 12px; }
 }
 
 /* アニメーションを控える設定では即表示 */
@@ -1542,12 +1543,32 @@ input:focus-visible,
 .section {
     padding: clamp(72px, 8vw, 120px) clamp(20px, 6vw, 90px);
 }
-/* 暗いテクスチャ背景（Menu / Gallery / Drink / News / Info を統一） */
+/* 暗いテクスチャ背景（Menu / Gallery / Drink / News / Info を統一）
+   画像右端の白い線が出ない範囲だけを切り出してタイル状に敷き詰め、
+   background-attachment:fixed で背景をビューポート基準に固定することで
+   セクション同士の境目にも継ぎ目（帯）が出ないようにする */
 .section-bg,
 .drink,
 .news,
 .info {
-    background: var(--dark) url("../image/haikei_dark.jpg") center / cover no-repeat;
+    background: var(--dark) url("../image/haikei_dark.jpg") left top / auto 2400px no-repeat fixed;
+}
+@media (max-width: 767px) {
+    /* iOSはfixed背景が重いため、スマホでは通常のスクロール背景に戻す。
+       固定時のための巨大サイズ指定も、スマホ幅にはcoverで十分なので戻す */
+    .section-bg,
+    .drink,
+    .news,
+    .info,
+    .hero-gap,
+    .intro,
+    .split-hero,
+    .concept,
+    .dish-gallery,
+    .footer {
+        background-attachment: scroll;
+        background-size: cover;
+    }
 }
 
 /* --- 見出し（EN + 和文） --- */
@@ -2036,9 +2057,9 @@ input:focus-visible,
    Footer
    ========================================================= */
 .footer {
-    /* 背景画像の右端にある白い縦線を画面外へ逃がす（拡大＋左寄せ）。
-       高さ 100% 指定で、フッターが縦に伸びても地色が出ないようにする */
-    background: var(--dark) url("../image/haikei_dark.jpg") left center / 132% 100% no-repeat;
+    /* 画像右端の白い線が出ない範囲だけを切り出してタイル状に敷き詰める。
+       repeatなので、フッターが縦に伸びても地色が出ない */
+    background: var(--dark) url("../image/haikei_dark.jpg") left top / auto 2400px no-repeat fixed;
     color: #e7d9c2;
     text-align: center;
     padding: clamp(56px, 7vw, 84px) 24px clamp(28px, 4vw, 40px);
@@ -2275,6 +2296,7 @@ input:focus-visible,
 }
 .fv-nav .lang-switch a {
     background: rgba(168,130,40,.35);
+    font-family: var(--font-en);
     text-orientation: upright;
     letter-spacing: 0;
 }
