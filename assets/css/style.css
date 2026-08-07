@@ -1363,7 +1363,8 @@ input:focus-visible,
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-top: 10px;
+    margin-top: 2px;
+    margin-bottom: 20px;
 }
 .drawer__lang-label {
     font-family: var(--font-en);
@@ -1487,7 +1488,7 @@ input:focus-visible,
         align-items: center;
         justify-content: space-between;
         padding: 14px 2px;
-        font-size: 16px;
+        font-size: 12px;
         letter-spacing: .1em;
     }
     /* 各項目の右端に小さな矢印 */
@@ -1503,7 +1504,8 @@ input:focus-visible,
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
-        margin-top: 8px;
+        margin-top: 2px;
+        margin-bottom: 20px;
     }
     .drawer__lang-label { text-align: center; }
     .drawer__lang-btns > * {
