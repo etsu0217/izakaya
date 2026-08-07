@@ -445,12 +445,12 @@ input:focus-visible,
 /* =========================================================
    Responsive
    ========================================================= */
-@media (max-width: 1080px) {
+@media (max-width: 1400px) {
     .fv-header { gap: 18px; padding: 0 24px; }
     .fv-contact__tel a { font-size: 22px; }
     .fv-contact__label { font-size: 11px; }
     .fv-reserve a { padding: 12px 18px; font-size: 13px; }
-    .fv-subnav { display: none; }              /* 901〜1080では省略して窮屈さを解消 */
+    .fv-subnav { display: none; }              /* 901〜1400では省略して窮屈さ・見切れを解消（英語はfv-navから） */
     .fv-nav { top: 148px; right: 24px; }
     .fv-nav a { height: 300px; font-size: 14px; padding: 16px 9px; }
 }
@@ -1343,44 +1343,6 @@ input:focus-visible,
 }
 .drawer__nav a:hover { color: var(--gold); opacity: 1; }
 
-/* 言語切り替え（日本語 / English） */
-.drawer__lang {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 22px;
-}
-.drawer__lang-label {
-    font-family: var(--font-en);
-    font-size: 11px;
-    letter-spacing: .18em;
-    color: rgba(42,33,26,.55);
-}
-.drawer__lang-btns {
-    display: flex;
-    border: 1px solid rgba(42,33,26,.25);
-    border-radius: 999px;
-    overflow: hidden;
-}
-.drawer__lang-btns > * {
-    padding: 7px 18px;
-    font-size: 13px;
-    letter-spacing: .06em;
-    line-height: 1;
-    white-space: nowrap;
-}
-.drawer__lang-btns > * + * { border-left: 1px solid rgba(42,33,26,.25); }
-.drawer__lang-btns a:hover {
-    background: rgba(184,137,75,.15);
-    color: var(--ink);
-    opacity: 1;
-}
-/* いま表示している言語 */
-.drawer__lang-btns .is-current {
-    background: var(--gold);
-    color: #fff;
-}
-
 /* フッター：ロゴ＋連絡先 */
 .drawer__foot {
     display: flex;
@@ -1481,21 +1443,6 @@ input:focus-visible,
         font-family: var(--font-en);
         font-size: 18px;
         color: var(--gold);
-    }
-
-    /* 言語切り替え：ナビの下で全幅に広げ、指で押しやすいサイズに */
-    .drawer__lang {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-        margin-top: 18px;
-    }
-    .drawer__lang-label { text-align: center; }
-    .drawer__lang-btns > * {
-        flex: 1;
-        padding: 12px 10px;
-        text-align: center;
-        font-size: 14px;
     }
 
     /* 連絡先：縦積みで中央に */
@@ -2249,16 +2196,17 @@ input:focus-visible,
     letter-spacing: .12em;
 }
 .fv-subnav .lang-switch a,
-.drawer__sub .lang-switch a,
 .footer-nav .lang-switch a {
     color: var(--gold);
 }
 .fv-subnav .lang-switch a:hover,
-.drawer__sub .lang-switch a:hover,
 .footer-nav .lang-switch a:hover {
     opacity: 1;
     text-decoration: underline;
 }
+.fv-nav .lang-switch a { background: rgba(168,130,40,.35); }
+.fv-nav .lang-switch a:hover,
+.fv-nav .lang-switch a.is-active { background: var(--gold); }
 
 /* =========================================================
    English page  英語版だけの上書き（<body class="lang-en">）
