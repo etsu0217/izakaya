@@ -21,6 +21,20 @@
 }
 .pc-br { display: inline; }
 
+/* ECサイトはお店のサイトのカスタムカーソル（リング＋ドット）を使わず、通常の矢印カーソルにする */
+body#shop,
+body#shop a,
+body#shop button,
+body#shop [role="button"],
+body#shop label,
+body#shop summary {
+    cursor: auto;
+}
+body#shop .cursor-ring,
+body#shop .cursor-dot {
+    display: none;
+}
+
 /* 読み上げソフト用（画面には出さない） */
 .visually-hidden {
     position: absolute;
